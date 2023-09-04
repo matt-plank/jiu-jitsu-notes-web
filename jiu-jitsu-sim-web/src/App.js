@@ -1,5 +1,6 @@
 import Card from "./components/card";
 import NavBar from "./components/navbar";
+import Technique from "./components/technique";
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
           yourGrips="Shoulder Crunch"
           theirGrips=""
         />
+
+        <Technique />
 
         <Card
           title="To Position"
