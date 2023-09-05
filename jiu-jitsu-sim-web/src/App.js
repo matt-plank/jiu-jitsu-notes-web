@@ -1,56 +1,51 @@
-import { useEffect, useState } from "react";
-import { randomTechnique } from "./api/api";
+import { useEffect } from "react";
 import Card from "./components/card";
 import NavBar from "./components/navbar";
 import Technique from "./components/technique";
+import useTechnique from "./hooks/useTechnique";
 
 function App() {
-  const [fromPosition, setFromPosition] = useState({});
-  const [toPosition, setToPosition] = useState({});
-  const [techniqueName, setTechniqueName] = useState();
+  const [newTechnique, technique, isLoading] = useTechnique();
 
-  // Fetch the techinque (and positions) from the API
   useEffect(() => {
-    const fetchRandomTechnique = async () => {
-      const technique = await randomTechnique();
-      console.log(technique);
-      setTechniqueName(technique.name);
-      setFromPosition(technique.from_position);
-      setToPosition(technique.to_position);
-    };
-
-    fetchRandomTechnique();
+    newTechnique();
   }, []);
+
+  const guessChangeHandler = (guessValue) => {
+    if (guessValue !== technique.name) return false;
+
+    newTechnique();
+
+    return true;
+  };
 
   return (
     <>
       <NavBar />
       <div className="flex flex-row gap-5 justify-around p-5">
-        <Card
-          title="From Position"
-          aspect={fromPosition.aspect}
-          position={fromPosition.name}
-          yourGrips={
-            fromPosition.your_grips ? fromPosition.your_grips.join(", ") : ""
-          }
-          theirGrips={
-            fromPosition.their_grips ? fromPosition.their_grips.join(", ") : ""
-          }
-        />
+        {isLoading ? (
+          <></>
+        ) : (
+          <>
+            <Card
+              title="From Position"
+              aspect={technique.from_position.aspect}
+              position={technique.from_position.name}
+              yourGrips={technique.from_position.your_grips?.join(", ") ?? ""}
+              theirGrips={technique.from_position.their_grips?.join(", ") ?? ""}
+            />
 
-        <Technique />
+            <Technique onGuessChange={guessChangeHandler} />
 
-        <Card
-          title="To Position"
-          aspect={toPosition.aspect}
-          position={toPosition.name}
-          yourGrips={
-            toPosition.your_grips ? toPosition.your_grips.join(", ") : ""
-          }
-          theirGrips={
-            toPosition.their_grips ? toPosition.their_grips.join(", ") : ""
-          }
-        />
+            <Card
+              title="To Position"
+              aspect={technique.to_position.aspect}
+              position={technique.to_position.name}
+              yourGrips={technique.to_position.your_grips?.join(", ") ?? ""}
+              theirGrips={technique.to_position.their_grips?.join(", ") ?? ""}
+            />
+          </>
+        )}
       </div>
     </>
   );
