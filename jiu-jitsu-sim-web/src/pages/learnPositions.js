@@ -3,7 +3,7 @@ import NavBar from "../components/navbar";
 const LearnPositions = () => {
   return (
     <>
-      <NavBar />
+      <NavBar selected={0} />
       <h1>Learn Positions</h1>
     </>
   );

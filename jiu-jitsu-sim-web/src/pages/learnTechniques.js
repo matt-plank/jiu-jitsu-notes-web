@@ -21,7 +21,7 @@ const LearnTechniques = () => {
 
   return (
     <>
-      <NavBar />
+      <NavBar selected={1} />
       <div className="flex flex-row gap-5 justify-around p-5">
         {isLoading ? (
           <></>
