@@ -57,12 +57,18 @@ const LearnPositions = () => {
         />
 
         <div className="w-1/3 bg-gray-100 rounded-md p-4">
+          <span className="text-gray-400">
+            {correctTechniques?.length ?? 0} / {techniques?.length ?? 0}
+          </span>
           {correctTechniques.map((technique) => (
             <p>{technique}</p>
           ))}
         </div>
 
         <div className="w-1/3 bg-gray-100 rounded-md p-4">
+          <span className="text-gray-400">
+            {correctSubmissions?.length ?? 0} / {submissions?.length ?? 0}
+          </span>
           {correctSubmissions.map((technique) => (
             <p>{technique}</p>
           ))}
