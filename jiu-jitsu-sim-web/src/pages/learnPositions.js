@@ -1,8 +1,11 @@
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
+import useAllPositions from "../hooks/useAllPositions";
 
 const LearnPositions = () => {
-  const options = ["Playing Closed Guard", "Top Mount", "Top Rear Mount"];
+  const allPositions = useAllPositions();
+  const options = allPositions.map((position) => position.name);
+
   return (
     <>
       <NavBar selected={0} />

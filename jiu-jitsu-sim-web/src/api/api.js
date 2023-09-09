@@ -6,3 +6,10 @@ export const randomTechnique = async () => {
 
   return json;
 };
+
+export const allPositions = async () => {
+  let response = await fetch(routes.allPositions);
+  let json = await response.json();
+
+  return json;
+};
