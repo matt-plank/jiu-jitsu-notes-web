@@ -35,7 +35,7 @@ const SearchableDropdown = ({
   };
 
   return (
-    <div className={`${className} inline-block w-96`}>
+    <div className={`${className} relative inline-block w-96`}>
       <div className="border-2 border-gray-400 rounded-sm p-1 px-2 flex flex-row items-center gap-2">
         <AiOutlineSearch className="text-gray-400" />
 
@@ -54,7 +54,7 @@ const SearchableDropdown = ({
         />
       </div>
       {isOpen ? (
-        <div className="border-2 border-gray-400 rounded-sm mt-2">
+        <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white">
           {options.filter(filterQueryInOption).map(dropDownElement)}
         </div>
       ) : (
