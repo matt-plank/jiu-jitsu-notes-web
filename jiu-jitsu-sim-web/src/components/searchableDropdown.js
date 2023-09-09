@@ -48,7 +48,7 @@ const SearchableDropdown = ({
         />
 
         <AiOutlineClose
-          className="text-gray-400 cursor-pointer"
+          className="text-gray-400 cursor-pointer hover:text-red-400"
           onClick={clear}
         />
       </div>
