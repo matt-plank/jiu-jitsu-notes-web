@@ -8,6 +8,7 @@ const SearchableDropdown = ({
   onChange,
   placeholder,
   options,
+  className,
 }) => {
   const inputRef = useRef();
   const isOpen = useClickToggle(inputRef);
@@ -34,7 +35,7 @@ const SearchableDropdown = ({
   };
 
   return (
-    <div className="inline-block">
+    <div className={`${className} inline-block w-96`}>
       <div className="border-2 border-gray-400 rounded-sm p-1 px-2 flex flex-row items-center gap-2">
         <AiOutlineSearch className="text-gray-400" />
 
@@ -44,7 +45,7 @@ const SearchableDropdown = ({
           value={value}
           onChange={onChange}
           type="text"
-          className="!outline-none w-96"
+          className="!outline-none flex-1"
         />
 
         <AiOutlineClose
