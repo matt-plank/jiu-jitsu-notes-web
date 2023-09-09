@@ -32,7 +32,12 @@ const useGuess = (techniques, submissions) => {
     );
   };
 
-  return [guess, updateGuess, correctTechniques, correctSubmissions];
+  const clear = () => {
+    setCorrectTechniques([]);
+    setCorrectSubmissions([]);
+  };
+
+  return [guess, updateGuess, correctTechniques, correctSubmissions, clear];
 };
 
 export default useGuess;

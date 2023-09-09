@@ -10,10 +10,6 @@ const LearnPositions = () => {
   const allPositions = useAllPositions();
   const options = allPositions.map((position) => position.display_name);
 
-  const positionChangeHandler = (e) => {
-    setCurrentPositionName(e.target.value);
-  };
-
   const currentPosition = allPositions.filter(
     (position) => position.display_name === currentPositionName
   )[0];
@@ -21,13 +17,20 @@ const LearnPositions = () => {
   const techniques = currentPosition?.techniques;
   const submissions = currentPosition?.submissions;
 
-  const [guess, setGuess, correctTechniques, correctSubmissions] = useGuess(
-    techniques,
-    submissions
-  );
+  const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
+    useGuess(techniques, submissions);
 
   const guessChangeHandler = (e) => {
     setGuess(e.target.value);
+  };
+
+  const updatePositionName = (newName) => {
+    setCurrentPositionName(newName);
+    clear();
+  };
+
+  const positionChangeHandler = (e) => {
+    updatePositionName(e.target.value);
   };
 
   return (
@@ -42,7 +45,7 @@ const LearnPositions = () => {
 
         <SearchableDropdown
           value={currentPositionName}
-          setValue={setCurrentPositionName}
+          setValue={updatePositionName}
           onChange={positionChangeHandler}
           placeholder="Enter Position"
           options={options}
