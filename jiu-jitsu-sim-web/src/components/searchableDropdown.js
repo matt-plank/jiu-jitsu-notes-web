@@ -34,7 +34,7 @@ const SearchableDropdown = ({
   };
 
   return (
-    <div className="inline-block m-2">
+    <div className="inline-block">
       <div className="border-2 border-gray-400 rounded-sm p-1 px-2 flex flex-row items-center gap-2">
         <AiOutlineSearch className="text-gray-400" />
 
