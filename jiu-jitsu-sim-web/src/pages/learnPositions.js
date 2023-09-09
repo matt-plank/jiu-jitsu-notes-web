@@ -59,7 +59,13 @@ const LearnPositions = () => {
           onChange={guessChangeHandler}
         />
 
-        <div className="w-1/3 bg-gray-100 rounded-md p-4">
+        <div
+          className={`w-1/3 bg-gray-100 rounded-md p-4 ${
+            correctTechniques?.length === techniques?.length
+              ? "border-2 border-green-500"
+              : ""
+          }`}
+        >
           <span className="text-gray-400">
             {correctTechniques?.length ?? 0} / {techniques?.length ?? 0}
           </span>
@@ -68,7 +74,13 @@ const LearnPositions = () => {
           ))}
         </div>
 
-        <div className="w-1/3 bg-gray-100 rounded-md p-4">
+        <div
+          className={`w-1/3 bg-gray-100 rounded-md p-4 ${
+            correctSubmissions?.length === submissions?.length
+              ? "border-2 border-green-500"
+              : ""
+          }`}
+        >
           <span className="text-gray-400">
             {correctSubmissions?.length ?? 0} / {submissions?.length ?? 0}
           </span>
