@@ -4,7 +4,7 @@ import useAllPositions from "../hooks/useAllPositions";
 
 const LearnPositions = () => {
   const allPositions = useAllPositions();
-  const options = allPositions.map((position) => position.name);
+  const options = allPositions.map((position) => position.display_name);
 
   return (
     <>
