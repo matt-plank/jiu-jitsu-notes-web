@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import useClickToggle from "../hooks/useClickToggle";
 
 const SearchableDropdown = ({
@@ -28,9 +29,15 @@ const SearchableDropdown = ({
     );
   };
 
+  const clear = () => {
+    setValue("");
+  };
+
   return (
     <div className="inline-block m-2">
-      <div className="border-2 border-gray-400 rounded-sm p-1 px-2">
+      <div className="border-2 border-gray-400 rounded-sm p-1 px-2 flex flex-row items-center gap-2">
+        <AiOutlineSearch className="text-gray-400" />
+
         <input
           placeholder={placeholder}
           ref={inputRef}
@@ -38,6 +45,11 @@ const SearchableDropdown = ({
           onChange={onChange}
           type="text"
           className="!outline-none w-96"
+        />
+
+        <AiOutlineClose
+          className="text-gray-400 cursor-pointer"
+          onClick={clear}
         />
       </div>
       {isOpen ? (
