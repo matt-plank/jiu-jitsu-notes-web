@@ -1,11 +1,12 @@
 import { useState } from "react";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
+import TextInput from "../components/textInput";
 import useAllPositions from "../hooks/useAllPositions";
+import useGuess from "../hooks/useGuess";
 
 const LearnPositions = () => {
   const [currentPositionName, setCurrentPositionName] = useState("");
-
   const allPositions = useAllPositions();
   const options = allPositions.map((position) => position.display_name);
 
@@ -16,6 +17,18 @@ const LearnPositions = () => {
   const currentPosition = allPositions.filter(
     (position) => position.display_name === currentPositionName
   )[0];
+
+  const techniques = currentPosition?.techniques;
+  const submissions = currentPosition?.submissions;
+
+  const [guess, setGuess, correctTechniques, correctSubmissions] = useGuess(
+    techniques,
+    submissions
+  );
+
+  const guessChangeHandler = (e) => {
+    setGuess(e.target.value);
+  };
 
   return (
     <>
@@ -36,16 +49,23 @@ const LearnPositions = () => {
           className="w-1/3"
         />
 
-        <div className="w-1/3">
-          <div className="bg-gray-100 rounded-md px-4 py-4">
-            {currentPosition?.techniques.map((technique) => (
-              <p>{technique}</p>
-            ))}
-            <hr className="h-px my-4 bg-gray-400 border-0" />
-            {currentPosition?.submissions.map((technique) => (
-              <p>{technique}</p>
-            ))}
-          </div>
+        <TextInput
+          placeholder="Enter Guess"
+          className="w-1/3"
+          value={guess}
+          onChange={guessChangeHandler}
+        />
+
+        <div className="w-1/3 bg-gray-100 rounded-md p-4">
+          {correctTechniques.map((technique) => (
+            <p>{technique}</p>
+          ))}
+        </div>
+
+        <div className="w-1/3 bg-gray-100 rounded-md p-4">
+          {correctSubmissions.map((technique) => (
+            <p>{technique}</p>
+          ))}
         </div>
       </div>
     </>
