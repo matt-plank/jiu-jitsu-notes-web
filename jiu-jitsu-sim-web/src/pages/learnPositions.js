@@ -1,4 +1,5 @@
 import { useState } from "react";
+import GuessCard from "../components/guessCard";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import TextInput from "../components/textInput";
@@ -59,35 +60,8 @@ const LearnPositions = () => {
           onChange={guessChangeHandler}
         />
 
-        <div
-          className={`w-1/3 bg-gray-100 rounded-md p-4 ${
-            correctTechniques?.length === techniques?.length
-              ? "border-2 border-green-500"
-              : ""
-          }`}
-        >
-          <span className="text-gray-400">
-            {correctTechniques?.length ?? 0} / {techniques?.length ?? 0}
-          </span>
-          {correctTechniques.map((technique) => (
-            <p>{technique}</p>
-          ))}
-        </div>
-
-        <div
-          className={`w-1/3 bg-gray-100 rounded-md p-4 ${
-            correctSubmissions?.length === submissions?.length
-              ? "border-2 border-green-500"
-              : ""
-          }`}
-        >
-          <span className="text-gray-400">
-            {correctSubmissions?.length ?? 0} / {submissions?.length ?? 0}
-          </span>
-          {correctSubmissions.map((technique) => (
-            <p>{technique}</p>
-          ))}
-        </div>
+        <GuessCard correctGuesses={correctTechniques} answers={techniques} />
+        <GuessCard correctGuesses={correctSubmissions} answers={submissions} />
       </div>
     </>
   );
