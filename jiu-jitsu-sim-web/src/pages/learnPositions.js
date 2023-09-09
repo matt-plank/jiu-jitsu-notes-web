@@ -36,7 +36,7 @@ const LearnPositions = () => {
 
       <div className="flex flex-col mt-20 gap-5 items-center">
         <div className="w-1/3">
-          <h2 className="text-2xl">Techniques</h2>
+          <h2 className="text-2xl">Learn Positions with Techniques</h2>
           <hr className="h-px my-4 w-full bg-gray-800 border-0" />
         </div>
 
