@@ -46,7 +46,9 @@ const LearnPositions = () => {
           <hr className="h-px w-full bg-gray-800 border-0" />
 
           <div className="flex flex-row gap-2">
-            <ActionButton onClick={clear}>Clear All</ActionButton>
+            <ActionButton onClick={clear} hotkeys="[">
+              Clear All
+            </ActionButton>
           </div>
 
           <SearchableDropdown
