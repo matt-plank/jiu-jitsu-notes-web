@@ -35,6 +35,12 @@ const LearnPositions = () => {
     updatePositionName(e.target.value);
   };
 
+  const selectRandomPosition = () => {
+    const randomIndex = Math.floor(Math.random() * allPositions.length);
+    const randomPosition = allPositions[randomIndex].display_name;
+    updatePositionName(randomPosition);
+  };
+
   return (
     <>
       <NavBar selected={0} />
@@ -47,7 +53,10 @@ const LearnPositions = () => {
 
           <div className="flex flex-row gap-2">
             <ActionButton onClick={clear} hotkeys="[">
-              Clear All
+              Clear Guesses
+            </ActionButton>
+            <ActionButton onClick={selectRandomPosition} hotkeys="]">
+              Select Random
             </ActionButton>
           </div>
 
