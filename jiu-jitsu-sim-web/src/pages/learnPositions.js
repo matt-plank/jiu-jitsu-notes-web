@@ -53,7 +53,7 @@ const LearnPositions = () => {
             onChange={positionChangeHandler}
             placeholder="Enter Position"
             options={options}
-            className="w-full"
+            className="w-full text-xl"
           />
 
           <div className="flex flex-row gap-2">
