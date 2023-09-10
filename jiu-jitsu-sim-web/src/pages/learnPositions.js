@@ -46,10 +46,15 @@ const LearnPositions = () => {
       <NavBar selected={0} />
 
       <div className="flex justify-center">
-        <div className="flex flex-col mt-20 gap-5 w-1/3">
-          <h2 className="text-2xl">Learn Positions with Techniques</h2>
-
-          <hr className="h-px w-full bg-gray-800 border-0" />
+        <div className="flex flex-col mt-10 gap-5 w-1/3">
+          <SearchableDropdown
+            value={currentPositionName}
+            setValue={updatePositionName}
+            onChange={positionChangeHandler}
+            placeholder="Enter Position"
+            options={options}
+            className="w-full"
+          />
 
           <div className="flex flex-row gap-2">
             <ActionButton onClick={clear} hotkeys="[">
@@ -60,16 +65,7 @@ const LearnPositions = () => {
             </ActionButton>
           </div>
 
-          <SearchableDropdown
-            value={currentPositionName}
-            setValue={updatePositionName}
-            onChange={positionChangeHandler}
-            placeholder="Enter Position"
-            options={options}
-            className="w-full"
-          />
-
-          <hr className="h-px w-full bg-gray-800 border-0" />
+          <hr className="h-px w-full bg-gray-800 border-0 my-5" />
 
           <TextInput
             placeholder="Enter Guess"
