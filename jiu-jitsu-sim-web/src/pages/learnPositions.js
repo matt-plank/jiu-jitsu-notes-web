@@ -43,7 +43,7 @@ const LearnPositions = () => {
 
   return (
     <>
-      <NavBar selected={0} />
+      <NavBar selected="/positions" />
 
       <div className="flex justify-center">
         <div className="flex flex-col mt-10 gap-5 w-1/3">
