@@ -46,34 +46,7 @@ const LearnPositions = () => {
           <hr className="h-px w-full bg-gray-800 border-0" />
 
           <div className="flex flex-row gap-2">
-            <ActionButton
-              onClick={() => {
-                alert("Hello");
-              }}
-            >
-              Hello
-            </ActionButton>
-            <ActionButton
-              onClick={() => {
-                alert("How");
-              }}
-            >
-              How
-            </ActionButton>
-            <ActionButton
-              onClick={() => {
-                alert("Are");
-              }}
-            >
-              Are
-            </ActionButton>
-            <ActionButton
-              onClick={() => {
-                alert("You");
-              }}
-            >
-              You
-            </ActionButton>
+            <ActionButton onClick={clear}>Clear All</ActionButton>
           </div>
 
           <SearchableDropdown
