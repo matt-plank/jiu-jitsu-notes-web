@@ -3,17 +3,20 @@ const GuessCard = ({ correctGuesses, answers }) => {
   const total = answers?.length;
 
   return (
-    <div
-      className={`rounded-md p-4 ${
-        numCorrect === total ? "border-2 border-green-500" : ""
-      }`}
-    >
-      <span className="text-gray-400">
+    <div className="rounded-md flex flex-col gap-3 p-4">
+      <span
+        className={numCorrect === total ? "text-green-500" : "text-gray-400"}
+      >
         {correctGuesses?.length ?? 0} / {answers?.length ?? 0}
       </span>
-      {correctGuesses.map((technique) => (
-        <p>{technique}</p>
-      ))}
+
+      <table className="border-collapse w-full">
+        {correctGuesses.map((technique) => (
+          <tr>
+            <td className="border border-gray-400 p-2">{technique}</td>
+          </tr>
+        ))}
+      </table>
     </div>
   );
 };
