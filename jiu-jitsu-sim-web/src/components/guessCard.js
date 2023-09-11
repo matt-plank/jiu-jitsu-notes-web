@@ -4,7 +4,7 @@ const GuessCard = ({ correctGuesses, answers }) => {
 
   return (
     <div
-      className={`bg-gray-100 rounded-md p-4 ${
+      className={`rounded-md p-4 ${
         numCorrect === total ? "border-2 border-green-500" : ""
       }`}
     >

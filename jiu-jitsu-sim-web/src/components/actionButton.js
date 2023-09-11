@@ -5,7 +5,7 @@ const ActionButton = ({ onClick, children, hotkeys }) => {
 
   return (
     <button
-      className="px-3 py-1 bg-gray-800 rounded-lg text-lg text-white active:scale-90 duration-75"
+      className="px-3 py-1 bg-gray-800 rounded-lg text-white active:scale-90 duration-75"
       onClick={onClick}
     >
       {children}
