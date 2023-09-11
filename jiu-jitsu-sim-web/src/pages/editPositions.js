@@ -41,53 +41,67 @@ const EditPositions = () => {
       <NavBar selected="/edit" />
 
       <div className="flex justify-center">
-        <div className="flex flex-col mt-10 gap-5 w-1/3 pb-10">
-          <SearchableDropdown
-            className="w-full"
-            placeholder="Enter Position"
-            options={options}
-            value={query}
-            setValue={querySetter}
-            onChange={queryChangeHandler}
-          />
-
-          <h2 className="text-xl">Details</h2>
-
-          <table className="border border-gray-800 border-collapse">
-            <EditableTableRow
-              title="Aspect"
-              value={aspect}
-              onChange={(e) => {
-                setAspect(e.target.value);
-              }}
+        <div className="flex flex-col mt-10 gap-5 w-[40%] pb-10">
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <SearchableDropdown
+              className="w-full bg-white"
+              placeholder="Search for Position"
+              options={options}
+              value={query}
+              setValue={querySetter}
+              onChange={queryChangeHandler}
             />
-            <EditableTableRow
-              title="Name"
-              value={name}
-              onChange={(e) => {
-                setName(e.target.value);
-              }}
+          </div>
+
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Details</h2>
+
+            <table className="border border-gray-800 border-collapse w-full">
+              <EditableTableRow
+                title="Aspect"
+                value={aspect}
+                onChange={(e) => {
+                  setAspect(e.target.value);
+                }}
+              />
+              <EditableTableRow
+                title="Name"
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </table>
+          </div>
+
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Your Grips</h2>
+
+            <EditableTable rowValues={myGrips} setRowValues={setMyGrips} />
+
+            <h2 className="text-xl">Their Grips</h2>
+
+            <EditableTable
+              rowValues={theirGrips}
+              setRowValues={setTheirGrips}
             />
-          </table>
+          </div>
 
-          <h2 className="text-xl">Your Grips</h2>
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Techniques</h2>
 
-          <EditableTable rowValues={myGrips} setRowValues={setMyGrips} />
+            <EditableTable
+              rowValues={techniques}
+              setRowValues={setTechniques}
+            />
 
-          <h2 className="text-xl">Their Grips</h2>
+            <h2 className="text-xl">Submissions</h2>
 
-          <EditableTable rowValues={theirGrips} setRowValues={setTheirGrips} />
-
-          <h2 className="text-xl">Techniques</h2>
-
-          <EditableTable rowValues={techniques} setRowValues={setTechniques} />
-
-          <h2 className="text-xl">Submissions</h2>
-
-          <EditableTable
-            rowValues={submissions}
-            setRowValues={setSubmissions}
-          />
+            <EditableTable
+              rowValues={submissions}
+              setRowValues={setSubmissions}
+            />
+          </div>
         </div>
       </div>
     </>

@@ -45,7 +45,7 @@ const SearchableDropdown = ({
           value={value}
           onChange={onChange}
           type="text"
-          className="!outline-none flex-1 pb-0.5"
+          className="!outline-none flex-1 pb-0.5 bg-transparent"
         />
 
         <AiOutlineClose

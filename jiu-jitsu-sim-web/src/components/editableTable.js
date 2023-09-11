@@ -30,7 +30,7 @@ const EditableTable = ({ rowValues, setRowValues }) => {
               type="text"
               value={value}
               onChange={rowChangeHandler(i)}
-              className="w-full !outline-none"
+              className="w-full !outline-none bg-transparent"
             />
           </td>
         </tr>

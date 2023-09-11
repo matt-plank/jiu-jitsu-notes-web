@@ -7,7 +7,7 @@ const EditableTableRow = ({ title, value, onChange }) => {
           value={value}
           onChange={onChange}
           type="text"
-          className="w-full !outline-none"
+          className="w-full !outline-none bg-transparent"
         />
       </td>
     </tr>
