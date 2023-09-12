@@ -57,20 +57,22 @@ const EditPositions = () => {
             <h2 className="text-xl">Details</h2>
 
             <table className="border border-gray-800 border-collapse w-full">
-              <EditableTableRow
-                title="Aspect"
-                value={aspect}
-                onChange={(e) => {
-                  setAspect(e.target.value);
-                }}
-              />
-              <EditableTableRow
-                title="Name"
-                value={name}
-                onChange={(e) => {
-                  setName(e.target.value);
-                }}
-              />
+              <tbody>
+                <EditableTableRow
+                  title="Aspect"
+                  value={aspect}
+                  onChange={(e) => {
+                    setAspect(e.target.value);
+                  }}
+                />
+                <EditableTableRow
+                  title="Name"
+                  value={name}
+                  onChange={(e) => {
+                    setName(e.target.value);
+                  }}
+                />
+              </tbody>
             </table>
           </div>
 

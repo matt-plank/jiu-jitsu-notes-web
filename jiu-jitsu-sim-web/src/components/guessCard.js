@@ -11,11 +11,13 @@ const GuessCard = ({ correctGuesses, answers }) => {
       </span>
 
       <table className="border-collapse w-full">
-        {correctGuesses.map((technique, i) => (
-          <tr key={i}>
-            <td className="border border-gray-400 p-2">{technique}</td>
-          </tr>
-        ))}
+        <tbody>
+          {correctGuesses.map((technique, i) => (
+            <tr key={i}>
+              <td className="border border-gray-400 p-2">{technique}</td>
+            </tr>
+          ))}
+        </tbody>
       </table>
     </div>
   );

@@ -23,26 +23,28 @@ const EditableTable = ({ rowValues, setRowValues }) => {
 
   return (
     <table className="border border-gray-800 border-collapse">
-      {rowValues.map((value, i) => (
-        <tr key={i}>
-          <td className="p-2 border border-gray-800">
-            <input
-              type="text"
-              value={value}
-              onChange={rowChangeHandler(i)}
-              className="w-full !outline-none bg-transparent"
-            />
+      <tbody>
+        {rowValues.map((value, i) => (
+          <tr key={i}>
+            <td className="p-2 border border-gray-800">
+              <input
+                type="text"
+                value={value}
+                onChange={rowChangeHandler(i)}
+                className="w-full !outline-none bg-transparent"
+              />
+            </td>
+          </tr>
+        ))}
+        <tr>
+          <td
+            onClick={newEmptyRow}
+            className="p-2 border-border-gray-800 flex justify-center items-center cursor-pointer hover:bg-gray-100"
+          >
+            +
           </td>
         </tr>
-      ))}
-      <tr>
-        <td
-          onClick={newEmptyRow}
-          className="p-2 border-border-gray-800 flex justify-center items-center cursor-pointer hover:bg-gray-100"
-        >
-          +
-        </td>
-      </tr>
+      </tbody>
     </table>
   );
 };
