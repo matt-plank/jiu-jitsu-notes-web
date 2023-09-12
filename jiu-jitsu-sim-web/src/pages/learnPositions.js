@@ -39,6 +39,7 @@ const LearnPositions = () => {
               setSelected={setSelectedPosition}
               placeholder="Enter Position"
               options={allPositions}
+              optionDisplayName={(option) => option.display_name}
               className="w-full bg-white"
             />
 

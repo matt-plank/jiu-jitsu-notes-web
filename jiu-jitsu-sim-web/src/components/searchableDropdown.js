@@ -7,6 +7,7 @@ const SearchableDropdown = ({
   setSelected,
   placeholder,
   options,
+  optionDisplayName,
   className,
 }) => {
   const inputRef = useRef();
@@ -15,11 +16,15 @@ const SearchableDropdown = ({
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    setQuery(selected?.display_name ?? "");
-  }, [selected]);
+    setQuery(selected ? optionDisplayName(selected) : "");
+  }, [selected, optionDisplayName]);
 
   const filterQueryInOption = (option) => {
-    return option.display_name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+    return (
+      optionDisplayName(option)
+        .toLowerCase()
+        .indexOf(query?.toLowerCase() ?? "") > -1
+    );
   };
 
   const queryChangeHandler = (e) => {
@@ -31,12 +36,12 @@ const SearchableDropdown = ({
       <p
         onClick={() => {
           setSelected(option);
-          setQuery(option.display_name);
+          setQuery(optionDisplayName(option));
         }}
         className="cursor-pointer hover:bg-gray-200 px-2 py-1"
         key={i}
       >
-        {option.display_name}
+        {optionDisplayName(option)}
       </p>
     );
   };
@@ -70,7 +75,7 @@ const SearchableDropdown = ({
         )}
       </div>
       {isOpen ? (
-        <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white">
+        <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white z-10">
           {options.filter(filterQueryInOption).map(dropDownElement)}
         </div>
       ) : (

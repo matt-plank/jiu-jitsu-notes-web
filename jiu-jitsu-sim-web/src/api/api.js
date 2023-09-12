@@ -13,3 +13,10 @@ export const allPositions = async () => {
 
   return json;
 };
+
+export const allGrips = async () => {
+  let response = await fetch(routes.allGrips);
+  let json = await response.json();
+
+  return json;
+};

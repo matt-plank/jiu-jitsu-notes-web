@@ -1,30 +1,15 @@
-import { useState } from "react";
-import EditableTable from "../components/editableTable";
-import EditableTableRow from "../components/editableTableRow";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
+import SearchableDropdownTable from "../components/searchableDropdownTable";
+import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
+import usePosition from "../hooks/usePosition";
 
 const EditPositions = () => {
   const positions = useAllPositions();
+  const grips = useAllGrips();
 
-  const [selectedPosition, setSelectedPosition] = useState();
-  const [myGrips, setMyGrips] = useState([]);
-  const [theirGrips, setTheirGrips] = useState([]);
-  const [aspect, setAspect] = useState("");
-  const [name, setName] = useState("");
-  const [techniques, setTechniques] = useState([]);
-  const [submissions, setSubmissions] = useState([]);
-
-  const updateSelectedPosition = (newSelectedPosition) => {
-    setSelectedPosition(newSelectedPosition);
-    setAspect(newSelectedPosition?.aspect ?? "");
-    setName(newSelectedPosition?.name ?? "");
-    setMyGrips(newSelectedPosition?.your_grips ?? []);
-    setTheirGrips(newSelectedPosition?.their_grips ?? []);
-    setTechniques(newSelectedPosition?.techniques ?? []);
-    setSubmissions(newSelectedPosition?.submissions ?? []);
-  };
+  const [position, setPosition, setPositionProperty] = usePosition();
 
   return (
     <>
@@ -37,60 +22,21 @@ const EditPositions = () => {
               className="w-full bg-white"
               placeholder="Search for Position"
               options={positions}
-              selected={selectedPosition}
-              setSelected={updateSelectedPosition}
+              optionDisplayName={(option) => option.display_name}
+              selected={position}
+              setSelected={setPosition}
             />
-          </div>
-
-          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
-            <h2 className="text-xl">Details</h2>
-
-            <table className="border border-gray-800 border-collapse w-full">
-              <tbody>
-                <EditableTableRow
-                  title="Aspect"
-                  value={aspect}
-                  onChange={(e) => {
-                    setAspect(e.target.value);
-                  }}
-                />
-                <EditableTableRow
-                  title="Name"
-                  value={name}
-                  onChange={(e) => {
-                    setName(e.target.value);
-                  }}
-                />
-              </tbody>
-            </table>
           </div>
 
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Your Grips</h2>
 
-            <EditableTable rowValues={myGrips} setRowValues={setMyGrips} />
-
-            <h2 className="text-xl">Their Grips</h2>
-
-            <EditableTable
-              rowValues={theirGrips}
-              setRowValues={setTheirGrips}
-            />
-          </div>
-
-          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
-            <h2 className="text-xl">Techniques</h2>
-
-            <EditableTable
-              rowValues={techniques}
-              setRowValues={setTechniques}
-            />
-
-            <h2 className="text-xl">Submissions</h2>
-
-            <EditableTable
-              rowValues={submissions}
-              setRowValues={setSubmissions}
+            <SearchableDropdownTable
+              placeholder="Search for Grip"
+              rowValues={position.your_grips}
+              setRowValues={setPositionProperty("your_grips")}
+              options={grips}
+              optionDisplayName={(option) => option}
             />
           </div>
         </div>
