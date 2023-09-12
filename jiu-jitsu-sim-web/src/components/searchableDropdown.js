@@ -17,13 +17,14 @@ const SearchableDropdown = ({
     return option.toLowerCase().indexOf(value.toLowerCase()) > -1;
   };
 
-  const dropDownElement = (option) => {
+  const dropDownElement = (option, i) => {
     return (
       <p
         onClick={() => {
           setValue(option);
         }}
         className="cursor-pointer hover:bg-gray-200 px-2 py-1"
+        key={i}
       >
         {option}
       </p>

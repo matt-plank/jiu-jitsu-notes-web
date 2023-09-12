@@ -24,7 +24,7 @@ const EditableTable = ({ rowValues, setRowValues }) => {
   return (
     <table className="border border-gray-800 border-collapse">
       {rowValues.map((value, i) => (
-        <tr>
+        <tr key={i}>
           <td className="p-2 border border-gray-800">
             <input
               type="text"
