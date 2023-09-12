@@ -1,11 +1,10 @@
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import useClickToggle from "../hooks/useClickToggle";
 
 const SearchableDropdown = ({
-  value,
-  setValue,
-  onChange,
+  selected,
+  setSelected,
   placeholder,
   options,
   className,
@@ -13,26 +12,38 @@ const SearchableDropdown = ({
   const inputRef = useRef();
   const isOpen = useClickToggle(inputRef);
 
+  const [query, setQuery] = useState("");
+
+  useEffect(() => {
+    setQuery(selected?.display_name ?? "");
+  }, [selected]);
+
   const filterQueryInOption = (option) => {
-    return option.toLowerCase().indexOf(value.toLowerCase()) > -1;
+    return option.display_name.toLowerCase().indexOf(query.toLowerCase()) > -1;
+  };
+
+  const queryChangeHandler = (e) => {
+    setQuery(e.target.value);
   };
 
   const dropDownElement = (option, i) => {
     return (
       <p
         onClick={() => {
-          setValue(option);
+          setSelected(option);
+          setQuery(option.display_name);
         }}
         className="cursor-pointer hover:bg-gray-200 px-2 py-1"
         key={i}
       >
-        {option}
+        {option.display_name}
       </p>
     );
   };
 
   const clear = () => {
-    setValue("");
+    setSelected(null);
+    setQuery("");
   };
 
   return (
@@ -43,16 +54,20 @@ const SearchableDropdown = ({
         <input
           placeholder={placeholder}
           ref={inputRef}
-          value={value}
-          onChange={onChange}
+          value={query}
+          onChange={queryChangeHandler}
           type="text"
           className="!outline-none flex-1 pb-0.5 bg-transparent"
         />
 
-        <AiOutlineClose
-          className="text-gray-400 cursor-pointer hover:text-red-400"
-          onClick={clear}
-        />
+        {selected ? (
+          <AiOutlineClose
+            className="text-gray-400 cursor-pointer hover:text-red-400"
+            onClick={clear}
+          />
+        ) : (
+          <></>
+        )}
       </div>
       {isOpen ? (
         <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white">

@@ -7,9 +7,8 @@ import useAllPositions from "../hooks/useAllPositions";
 
 const EditPositions = () => {
   const positions = useAllPositions();
-  const options = positions.map((position) => position.display_name);
 
-  const [query, setQuery] = useState("");
+  const [selectedPosition, setSelectedPosition] = useState();
   const [myGrips, setMyGrips] = useState([]);
   const [theirGrips, setTheirGrips] = useState([]);
   const [aspect, setAspect] = useState("");
@@ -17,23 +16,14 @@ const EditPositions = () => {
   const [techniques, setTechniques] = useState([]);
   const [submissions, setSubmissions] = useState([]);
 
-  const querySetter = (newQuery) => {
-    const newSelectedPosition = positions.filter(
-      (position) => position.display_name === newQuery
-    )[0];
-
-    setQuery(newQuery);
+  const updateSelectedPosition = (newSelectedPosition) => {
+    setSelectedPosition(newSelectedPosition);
     setAspect(newSelectedPosition?.aspect ?? "");
     setName(newSelectedPosition?.name ?? "");
     setMyGrips(newSelectedPosition?.your_grips ?? []);
     setTheirGrips(newSelectedPosition?.their_grips ?? []);
     setTechniques(newSelectedPosition?.techniques ?? []);
     setSubmissions(newSelectedPosition?.submissions ?? []);
-  };
-
-  const queryChangeHandler = (e) => {
-    const newQuery = e.target.value;
-    querySetter(newQuery);
   };
 
   return (
@@ -46,10 +36,9 @@ const EditPositions = () => {
             <SearchableDropdown
               className="w-full bg-white"
               placeholder="Search for Position"
-              options={options}
-              value={query}
-              setValue={querySetter}
-              onChange={queryChangeHandler}
+              options={positions}
+              selected={selectedPosition}
+              setSelected={updateSelectedPosition}
             />
           </div>
 

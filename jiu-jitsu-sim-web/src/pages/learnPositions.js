@@ -8,16 +8,11 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuess from "../hooks/useGuess";
 
 const LearnPositions = () => {
-  const [currentPositionName, setCurrentPositionName] = useState("");
+  const [selectedPosition, setSelectedPosition] = useState();
   const allPositions = useAllPositions();
-  const options = allPositions.map((position) => position.display_name);
 
-  const currentPosition = allPositions.filter(
-    (position) => position.display_name === currentPositionName
-  )[0];
-
-  const techniques = currentPosition?.techniques;
-  const submissions = currentPosition?.submissions;
+  const techniques = selectedPosition?.techniques;
+  const submissions = selectedPosition?.submissions;
 
   const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
     useGuess(techniques, submissions);
@@ -26,19 +21,10 @@ const LearnPositions = () => {
     setGuess(e.target.value);
   };
 
-  const updatePositionName = (newName) => {
-    setCurrentPositionName(newName);
-    clear();
-  };
-
-  const positionChangeHandler = (e) => {
-    updatePositionName(e.target.value);
-  };
-
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(Math.random() * allPositions.length);
-    const randomPosition = allPositions[randomIndex].display_name;
-    updatePositionName(randomPosition);
+    const randomPosition = allPositions[randomIndex];
+    setSelectedPosition(randomPosition);
   };
 
   return (
@@ -49,11 +35,10 @@ const LearnPositions = () => {
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <SearchableDropdown
-              value={currentPositionName}
-              setValue={updatePositionName}
-              onChange={positionChangeHandler}
+              selected={selectedPosition}
+              setSelected={setSelectedPosition}
               placeholder="Enter Position"
-              options={options}
+              options={allPositions}
               className="w-full bg-white"
             />
 
