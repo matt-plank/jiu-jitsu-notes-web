@@ -16,8 +16,8 @@ const SearchableDropdown = ({
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    setQuery(selected ? optionDisplayName(selected) : "");
-  }, [selected, optionDisplayName]);
+    setQuery(selected ? optionDisplayName(options[selected]) : "");
+  }, [selected, options, optionDisplayName]);
 
   const filterQueryInOption = (option) => {
     return (
@@ -35,7 +35,7 @@ const SearchableDropdown = ({
     return (
       <p
         onClick={() => {
-          setSelected(option);
+          setSelected(i);
           setQuery(optionDisplayName(option));
         }}
         className="cursor-pointer hover:bg-gray-200 px-2 py-1"

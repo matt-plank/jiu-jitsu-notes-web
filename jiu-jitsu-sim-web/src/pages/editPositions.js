@@ -1,15 +1,16 @@
+import { useState } from "react";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
-import SearchableDropdownTable from "../components/searchableDropdownTable";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
-import usePosition from "../hooks/usePosition";
 
 const EditPositions = () => {
   const positions = useAllPositions();
   const grips = useAllGrips();
 
-  const [position, setPosition, setPositionProperty] = usePosition();
+  const [selected, setSelected] = useState(null);
+
+  console.log(selected);
 
   return (
     <>
@@ -23,20 +24,8 @@ const EditPositions = () => {
               placeholder="Search for Position"
               options={positions}
               optionDisplayName={(option) => option.display_name}
-              selected={position}
-              setSelected={setPosition}
-            />
-          </div>
-
-          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
-            <h2 className="text-xl">Your Grips</h2>
-
-            <SearchableDropdownTable
-              placeholder="Search for Grip"
-              rowValues={position.your_grips}
-              setRowValues={setPositionProperty("your_grips")}
-              options={grips}
-              optionDisplayName={(option) => option}
+              selected={selected}
+              setSelected={setSelected}
             />
           </div>
         </div>

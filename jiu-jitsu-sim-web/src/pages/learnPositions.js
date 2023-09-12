@@ -8,23 +8,22 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuess from "../hooks/useGuess";
 
 const LearnPositions = () => {
-  const [selectedPosition, setSelectedPosition] = useState();
-  const allPositions = useAllPositions();
-
-  const techniques = selectedPosition?.techniques;
-  const submissions = selectedPosition?.submissions;
+  const [selected, setSelected] = useState(null);
+  const positions = useAllPositions();
 
   const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
-    useGuess(techniques, submissions);
+    useGuess(
+      positions[selected]?.techniques ?? [],
+      positions[selected]?.submissions ?? []
+    );
 
   const guessChangeHandler = (e) => {
     setGuess(e.target.value);
   };
 
   const selectRandomPosition = () => {
-    const randomIndex = Math.floor(Math.random() * allPositions.length);
-    const randomPosition = allPositions[randomIndex];
-    setSelectedPosition(randomPosition);
+    const randomIndex = Math.floor(Math.random() * positions.length);
+    setSelected(randomIndex);
   };
 
   return (
@@ -35,10 +34,10 @@ const LearnPositions = () => {
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <SearchableDropdown
-              selected={selectedPosition}
-              setSelected={setSelectedPosition}
+              selected={selected}
+              setSelected={setSelected}
               placeholder="Enter Position"
-              options={allPositions}
+              options={positions}
               optionDisplayName={(option) => option.display_name}
               className="w-full bg-white"
             />
@@ -63,11 +62,11 @@ const LearnPositions = () => {
 
             <GuessCard
               correctGuesses={correctTechniques}
-              answers={techniques}
+              answers={positions[selected]?.techniques ?? []}
             />
             <GuessCard
               correctGuesses={correctSubmissions}
-              answers={submissions}
+              answers={positions[selected]?.submissions ?? []}
             />
           </div>
         </div>
