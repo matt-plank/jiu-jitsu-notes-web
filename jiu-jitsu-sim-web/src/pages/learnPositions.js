@@ -9,7 +9,7 @@ import useGuess from "../hooks/useGuess";
 
 const LearnPositions = () => {
   const [selected, setSelected] = useState(null);
-  const positions = useAllPositions();
+  const [positions, updatePositions, refreshPositions] = useAllPositions();
 
   const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
     useGuess(
@@ -24,6 +24,7 @@ const LearnPositions = () => {
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(Math.random() * positions.length);
     setSelected(randomIndex);
+    clear();
   };
 
   return (
