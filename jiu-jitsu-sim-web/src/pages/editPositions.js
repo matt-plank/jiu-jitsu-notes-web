@@ -43,7 +43,8 @@ const EditPositions = () => {
                     <input
                       type="text"
                       className="bg-transparent w-full !outline-none"
-                      value={position?.aspect}
+                      placeholder="Select a Position to Edit"
+                      value={position?.aspect ?? ""}
                       onChange={(e) => {
                         update(selected, { aspect: e.target.value });
                       }}
@@ -56,7 +57,8 @@ const EditPositions = () => {
                     <input
                       type="text"
                       className="bg-transparent w-full !outline-none"
-                      value={position?.name}
+                      placeholder="Select a Position to Edit"
+                      value={position?.name ?? ""}
                       onChange={(e) => {
                         update(selected, { name: e.target.value });
                       }}
