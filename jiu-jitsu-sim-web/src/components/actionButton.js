@@ -1,7 +1,11 @@
 import { useHotkeys } from "react-hotkeys-hook";
 
 const ActionButton = ({ onClick, children, hotkeys }) => {
-  useHotkeys(hotkeys, onClick);
+  useHotkeys(hotkeys, onClick, {
+    preventDefault: true,
+    enableOnContentEditable: true,
+    enableOnFormTags: true,
+  });
 
   return (
     <button
