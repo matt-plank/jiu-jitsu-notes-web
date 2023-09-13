@@ -4,16 +4,25 @@ import { allPositions } from "../api/api";
 const useAllPositions = () => {
   const [positions, setPositions] = useState([]);
 
-  useEffect(() => {
-    const fetchAllPositions = async () => {
-      let positions = await allPositions();
-      setPositions(positions);
-    };
+  const fetchAllPositions = async () => {
+    let positions = await allPositions();
+    setPositions(positions);
+  };
 
+  const updatePosition = (index, data) => {
+    setPositions((currentPositions) => {
+      const newPositions = [...currentPositions];
+      newPositions[index] = { ...newPositions[index], ...data };
+
+      return newPositions;
+    });
+  };
+
+  useEffect(() => {
     fetchAllPositions();
   }, []);
 
-  return positions;
+  return [positions, updatePosition, fetchAllPositions];
 };
 
 export default useAllPositions;
