@@ -58,6 +58,16 @@ const EditPositions = () => {
               setGrips={position.your_grips.setValue}
               allGrips={grips}
             />
+
+            <ActionButton
+              onClick={() => {
+                position.your_grips.setValue((currentGrips) => {
+                  return [...currentGrips, ""];
+                });
+              }}
+            >
+              Add Grip
+            </ActionButton>
           </div>
 
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
@@ -68,6 +78,16 @@ const EditPositions = () => {
               setGrips={position.their_grips.setValue}
               allGrips={grips}
             />
+
+            <ActionButton
+              onClick={() => {
+                position.their_grips.setValue((currentGrips) => {
+                  return [...currentGrips, ""];
+                });
+              }}
+            >
+              Add Grip
+            </ActionButton>
           </div>
 
           <ActionButton onClick={savePositionDetails} hotkeys="ctrl+s">

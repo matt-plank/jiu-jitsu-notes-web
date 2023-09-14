@@ -53,8 +53,12 @@ const usePosition = (position) => {
       id: positionState.id.value,
       aspect: positionState.aspect.value,
       name: positionState.name.value,
-      your_grips: positionState.your_grips.value,
-      their_grips: positionState.their_grips.value,
+      your_grips: positionState.your_grips.value.filter(
+        (value) => value !== ""
+      ),
+      their_grips: positionState.their_grips.value.filter(
+        (value) => value !== ""
+      ),
       techniques: positionState.techniques.value,
       submissions: positionState.submissions.value,
     };

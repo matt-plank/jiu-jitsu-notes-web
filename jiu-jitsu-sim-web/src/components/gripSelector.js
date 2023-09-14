@@ -7,7 +7,7 @@ const GripSelector = ({ grip, setGrip, allGrips }) => {
         setGrip(e.target.value);
       }}
     >
-      <option>--- None ---</option>
+      <option value="">--- None ---</option>
       {allGrips.map((gripOption) => (
         <option>{gripOption.name}</option>
       ))}
