@@ -1,6 +1,6 @@
 import { useHotkeys } from "react-hotkeys-hook";
 
-const ActionButton = ({ onClick, children, hotkeys }) => {
+const ActionButton = ({ onClick, children, hotkeys = "" }) => {
   useHotkeys(hotkeys, onClick, {
     preventDefault: true,
     enableOnContentEditable: true,
