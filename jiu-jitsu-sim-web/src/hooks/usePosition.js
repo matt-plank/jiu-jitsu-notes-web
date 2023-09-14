@@ -1,39 +1,66 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const usePosition = () => {
-  const DEFAULT_POSITION = {
-    id: null,
-    name: "",
-    aspect: "",
-    your_grips: [],
-    their_grips: [],
-    techniques: [],
-    submissions: [],
-    display_name: "",
+const useStateAsDict = (defaultValue) => {
+  const [value, setValue] = useState(defaultValue);
+
+  return {
+    value: value,
+    setValue: setValue,
+  };
+};
+
+const usePosition = (position) => {
+  const positionState = {
+    id: useStateAsDict(null),
+    aspect: useStateAsDict(""),
+    name: useStateAsDict(""),
+    your_grips: useStateAsDict([]),
+    their_grips: useStateAsDict([]),
+    techniques: useStateAsDict([]),
+    submissions: useStateAsDict([]),
   };
 
-  const [position, setPositionState] = useState(DEFAULT_POSITION);
+  useEffect(() => {
+    positionState.id.setValue(position?.id ?? null);
+  }, [position?.id]);
 
-  const setPosition = (newPosition) => {
-    if (!newPosition) {
-      setPositionState(DEFAULT_POSITION);
-      return;
-    }
+  useEffect(() => {
+    positionState.aspect.setValue(position?.aspect ?? "");
+  }, [position?.aspect]);
 
-    setPositionState(newPosition);
-  };
+  useEffect(() => {
+    positionState.name.setValue(position?.name ?? "");
+  }, [position?.name]);
 
-  const setPositionProperty = (property) => {
-    return (value) => {
-      setPosition((currentPosition) => {
-        const newPosition = { ...currentPosition };
-        newPosition[property] = value;
-        return newPosition;
-      });
+  useEffect(() => {
+    positionState.your_grips.setValue(position?.your_grips ?? []);
+  }, [position?.your_grips]);
+
+  useEffect(() => {
+    positionState.their_grips.setValue(position?.their_grips ?? []);
+  }, [position?.their_grips]);
+
+  useEffect(() => {
+    positionState.techniques.setValue(position?.techniques ?? []);
+  }, [position?.techniques]);
+
+  useEffect(() => {
+    positionState.submissions.setValue(position?.submissions ?? []);
+  }, [position?.submissions]);
+
+  const asObject = () => {
+    return {
+      id: positionState.id.value,
+      aspect: positionState.aspect.value,
+      name: positionState.name.value,
+      your_grips: positionState.your_grips.value,
+      their_grips: positionState.their_grips.value,
+      techniques: positionState.techniques.value,
+      submissions: positionState.submissions.value,
     };
   };
 
-  return [position, setPosition, setPositionProperty];
+  return [positionState, asObject];
 };
 
 export default usePosition;

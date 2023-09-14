@@ -5,8 +5,9 @@ import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
+import usePosition from "../hooks/usePosition";
 
-const EditPositionDetailsTable = (position, update, selected) => {
+const EditPositionDetailsTable = ({ aspect, setAspect, name, setName }) => {
   return (
     <table className="border-collapse w-full">
       <tbody>
@@ -17,9 +18,9 @@ const EditPositionDetailsTable = (position, update, selected) => {
               type="text"
               className="bg-transparent w-full !outline-none"
               placeholder="Select a Position to Edit"
-              value={position?.aspect ?? ""}
+              value={aspect}
               onChange={(e) => {
-                update(selected, { aspect: e.target.value });
+                setAspect(e.target.value);
               }}
             />
           </td>
@@ -31,9 +32,9 @@ const EditPositionDetailsTable = (position, update, selected) => {
               type="text"
               className="bg-transparent w-full !outline-none"
               placeholder="Select a Position to Edit"
-              value={position?.name ?? ""}
+              value={name}
               onChange={(e) => {
-                update(selected, { name: e.target.value });
+                setName(e.target.value);
               }}
             />
           </td>
@@ -43,7 +44,7 @@ const EditPositionDetailsTable = (position, update, selected) => {
   );
 };
 
-const GripEditor = ({ grips, update, selected, allGrips }) => {
+const GripEditor = ({ grips, setGrips, allGrips }) => {
   return (
     <>
       {grips.map((grip, i) => (
@@ -51,10 +52,11 @@ const GripEditor = ({ grips, update, selected, allGrips }) => {
           className="border-2 border-gray-400 rounded-sm p-2 bg-white"
           value={grip}
           onChange={(e) => {
-            const newGrips = [...grips];
-            newGrips[i] = e.target.value;
-
-            update(selected, { your_grips: newGrips });
+            setGrips((currentGrips) => {
+              const newGrips = [...currentGrips];
+              newGrips[i] = e.target.value;
+              return newGrips;
+            });
           }}
         >
           <option>--- None ---</option>
@@ -68,14 +70,15 @@ const GripEditor = ({ grips, update, selected, allGrips }) => {
 };
 
 const EditPositions = () => {
-  const [positions, update, refreshPositions] = useAllPositions();
+  const [positions, _, refreshPositions] = useAllPositions();
   const [selected, setSelected] = useState(null);
-  const position = positions[selected];
+
+  const [position, positionAsObject] = usePosition(positions[selected]);
 
   const grips = useAllGrips();
 
   const savePositionDetails = async () => {
-    await updatePosition(position.id, position);
+    await updatePosition(position.id.value, positionAsObject());
     refreshPositions();
   };
 
@@ -100,9 +103,10 @@ const EditPositions = () => {
             <h2 className="text-xl">Details</h2>
 
             <EditPositionDetailsTable
-              position={position}
-              update={update}
-              selected={selected}
+              aspect={position.aspect.value}
+              setAspect={position.aspect.setValue}
+              name={position.name.value}
+              setName={position.name.setValue}
             />
           </div>
 
@@ -110,9 +114,8 @@ const EditPositions = () => {
             <h2 className="text-xl">Your Grips</h2>
 
             <GripEditor
-              grips={position?.your_grips ?? []}
-              update={update}
-              selected={selected}
+              grips={position.your_grips.value}
+              setGrips={position.your_grips.setValue}
               allGrips={grips}
             />
           </div>
@@ -121,9 +124,8 @@ const EditPositions = () => {
             <h2 className="text-xl">Their Grips</h2>
 
             <GripEditor
-              grips={position?.their_grips ?? []}
-              update={update}
-              selected={selected}
+              grips={position.their_grips.value}
+              setGrips={position.their_grips.setValue}
               allGrips={grips}
             />
           </div>
