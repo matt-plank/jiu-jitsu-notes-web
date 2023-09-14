@@ -1,37 +1,13 @@
 import { useState } from "react";
 import { updatePosition } from "../api/api";
 import ActionButton from "../components/actionButton";
+import MultiGripSelector from "../components/multiGripSelector";
 import NavBar from "../components/navbar";
 import PositionDetailsEditableTable from "../components/positionDetailsEditableTable";
 import SearchableDropdown from "../components/searchableDropdown";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
-
-const GripEditor = ({ grips, setGrips, allGrips }) => {
-  return (
-    <>
-      {grips.map((grip, i) => (
-        <select
-          className="border-2 border-gray-400 rounded-sm p-2 bg-white"
-          value={grip}
-          onChange={(e) => {
-            setGrips((currentGrips) => {
-              const newGrips = [...currentGrips];
-              newGrips[i] = e.target.value;
-              return newGrips;
-            });
-          }}
-        >
-          <option>--- None ---</option>
-          {allGrips.map((gripOption) => (
-            <option>{gripOption.name}</option>
-          ))}
-        </select>
-      ))}
-    </>
-  );
-};
 
 const EditPositions = () => {
   const [positions, _, refreshPositions] = useAllPositions();
@@ -77,7 +53,7 @@ const EditPositions = () => {
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Your Grips</h2>
 
-            <GripEditor
+            <MultiGripSelector
               grips={position.your_grips.value}
               setGrips={position.your_grips.setValue}
               allGrips={grips}
@@ -87,7 +63,7 @@ const EditPositions = () => {
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Their Grips</h2>
 
-            <GripEditor
+            <MultiGripSelector
               grips={position.their_grips.value}
               setGrips={position.their_grips.setValue}
               allGrips={grips}
