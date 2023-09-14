@@ -10,7 +10,7 @@ import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
 
 const EditPositions = () => {
-  const [positions, _, refreshPositions] = useAllPositions();
+  const [positions, refreshPositions] = useAllPositions();
   const [selected, setSelected] = useState(null);
 
   const [position, positionAsObject] = usePosition(positions[selected]);

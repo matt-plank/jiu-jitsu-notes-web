@@ -9,20 +9,11 @@ const useAllPositions = () => {
     setPositions(positions);
   };
 
-  const updatePosition = (index, data) => {
-    setPositions((currentPositions) => {
-      const newPositions = [...currentPositions];
-      newPositions[index] = { ...newPositions[index], ...data };
-
-      return newPositions;
-    });
-  };
-
   useEffect(() => {
     fetchAllPositions();
   }, []);
 
-  return [positions, updatePosition, fetchAllPositions];
+  return [positions, fetchAllPositions];
 };
 
 export default useAllPositions;
