@@ -5,6 +5,7 @@ import MultiGripSelector from "../components/multiGripSelector";
 import NavBar from "../components/navbar";
 import PositionDetailsEditableTable from "../components/positionDetailsEditableTable";
 import SearchableDropdown from "../components/searchableDropdown";
+import TechniqueEditor from "../components/techniqueEditor";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
@@ -87,6 +88,60 @@ const EditPositions = () => {
               }}
             >
               Add Grip
+            </ActionButton>
+          </div>
+
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Techniques</h2>
+
+            {position.techniques.value.map((technique, i) => (
+              <TechniqueEditor
+                technique={technique}
+                setTechnique={(newValue) => {
+                  position.techniques.setValue((currentTechniques) => {
+                    const newTechniques = [...currentTechniques];
+                    newTechniques[i] = newValue;
+                    return newTechniques;
+                  });
+                }}
+              />
+            ))}
+
+            <ActionButton
+              onClick={() => {
+                position.techniques.setValue((currentTechniques) => {
+                  return [...currentTechniques, ""];
+                });
+              }}
+            >
+              New Technique
+            </ActionButton>
+          </div>
+
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Submissions</h2>
+
+            {position.submissions.value.map((submission, i) => (
+              <TechniqueEditor
+                technique={submission}
+                setTechnique={(newValue) => {
+                  position.submissions.setValue((currentSubmissions) => {
+                    const newSubmissions = [...currentSubmissions];
+                    newSubmissions[i] = newValue;
+                    return newSubmissions;
+                  });
+                }}
+              />
+            ))}
+
+            <ActionButton
+              onClick={() => {
+                position.submissions.setValue((currentSubmissions) => {
+                  return [...currentSubmissions, ""];
+                });
+              }}
+            >
+              New Submission
             </ActionButton>
           </div>
 
