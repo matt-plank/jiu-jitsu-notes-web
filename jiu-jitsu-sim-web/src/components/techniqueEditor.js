@@ -7,9 +7,11 @@ const TechniqueEditor = ({ technique, setTechnique }) => {
         type="text"
         placeholder="Enter Technique Name"
         className="p-2 border-2 border-gray-400 rounded-sm bg-white flex-1 w-full !outline-none"
-        value={technique}
+        value={technique.name}
         onChange={(e) => {
-          setTechnique(e.target.value);
+          const newTechnique = { ...technique };
+          newTechnique.name = e.target.value;
+          setTechnique(newTechnique);
         }}
       />
 

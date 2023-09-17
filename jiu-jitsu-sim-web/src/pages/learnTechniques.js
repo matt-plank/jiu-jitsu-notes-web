@@ -2,10 +2,10 @@ import { useEffect } from "react";
 import Card from "../components/card";
 import NavBar from "../components/navbar";
 import Technique from "../components/technique";
-import useTechnique from "../hooks/useTechnique";
+import useRandomTechnique from "../hooks/useRandomTechnique";
 
 const LearnTechniques = () => {
-  const [newTechnique, technique, isLoading] = useTechnique();
+  const [newTechnique, technique, isLoading] = useRandomTechnique();
 
   useEffect(() => {
     newTechnique();
