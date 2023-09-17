@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { updatePosition } from "../api/api";
 import ActionButton from "../components/actionButton";
 import MultiGripSelector from "../components/multiGripSelector";
 import NavBar from "../components/navbar";
@@ -14,12 +13,12 @@ const EditPositions = () => {
   const [positions, refreshPositions] = useAllPositions();
   const [selected, setSelected] = useState(null);
 
-  const [position, positionAsObject] = usePosition(positions[selected]);
+  const [position, updatePosition] = usePosition(positions[selected]);
 
   const grips = useAllGrips();
 
   const savePositionDetails = async () => {
-    await updatePosition(position.id.value, positionAsObject());
+    await updatePosition();
     refreshPositions();
   };
 

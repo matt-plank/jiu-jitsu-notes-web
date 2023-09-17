@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { updatePosition } from "../api/api";
 
 const useStateAsDict = (defaultValue) => {
   const [value, setValue] = useState(defaultValue);
@@ -64,7 +65,11 @@ const usePosition = (position) => {
     };
   };
 
-  return [positionState, asObject];
+  const update = async () => {
+    await updatePosition(positionState.id.value, asObject());
+  };
+
+  return [positionState, update];
 };
 
 export default usePosition;
