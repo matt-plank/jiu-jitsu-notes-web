@@ -26,7 +26,7 @@ const EditPositions = () => {
       await saveTechnique(i);
     });
 
-    refreshPositions();
+    await refreshPositions();
   };
 
   return (
