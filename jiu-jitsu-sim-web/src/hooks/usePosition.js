@@ -1,14 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { updatePosition } from "../api/api";
-
-const useStateAsDict = (defaultValue) => {
-  const [value, setValue] = useState(defaultValue);
-
-  return {
-    value: value,
-    setValue: setValue,
-  };
-};
+import useStateAsDict from "./useStateAsDict";
 
 const usePosition = (position) => {
   const positionState = {

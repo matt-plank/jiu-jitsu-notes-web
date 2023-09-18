@@ -31,3 +31,25 @@ export const updatePosition = async (id, data) => {
 
   return json;
 };
+
+export const updateTechnique = async (id, data) => {
+  let response = await fetch(routes.technique, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...data, id: id }),
+  });
+  let json = await response.json();
+
+  return json;
+};
+
+export const createTechnique = async (data) => {
+  let response = await fetch(routes.technique, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  let json = await response.json();
+
+  return json;
+};

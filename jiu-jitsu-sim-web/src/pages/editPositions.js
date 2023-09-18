@@ -8,17 +8,24 @@ import TechniqueEditor from "../components/techniqueEditor";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
+import useTechniques from "../hooks/useTechniques";
 
 const EditPositions = () => {
+  const grips = useAllGrips();
   const [positions, refreshPositions] = useAllPositions();
   const [selected, setSelected] = useState(null);
 
   const [position, updatePosition] = usePosition(positions[selected]);
-
-  const grips = useAllGrips();
+  const [techniques, setTechniqueProperty, newTechnique, saveTechnique] =
+    useTechniques(positions[selected]?.techniques, positions[selected]?.id);
 
   const savePositionDetails = async () => {
     await updatePosition();
+
+    techniques.forEach(async (technique, i) => {
+      await saveTechnique(i);
+    });
+
     refreshPositions();
   };
 
@@ -93,55 +100,18 @@ const EditPositions = () => {
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Techniques</h2>
 
-            {position.techniques.value.map((technique, i) => (
+            {techniques?.map((technique, i) => (
               <TechniqueEditor
-                technique={technique}
-                setTechnique={(newValue) => {
-                  position.techniques.setValue((currentTechniques) => {
-                    const newTechniques = [...currentTechniques];
-                    newTechniques[i] = newValue;
-                    return newTechniques;
-                  });
-                }}
+                position={position}
+                name={technique.name}
+                setName={setTechniqueProperty(i, "name")}
+                positions={positions}
+                toPosition={technique.to_position.id}
+                setToPosition={setTechniqueProperty(i, "to_position")}
               />
             ))}
 
-            <ActionButton
-              onClick={() => {
-                position.techniques.setValue((currentTechniques) => {
-                  return [...currentTechniques, ""];
-                });
-              }}
-            >
-              New Technique
-            </ActionButton>
-          </div>
-
-          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
-            <h2 className="text-xl">Submissions</h2>
-
-            {position.submissions.value.map((submission, i) => (
-              <TechniqueEditor
-                technique={submission}
-                setTechnique={(newValue) => {
-                  position.submissions.setValue((currentSubmissions) => {
-                    const newSubmissions = [...currentSubmissions];
-                    newSubmissions[i] = newValue;
-                    return newSubmissions;
-                  });
-                }}
-              />
-            ))}
-
-            <ActionButton
-              onClick={() => {
-                position.submissions.setValue((currentSubmissions) => {
-                  return [...currentSubmissions, ""];
-                });
-              }}
-            >
-              New Submission
-            </ActionButton>
+            <ActionButton onClick={newTechnique}>New Technique</ActionButton>
           </div>
 
           <ActionButton onClick={savePositionDetails} hotkeys="ctrl+s">

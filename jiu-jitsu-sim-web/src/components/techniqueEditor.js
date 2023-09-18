@@ -1,21 +1,36 @@
-import ActionButton from "./actionButton";
-
-const TechniqueEditor = ({ technique, setTechnique }) => {
+const TechniqueEditor = ({
+  name,
+  setName,
+  positions,
+  toPosition,
+  setToPosition,
+}) => {
   return (
     <div className="flex flex-row gap-2">
       <input
         type="text"
         placeholder="Enter Technique Name"
         className="p-2 border-2 border-gray-400 rounded-sm bg-white flex-1 w-full !outline-none"
-        value={technique.name}
+        value={name}
         onChange={(e) => {
-          const newTechnique = { ...technique };
-          newTechnique.name = e.target.value;
-          setTechnique(newTechnique);
+          setName(e.target.value);
         }}
       />
 
-      <ActionButton>Edit Technique</ActionButton>
+      <select
+        className="border-2 border-gray-400 rounded-sm p-2 bg-white"
+        value={toPosition?.toString() ?? ""}
+        onChange={(e) => {
+          setToPosition({
+            id: parseInt(e.target.value),
+          });
+        }}
+      >
+        <option value="">--- None ---</option>
+        {positions.map((position) => (
+          <option value={position.id}>{position.display_name}</option>
+        ))}
+      </select>
     </div>
   );
 };
