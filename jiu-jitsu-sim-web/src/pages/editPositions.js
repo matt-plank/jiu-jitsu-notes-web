@@ -15,12 +15,12 @@ const EditPositions = () => {
   const [positions, refreshPositions] = useAllPositions();
   const [selected, setSelected] = useState(null);
 
-  const [position, updatePosition] = usePosition(positions[selected]);
+  const [position, savePosition] = usePosition(positions[selected]);
   const [techniques, setTechniqueProperty, newTechnique, saveTechnique] =
     useTechniques(positions[selected]?.techniques, positions[selected]?.id);
 
   const savePositionDetails = async () => {
-    await updatePosition();
+    await savePosition();
 
     techniques.forEach(async (technique, i) => {
       await saveTechnique(i);

@@ -9,40 +9,18 @@ const usePosition = (position) => {
     name: useStateAsDict(""),
     your_grips: useStateAsDict([]),
     their_grips: useStateAsDict([]),
-    techniques: useStateAsDict([]),
-    submissions: useStateAsDict([]),
   };
 
   useEffect(() => {
     positionState.id.setValue(position?.id ?? null);
-  }, [position?.id]);
-
-  useEffect(() => {
     positionState.aspect.setValue(position?.aspect ?? "");
-  }, [position?.aspect]);
-
-  useEffect(() => {
     positionState.name.setValue(position?.name ?? "");
-  }, [position?.name]);
-
-  useEffect(() => {
     positionState.your_grips.setValue(position?.your_grips ?? []);
-  }, [position?.your_grips]);
-
-  useEffect(() => {
     positionState.their_grips.setValue(position?.their_grips ?? []);
-  }, [position?.their_grips]);
+  }, [position]);
 
-  useEffect(() => {
-    positionState.techniques.setValue(position?.techniques ?? []);
-  }, [position?.techniques]);
-
-  useEffect(() => {
-    positionState.submissions.setValue(position?.submissions ?? []);
-  }, [position?.submissions]);
-
-  const asObject = () => {
-    return {
+  const updateWithApi = async () => {
+    await updatePosition(positionState.id.value, {
       id: positionState.id.value,
       aspect: positionState.aspect.value,
       name: positionState.name.value,
@@ -52,16 +30,10 @@ const usePosition = (position) => {
       their_grips: positionState.their_grips.value.filter(
         (value) => value !== ""
       ),
-      techniques: positionState.techniques.value,
-      submissions: positionState.submissions.value,
-    };
+    });
   };
 
-  const update = async () => {
-    await updatePosition(positionState.id.value, asObject());
-  };
-
-  return [positionState, update];
+  return [positionState, updateWithApi];
 };
 
 export default usePosition;
