@@ -53,3 +53,11 @@ export const createTechnique = async (data) => {
 
   return json;
 };
+
+export const deleteTechnique = async (id) => {
+  await fetch(routes.technique, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id }),
+  });
+};
