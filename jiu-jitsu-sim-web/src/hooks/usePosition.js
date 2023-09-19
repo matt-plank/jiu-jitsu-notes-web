@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { updatePosition } from "../api/api";
+import { createPosition, updatePosition } from "../api/api";
 import useStateAsDict from "./useStateAsDict";
 
 const usePosition = (position) => {
@@ -19,7 +19,22 @@ const usePosition = (position) => {
     positionState.their_grips.setValue(position?.their_grips ?? []);
   }, [position]);
 
-  const updateWithApi = async () => {
+  const create = async () => {
+    let newPositionData = await createPosition({
+      aspect: positionState.aspect.value,
+      name: positionState.name.value,
+      your_grips: positionState.your_grips.value.filter(
+        (value) => value !== ""
+      ),
+      their_grips: positionState.their_grips.value.filter(
+        (value) => value !== ""
+      ),
+    });
+
+    positionState.id.setValue(newPositionData.id);
+  };
+
+  const update = async () => {
     await updatePosition(positionState.id.value, {
       id: positionState.id.value,
       aspect: positionState.aspect.value,
@@ -33,7 +48,16 @@ const usePosition = (position) => {
     });
   };
 
-  return [positionState, updateWithApi];
+  const savePosition = async () => {
+    if (!positionState.id.value) {
+      await create();
+      return;
+    }
+
+    await update();
+  };
+
+  return [positionState, savePosition];
 };
 
 export default usePosition;

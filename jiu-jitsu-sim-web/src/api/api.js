@@ -21,6 +21,17 @@ export const allGrips = async () => {
   return json;
 };
 
+export const createPosition = async (data) => {
+  let response = await fetch(routes.allPositions, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  let json = await response.json();
+
+  return json;
+};
+
 export const updatePosition = async (id, data) => {
   let response = await fetch(routes.allPositions, {
     method: "PUT",
