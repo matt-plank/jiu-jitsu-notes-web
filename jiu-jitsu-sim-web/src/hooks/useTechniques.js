@@ -8,7 +8,7 @@ const useTechniques = (techniqueApiResults, fromPositionId) => {
     setTechniques(techniqueApiResults ?? []);
   }, [techniqueApiResults]);
 
-  const setPropertyOfTechnique = (techniqueIndex, propertyName) => {
+  const setPropertyByIndex = (techniqueIndex, propertyName) => {
     return (newPropertyValue) => {
       setTechniques((currentTechniques) => {
         const newTechniques = [...currentTechniques];
@@ -18,7 +18,7 @@ const useTechniques = (techniqueApiResults, fromPositionId) => {
     };
   };
 
-  const saveTechnique = async (index) => {
+  const saveByIndex = async (index) => {
     const technique = techniques[index];
 
     if (!technique.id && technique.name === "") return;
@@ -36,7 +36,7 @@ const useTechniques = (techniqueApiResults, fromPositionId) => {
     await updateTechnique(technique.id, technique);
   };
 
-  const newTechnique = () => {
+  const newEmptyTechnique = () => {
     setTechniques((currentTechniques) => [
       ...currentTechniques,
       {
@@ -47,7 +47,12 @@ const useTechniques = (techniqueApiResults, fromPositionId) => {
     ]);
   };
 
-  return [techniques, setPropertyOfTechnique, newTechnique, saveTechnique];
+  return {
+    techniques,
+    setPropertyByIndex,
+    newEmptyTechnique,
+    saveByIndex,
+  };
 };
 
 export default useTechniques;

@@ -16,14 +16,16 @@ const EditPositions = () => {
   const [selected, setSelected] = useState(null);
 
   const [position, savePosition] = usePosition(positions[selected]);
-  const [techniques, setTechniqueProperty, newTechnique, saveTechnique] =
-    useTechniques(positions[selected]?.techniques, positions[selected]?.id);
+  const techniques = useTechniques(
+    positions[selected]?.techniques,
+    positions[selected]?.id
+  );
 
   const savePositionDetails = async () => {
     await savePosition();
 
-    techniques.forEach(async (technique, i) => {
-      await saveTechnique(i);
+    techniques.techniques.forEach(async (_, i) => {
+      await techniques.saveByIndex(i);
     });
 
     await refreshPositions();
@@ -100,18 +102,20 @@ const EditPositions = () => {
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Techniques</h2>
 
-            {techniques?.map((technique, i) => (
+            {techniques.techniques.map((technique, i) => (
               <TechniqueEditor
                 position={position}
                 name={technique.name}
-                setName={setTechniqueProperty(i, "name")}
+                setName={techniques.setPropertyByIndex(i, "name")}
                 positions={positions}
                 toPosition={technique.to_position.id}
-                setToPosition={setTechniqueProperty(i, "to_position")}
+                setToPosition={techniques.setPropertyByIndex(i, "to_position")}
               />
             ))}
 
-            <ActionButton onClick={newTechnique}>New Technique</ActionButton>
+            <ActionButton onClick={techniques.newEmptyTechnique}>
+              New Technique
+            </ActionButton>
           </div>
 
           <ActionButton onClick={savePositionDetails} hotkeys="ctrl+s">
