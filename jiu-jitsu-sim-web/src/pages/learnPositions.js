@@ -21,7 +21,7 @@ const LearnPositions = () => {
   };
 
   const selectRandomPosition = () => {
-    const randomIndex = Math.floor(Math.random() * positions.length);
+    const randomIndex = Math.floor(Math.random() * (positions.length - 1));
     setSelected(randomIndex);
     guesses.clearPreviousGuesses();
   };
