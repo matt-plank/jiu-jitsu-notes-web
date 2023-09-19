@@ -3,11 +3,11 @@ import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import useClickToggle from "../hooks/useClickToggle";
 
 const SearchableDropdown = ({
-  selected,
-  setSelected,
+  selectedItem,
+  setSelectedItem,
   placeholder,
-  options,
-  optionDisplayName,
+  itemOptions,
+  getItemDisplayName,
   className,
 }) => {
   const inputRef = useRef();
@@ -16,38 +16,17 @@ const SearchableDropdown = ({
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    setQuery(selected ? optionDisplayName(options[selected]) : "");
-  }, [selected, options, optionDisplayName]);
+    setQuery(selectedItem ? getItemDisplayName(selectedItem) : "");
+  }, [selectedItem, getItemDisplayName]);
 
-  const filterQueryInOption = (option) => {
+  const filterQueryInOption = (item) => {
     return (
-      optionDisplayName(option)
-        .toLowerCase()
-        .indexOf(query?.toLowerCase() ?? "") > -1
+      getItemDisplayName(item).toLowerCase().indexOf(query.toLowerCase()) > -1
     );
   };
 
-  const queryChangeHandler = (e) => {
-    setQuery(e.target.value);
-  };
-
-  const dropDownElement = (option, i) => {
-    return (
-      <p
-        onClick={() => {
-          setSelected(i);
-          setQuery(optionDisplayName(option));
-        }}
-        className="cursor-pointer hover:bg-gray-200 px-2 py-1"
-        key={i}
-      >
-        {optionDisplayName(option)}
-      </p>
-    );
-  };
-
-  const clear = () => {
-    setSelected(null);
+  const deselectSelectedItem = () => {
+    setSelectedItem(null);
     setQuery("");
   };
 
@@ -60,15 +39,17 @@ const SearchableDropdown = ({
           placeholder={placeholder}
           ref={inputRef}
           value={query}
-          onChange={queryChangeHandler}
+          onChange={(e) => {
+            setQuery(e.target.value);
+          }}
           type="text"
           className="!outline-none flex-1 pb-0.5 bg-transparent"
         />
 
-        {selected ? (
+        {selectedItem ? (
           <AiOutlineClose
             className="text-gray-400 cursor-pointer hover:text-red-400"
-            onClick={clear}
+            onClick={deselectSelectedItem}
           />
         ) : (
           <></>
@@ -76,7 +57,18 @@ const SearchableDropdown = ({
       </div>
       {isOpen ? (
         <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white z-10">
-          {options.filter(filterQueryInOption).map(dropDownElement)}
+          {itemOptions.filter(filterQueryInOption).map((item, i) => (
+            <p
+              onClick={() => {
+                setSelectedItem(item);
+                setQuery(getItemDisplayName(item));
+              }}
+              className="cursor-pointer hover:bg-gray-200 px-2 py-1"
+              key={i}
+            >
+              {getItemDisplayName(item)}
+            </p>
+          ))}
         </div>
       ) : (
         <></>

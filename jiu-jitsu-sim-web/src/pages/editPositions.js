@@ -13,12 +13,12 @@ import useTechniques from "../hooks/useTechniques";
 const EditPositions = () => {
   const grips = useAllGrips();
   const [positions, refreshPositions] = useAllPositions();
-  const [selected, setSelected] = useState(null);
+  const [selectedPosition, setSelectedPosition] = useState();
 
-  const [position, savePosition] = usePosition(positions[selected]);
+  const [position, savePosition] = usePosition(selectedPosition);
   const techniques = useTechniques(
-    positions[selected]?.techniques,
-    positions[selected]?.id
+    selectedPosition?.techniques,
+    selectedPosition?.id
   );
 
   const savePositionDetails = async () => {
@@ -39,12 +39,12 @@ const EditPositions = () => {
         <div className="flex flex-col mt-10 gap-5 w-[40%] pb-10">
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <SearchableDropdown
-              className="w-full bg-white"
+              selectedItem={selectedPosition}
+              setSelectedItem={setSelectedPosition}
+              itemOptions={positions}
+              getItemDisplayName={(option) => option.display_name}
               placeholder="Search for Position"
-              options={positions}
-              optionDisplayName={(option) => option.display_name}
-              selected={selected}
-              setSelected={setSelected}
+              className="w-full bg-white"
             />
           </div>
 
