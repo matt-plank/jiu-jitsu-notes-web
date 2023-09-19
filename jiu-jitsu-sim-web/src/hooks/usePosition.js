@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createPosition, updatePosition } from "../api/api";
+import { createPosition, deletePosition, updatePosition } from "../api/api";
 import useStateAsDict from "./useStateAsDict";
 
 const usePosition = (position) => {
@@ -48,7 +48,7 @@ const usePosition = (position) => {
     });
   };
 
-  const savePosition = async () => {
+  const save = async () => {
     if (!positionState.id.value) {
       await create();
       return;
@@ -57,7 +57,17 @@ const usePosition = (position) => {
     await update();
   };
 
-  return [positionState, savePosition];
+  const remove = async () => {
+    if (!positionState.id.value) return;
+
+    await deletePosition(positionState.id.value);
+  };
+
+  return {
+    position: positionState,
+    save,
+    remove,
+  };
 };
 
 export default usePosition;

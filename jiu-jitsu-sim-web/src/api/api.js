@@ -43,6 +43,14 @@ export const updatePosition = async (id, data) => {
   return json;
 };
 
+export const deletePosition = async (id) => {
+  await fetch(routes.allPositions, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id }),
+  });
+};
+
 export const updateTechnique = async (id, data) => {
   let response = await fetch(routes.technique, {
     method: "PUT",

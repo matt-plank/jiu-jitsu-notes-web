@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ActionButton from "../components/actionButton";
 import MultiGripSelector from "../components/multiGripSelector";
 import NavBar from "../components/navbar";
@@ -15,21 +15,38 @@ const EditPositions = () => {
   const [positions, refreshPositions] = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
 
-  const [position, savePosition] = usePosition(selectedPosition);
+  const position = usePosition(selectedPosition);
   const techniques = useTechniques(
     selectedPosition?.techniques,
     selectedPosition?.id
   );
 
   const savePositionDetails = async () => {
-    await savePosition();
+    await position.save();
 
     techniques.techniques.forEach(async (_, i) => {
       await techniques.saveByIndex(i);
     });
 
-    await refreshPositions();
+    await refreshPositions(null);
   };
+
+  const deletePosition = async () => {
+    await position.remove();
+    await refreshPositions();
+
+    setSelectedPosition();
+  };
+
+  useEffect(() => {
+    if (!position.position.id.value) return;
+
+    const currentPosition = positions.filter(
+      (p) => p.id === position.position.id.value
+    )[0];
+
+    setSelectedPosition(currentPosition);
+  }, [positions]);
 
   return (
     <>
@@ -52,10 +69,10 @@ const EditPositions = () => {
             <h2 className="text-xl">Details</h2>
 
             <PositionDetailsEditableTable
-              aspect={position.aspect.value}
-              setAspect={position.aspect.setValue}
-              name={position.name.value}
-              setName={position.name.setValue}
+              aspect={position.position.aspect.value}
+              setAspect={position.position.aspect.setValue}
+              name={position.position.name.value}
+              setName={position.position.name.setValue}
             />
           </div>
 
@@ -63,14 +80,14 @@ const EditPositions = () => {
             <h2 className="text-xl">Your Grips</h2>
 
             <MultiGripSelector
-              grips={position.your_grips.value}
-              setGrips={position.your_grips.setValue}
+              grips={position.position.your_grips.value}
+              setGrips={position.position.your_grips.setValue}
               allGrips={grips}
             />
 
             <ActionButton
               onClick={() => {
-                position.your_grips.setValue((currentGrips) => {
+                position.position.your_grips.setValue((currentGrips) => {
                   return [...currentGrips, ""];
                 });
               }}
@@ -83,14 +100,14 @@ const EditPositions = () => {
             <h2 className="text-xl">Their Grips</h2>
 
             <MultiGripSelector
-              grips={position.their_grips.value}
-              setGrips={position.their_grips.setValue}
+              grips={position.position.their_grips.value}
+              setGrips={position.position.their_grips.setValue}
               allGrips={grips}
             />
 
             <ActionButton
               onClick={() => {
-                position.their_grips.setValue((currentGrips) => {
+                position.position.their_grips.setValue((currentGrips) => {
                   return [...currentGrips, ""];
                 });
               }}
@@ -118,9 +135,18 @@ const EditPositions = () => {
             </ActionButton>
           </div>
 
-          <ActionButton onClick={savePositionDetails} hotkeys="ctrl+s">
-            Save Position Details
-          </ActionButton>
+          <div className="w-full flex gap-5">
+            <ActionButton
+              onClick={savePositionDetails}
+              hotkeys="ctrl+s"
+              className="flex-1"
+            >
+              Save Position Details
+            </ActionButton>
+            <ActionButton onClick={deletePosition} className="flex-1">
+              Delete Position
+            </ActionButton>
+          </div>
         </div>
       </div>
     </>
