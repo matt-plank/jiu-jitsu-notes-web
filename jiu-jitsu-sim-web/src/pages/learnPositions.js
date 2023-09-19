@@ -5,27 +5,25 @@ import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import TextInput from "../components/textInput";
 import useAllPositions from "../hooks/useAllPositions";
-import useGuess from "../hooks/useGuess";
+import useGuesses from "../hooks/useGuesses";
 
 const LearnPositions = () => {
   const [selected, setSelected] = useState(null);
   const [positions, ,] = useAllPositions();
 
-  const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
-    useGuess(
-      positions[selected]?.techniques.map((technique) => technique.name) ?? [],
-      positions[selected]?.submissions.map((submission) => submission.name) ??
-        []
-    );
+  const guesses = useGuesses(
+    positions[selected]?.techniques.map((technique) => technique.name) ?? [],
+    positions[selected]?.submissions.map((submission) => submission.name) ?? []
+  );
 
   const guessChangeHandler = (e) => {
-    setGuess(e.target.value);
+    guesses.setGuessString(e.target.value);
   };
 
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(Math.random() * positions.length);
     setSelected(randomIndex);
-    clear();
+    guesses.clearPreviousGuesses();
   };
 
   return (
@@ -45,7 +43,7 @@ const LearnPositions = () => {
             />
 
             <div className="flex flex-row gap-2">
-              <ActionButton onClick={clear} hotkeys="[">
+              <ActionButton onClick={guesses.clearPreviousGuesses} hotkeys="[">
                 Clear Guesses
               </ActionButton>
               <ActionButton onClick={selectRandomPosition} hotkeys="]">
@@ -57,17 +55,17 @@ const LearnPositions = () => {
           <div className="flex flex-col gap-5 bg-gray-100 rounded-lg p-5">
             <TextInput
               placeholder="Enter Guess"
-              value={guess}
+              value={guesses.guessString}
               onChange={guessChangeHandler}
               className="bg-white"
             />
 
             <GuessCard
-              correctGuesses={correctTechniques}
+              correctGuesses={guesses.guessedTechniqueNames}
               answers={positions[selected]?.techniques ?? []}
             />
             <GuessCard
-              correctGuesses={correctSubmissions}
+              correctGuesses={guesses.guessedSubmissionNames}
               answers={positions[selected]?.submissions ?? []}
             />
           </div>
