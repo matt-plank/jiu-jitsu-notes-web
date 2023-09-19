@@ -9,12 +9,13 @@ import useGuess from "../hooks/useGuess";
 
 const LearnPositions = () => {
   const [selected, setSelected] = useState(null);
-  const [positions, updatePositions, refreshPositions] = useAllPositions();
+  const [positions, ,] = useAllPositions();
 
   const [guess, setGuess, correctTechniques, correctSubmissions, clear] =
     useGuess(
-      positions[selected]?.techniques ?? [],
-      positions[selected]?.submissions ?? []
+      positions[selected]?.techniques.map((technique) => technique.name) ?? [],
+      positions[selected]?.submissions.map((submission) => submission.name) ??
+        []
     );
 
   const guessChangeHandler = (e) => {
