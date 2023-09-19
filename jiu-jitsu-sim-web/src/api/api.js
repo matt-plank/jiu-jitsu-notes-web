@@ -80,3 +80,33 @@ export const deleteTechnique = async (id) => {
     body: JSON.stringify({ id: id }),
   });
 };
+
+export const createSubmission = async (data) => {
+  let response = await fetch(routes.submission, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  });
+  let json = await response.json();
+
+  return json;
+};
+
+export const updateSubmission = async (id, data) => {
+  let response = await fetch(routes.submission, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...data, id: id }),
+  });
+  let json = await response.json();
+
+  return json;
+};
+
+export const deleteSubmission = async (id) => {
+  await fetch(routes.submission, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: id }),
+  });
+};

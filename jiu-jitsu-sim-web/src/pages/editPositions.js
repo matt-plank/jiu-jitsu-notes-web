@@ -8,6 +8,7 @@ import TechniqueEditor from "../components/techniqueEditor";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
+import useSubmissions from "../hooks/useSubmissions";
 import useTechniques from "../hooks/useTechniques";
 
 const EditPositions = () => {
@@ -20,12 +21,20 @@ const EditPositions = () => {
     selectedPosition?.techniques,
     selectedPosition?.id
   );
+  const submissions = useSubmissions(
+    selectedPosition?.submissions,
+    selectedPosition?.id
+  );
 
   const savePositionDetails = async () => {
     await position.save();
 
     techniques.techniques.forEach(async (_, i) => {
       await techniques.saveByIndex(i);
+    });
+
+    submissions.submissions.forEach(async (_, i) => {
+      await submissions.saveByIndex(i);
     });
 
     await refreshPositions(null);
@@ -131,6 +140,26 @@ const EditPositions = () => {
             ))}
 
             <ActionButton onClick={techniques.newEmptyTechnique}>
+              New Technique
+            </ActionButton>
+          </div>
+
+          <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+            <h2 className="text-xl">Submissions</h2>
+
+            {submissions.submissions.map((submission, i) => (
+              <input
+                type="text"
+                placeholder="Enter Submission Name"
+                className="p-2 border-2 border-gray-400 rounded-sm bg-white flex-1 w-full !outline-none"
+                value={submission.name}
+                onChange={(e) => {
+                  submissions.setPropertyByIndex(i, "name")(e.target.value);
+                }}
+              />
+            ))}
+
+            <ActionButton onClick={submissions.newEmptySubmission}>
               New Technique
             </ActionButton>
           </div>
