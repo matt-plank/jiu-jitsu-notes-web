@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import ActionButton from "../components/actionButton";
 import MultiGripSelector from "../components/multiGripSelector";
 import NavBar from "../components/navbar";
@@ -24,6 +25,18 @@ const EditPositions = () => {
   const submissions = useSubmissions(
     selectedPosition?.submissions,
     selectedPosition?.id
+  );
+
+  useHotkeys(
+    "escape",
+    () => {
+      setSelectedPosition();
+    },
+    {
+      preventDefault: true,
+      enableOnContentEditable: true,
+      enableOnFormTags: true,
+    }
   );
 
   const savePositionDetails = async () => {
