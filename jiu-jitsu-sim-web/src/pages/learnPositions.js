@@ -8,12 +8,12 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 
 const LearnPositions = () => {
-  const [selected, setSelected] = useState(null);
+  const [selectedPosition, setSelectedPosition] = useState();
   const [positions, ,] = useAllPositions();
 
   const guesses = useGuesses(
-    positions[selected]?.techniques.map((technique) => technique.name) ?? [],
-    positions[selected]?.submissions.map((submission) => submission.name) ?? []
+    selectedPosition?.techniques.map((technique) => technique.name) ?? [],
+    selectedPosition?.submissions.map((submission) => submission.name) ?? []
   );
 
   const guessChangeHandler = (e) => {
@@ -22,7 +22,7 @@ const LearnPositions = () => {
 
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(Math.random() * (positions.length - 1));
-    setSelected(randomIndex);
+    setSelectedPosition(randomIndex);
     guesses.clearPreviousGuesses();
   };
 
@@ -34,11 +34,11 @@ const LearnPositions = () => {
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <SearchableDropdown
-              selected={selected}
-              setSelected={setSelected}
-              placeholder="Enter Position"
-              options={positions}
-              optionDisplayName={(option) => option.display_name}
+              selectedItem={selectedPosition}
+              setSelectedItem={setSelectedPosition}
+              itemOptions={positions}
+              getItemDisplayName={(option) => option.display_name}
+              placeholder="Search for Position"
               className="w-full bg-white"
             />
 
@@ -62,11 +62,11 @@ const LearnPositions = () => {
 
             <GuessCard
               correctGuesses={guesses.guessedTechniqueNames}
-              answers={positions[selected]?.techniques ?? []}
+              answers={selectedPosition?.techniques ?? []}
             />
             <GuessCard
               correctGuesses={guesses.guessedSubmissionNames}
-              answers={positions[selected]?.submissions ?? []}
+              answers={selectedPosition?.submissions ?? []}
             />
           </div>
         </div>
