@@ -14,13 +14,6 @@ const NavBar = ({ selected }) => {
       >
         <Link to="/positions">Learn Positions</Link>
       </p>
-      <p
-        className={
-          selected === "/techniques" ? "text-yellow-500" : "text-white"
-        }
-      >
-        <Link to="/techniques">Learn Techniques</Link>
-      </p>
     </div>
   );
 };
