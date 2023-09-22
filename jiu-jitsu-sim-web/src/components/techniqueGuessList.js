@@ -1,5 +1,3 @@
-import ActionButton from "./actionButton";
-
 const TechniqueGuessList = ({
   allTechniques,
   guessedTechniques,
@@ -12,16 +10,14 @@ const TechniqueGuessList = ({
         {guessedTechniques.length} / {allTechniques.length}
       </p>
       {guessedTechniques.map((technique) => (
-        <div className="flex justify-between">
+        <div
+          className="flex justify-between px-2 py-1 cursor-pointer hover:bg-gray-200"
+          onClick={() => {
+            const position = findPositionById(technique.to_position.id);
+            setSelectedPosition(position);
+          }}
+        >
           <p>{technique.name}</p>
-          <ActionButton
-            onClick={() => {
-              const position = findPositionById(technique.to_position.id);
-              setSelectedPosition(position);
-            }}
-          >
-            Go To
-          </ActionButton>
         </div>
       ))}
     </div>

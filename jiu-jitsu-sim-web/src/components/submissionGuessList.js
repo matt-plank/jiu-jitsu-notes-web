@@ -5,7 +5,7 @@ const SubmissionGuessList = ({ allSubmissions, guessedSubmissions }) => {
         {guessedSubmissions.length} / {allSubmissions.length}
       </p>
       {guessedSubmissions.map((submission) => (
-        <div className="flex justify-between">
+        <div className="px-2 py-1">
           <p>{submission.name}</p>
         </div>
       ))}
