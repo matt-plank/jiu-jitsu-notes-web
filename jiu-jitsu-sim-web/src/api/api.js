@@ -38,13 +38,13 @@ export const techniques = {
 
 export const positions = {
   all: async () => {
-    let response = await fetch(routes.allPositions);
+    let response = await fetch(routes.position);
     let json = await response.json();
 
     return json;
   },
   create: async (data) => {
-    let response = await fetch(routes.allPositions, {
+    let response = await fetch(routes.position, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
@@ -54,7 +54,7 @@ export const positions = {
     return json;
   },
   update: async (id, data) => {
-    let response = await fetch(routes.allPositions, {
+    let response = await fetch(routes.position, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...data, id: id }),
@@ -64,7 +64,7 @@ export const positions = {
     return json;
   },
   delete: async (id) => {
-    await fetch(routes.allPositions, {
+    await fetch(routes.position, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: id }),
