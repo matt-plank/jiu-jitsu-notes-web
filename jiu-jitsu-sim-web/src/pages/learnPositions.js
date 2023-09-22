@@ -1,29 +1,39 @@
 import { useState } from "react";
 import ActionButton from "../components/actionButton";
-import GuessCard from "../components/guessCard";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
+import SubmissionGuessList from "../components/submissionGuessList";
+import TechniqueGuessList from "../components/techniqueGuessList";
 import TextInput from "../components/textInput";
 import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 
 const LearnPositions = () => {
   const [selectedPosition, setSelectedPosition] = useState();
-  const [positions, ,] = useAllPositions();
+  const positions = useAllPositions();
 
-  const guesses = useGuesses(
-    selectedPosition?.techniques.map((technique) => technique.name) ?? [],
-    selectedPosition?.submissions.map((submission) => submission.name) ?? []
+  const [guessString, setGuessString] = useState("");
+  const [guessedTechniques, clearGuessedTechniques] = useGuesses(
+    guessString,
+    setGuessString,
+    selectedPosition?.techniques ?? []
+  );
+  const [guessedSubmissions, clearGuessedSubmissions] = useGuesses(
+    guessString,
+    setGuessString,
+    selectedPosition?.submissions ?? []
   );
 
-  const guessChangeHandler = (e) => {
-    guesses.setGuessString(e.target.value);
+  const selectRandomPosition = () => {
+    const randomIndex = Math.floor(
+      Math.random() * (positions.positionList.length - 1)
+    );
+    setSelectedPosition(positions.positionList[randomIndex]);
   };
 
-  const selectRandomPosition = () => {
-    const randomIndex = Math.floor(Math.random() * (positions.length - 1));
-    setSelectedPosition(randomIndex);
-    guesses.clearPreviousGuesses();
+  const clearAllGuesses = () => {
+    clearGuessedTechniques();
+    clearGuessedSubmissions();
   };
 
   return (
@@ -36,14 +46,14 @@ const LearnPositions = () => {
             <SearchableDropdown
               selectedItem={selectedPosition}
               setSelectedItem={setSelectedPosition}
-              itemOptions={positions}
+              itemOptions={positions.positionList}
               getItemDisplayName={(option) => option.display_name}
               placeholder="Search for Position"
               className="w-full bg-white"
             />
 
             <div className="flex flex-row gap-2">
-              <ActionButton onClick={guesses.clearPreviousGuesses} hotkeys="[">
+              <ActionButton onClick={clearAllGuesses} hotkeys="[">
                 Clear Guesses
               </ActionButton>
               <ActionButton onClick={selectRandomPosition} hotkeys="]">
@@ -55,18 +65,23 @@ const LearnPositions = () => {
           <div className="flex flex-col gap-5 bg-gray-100 rounded-lg p-5">
             <TextInput
               placeholder="Enter Guess"
-              value={guesses.guessString}
-              onChange={guessChangeHandler}
+              value={guessString}
+              onChange={(e) => {
+                setGuessString(e.target.value);
+              }}
               className="bg-white"
             />
 
-            <GuessCard
-              correctGuesses={guesses.guessedTechniqueNames}
-              answers={selectedPosition?.techniques ?? []}
+            <TechniqueGuessList
+              allTechniques={selectedPosition?.techniques ?? []}
+              guessedTechniques={guessedTechniques}
+              setSelectedPosition={setSelectedPosition}
+              findPositionById={positions.findById}
             />
-            <GuessCard
-              correctGuesses={guesses.guessedSubmissionNames}
-              answers={selectedPosition?.submissions ?? []}
+
+            <SubmissionGuessList
+              allSubmissions={selectedPosition?.submissions ?? []}
+              guessedSubmissions={guessedSubmissions}
             />
           </div>
         </div>

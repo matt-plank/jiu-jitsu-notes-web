@@ -2,18 +2,26 @@ import { useEffect, useState } from "react";
 import { allPositions } from "../api/api";
 
 const useAllPositions = () => {
-  const [positions, setPositions] = useState([]);
+  const [positionList, setPositionList] = useState([]);
 
-  const fetchAllPositions = async () => {
+  const refreshPositions = async () => {
     let positions = await allPositions();
-    setPositions(positions);
+    setPositionList(positions);
   };
 
   useEffect(() => {
-    fetchAllPositions();
+    refreshPositions();
   }, []);
 
-  return [positions, fetchAllPositions];
+  const findById = (id) => {
+    return positionList.filter((position) => position.id === id)[0];
+  };
+
+  return {
+    positionList,
+    refreshPositions,
+    findById,
+  };
 };
 
 export default useAllPositions;

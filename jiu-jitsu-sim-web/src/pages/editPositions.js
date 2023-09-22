@@ -14,7 +14,7 @@ import useTechniques from "../hooks/useTechniques";
 
 const EditPositions = () => {
   const grips = useAllGrips();
-  const [positions, refreshPositions] = useAllPositions();
+  const positions = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
 
   const position = usePosition(selectedPosition);
@@ -50,12 +50,12 @@ const EditPositions = () => {
       await submissions.saveByIndex(i);
     });
 
-    await refreshPositions(null);
+    await positions.refreshPositions();
   };
 
   const deletePosition = async () => {
     await position.remove();
-    await refreshPositions();
+    await positions.refreshPositions();
 
     setSelectedPosition();
   };
@@ -63,12 +63,12 @@ const EditPositions = () => {
   useEffect(() => {
     if (!position.position.id.value) return;
 
-    const currentPosition = positions.filter(
+    const currentPosition = positions.positionList.filter(
       (p) => p.id === position.position.id.value
     )[0];
 
     setSelectedPosition(currentPosition);
-  }, [positions]);
+  }, [positions.positionList]);
 
   return (
     <>
@@ -80,7 +80,7 @@ const EditPositions = () => {
             <SearchableDropdown
               selectedItem={selectedPosition}
               setSelectedItem={setSelectedPosition}
-              itemOptions={positions}
+              itemOptions={positions.positionList}
               getItemDisplayName={(option) => option.display_name}
               placeholder="Search for Position"
               className="w-full bg-white"
@@ -146,7 +146,7 @@ const EditPositions = () => {
                 position={position}
                 name={technique.name}
                 setName={techniques.setPropertyByIndex(i, "name")}
-                positions={positions}
+                positions={positions.positionList}
                 toPosition={technique.to_position.id}
                 setToPosition={techniques.setPropertyByIndex(i, "to_position")}
               />
