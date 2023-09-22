@@ -104,7 +104,7 @@ export const submissions = {
 
 export const grips = {
   all: async () => {
-    let response = await fetch(routes.allGrips);
+    let response = await fetch(routes.grip);
     let json = await response.json();
 
     return json;
