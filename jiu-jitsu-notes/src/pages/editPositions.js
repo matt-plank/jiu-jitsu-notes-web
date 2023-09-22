@@ -74,8 +74,8 @@ const EditPositions = () => {
     <>
       <NavBar selected="/edit" />
 
-      <div className="flex justify-center">
-        <div className="flex flex-col mt-10 gap-5 w-[40%] pb-10">
+      <div className="flex p-5 gap-5">
+        <div className="w-1/3 flex flex-col gap-5">
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <SearchableDropdown
               selectedItem={selectedPosition}
@@ -85,6 +85,20 @@ const EditPositions = () => {
               placeholder="Search for Position"
               className="w-full bg-white"
             />
+          </div>
+
+          <div className="w-full flex gap-5">
+            <ActionButton
+              onClick={savePositionDetails}
+              hotkeys="ctrl+s"
+              className="flex-1"
+            >
+              Save Position Details
+            </ActionButton>
+
+            <ActionButton onClick={deletePosition} className="flex-1">
+              Delete Position
+            </ActionButton>
           </div>
 
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
@@ -137,7 +151,9 @@ const EditPositions = () => {
               Add Grip
             </ActionButton>
           </div>
+        </div>
 
+        <div className="w-1/3">
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Techniques</h2>
 
@@ -156,7 +172,9 @@ const EditPositions = () => {
               New Technique
             </ActionButton>
           </div>
+        </div>
 
+        <div className="w-1/3">
           <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
             <h2 className="text-xl">Submissions</h2>
 
@@ -174,19 +192,6 @@ const EditPositions = () => {
 
             <ActionButton onClick={submissions.newEmptySubmission}>
               New Technique
-            </ActionButton>
-          </div>
-
-          <div className="w-full flex gap-5">
-            <ActionButton
-              onClick={savePositionDetails}
-              hotkeys="ctrl+s"
-              className="flex-1"
-            >
-              Save Position Details
-            </ActionButton>
-            <ActionButton onClick={deletePosition} className="flex-1">
-              Delete Position
             </ActionButton>
           </div>
         </div>
