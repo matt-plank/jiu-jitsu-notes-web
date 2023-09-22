@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { createPosition, deletePosition, updatePosition } from "../api/api";
+import { positions as positionsApi } from "../api/api";
 import useStateAsDict from "./useStateAsDict";
 
 const usePosition = (position) => {
@@ -20,7 +20,7 @@ const usePosition = (position) => {
   }, [position]);
 
   const create = async () => {
-    let newPositionData = await createPosition({
+    let newPositionData = await positionsApi.create({
       aspect: positionState.aspect.value,
       name: positionState.name.value,
       your_grips: positionState.your_grips.value.filter(
@@ -35,7 +35,7 @@ const usePosition = (position) => {
   };
 
   const update = async () => {
-    await updatePosition(positionState.id.value, {
+    await positionsApi.update(positionState.id.value, {
       id: positionState.id.value,
       aspect: positionState.aspect.value,
       name: positionState.name.value,
@@ -60,7 +60,7 @@ const usePosition = (position) => {
   const remove = async () => {
     if (!positionState.id.value) return;
 
-    await deletePosition(positionState.id.value);
+    await positionsApi.delete(positionState.id.value);
   };
 
   return {

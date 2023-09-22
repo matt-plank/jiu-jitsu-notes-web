@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { allPositions } from "../api/api";
+import { positions as positionsApi } from "../api/api";
 
 const useAllPositions = () => {
   const [positionList, setPositionList] = useState([]);
 
   const refreshPositions = async () => {
-    let positions = await allPositions();
+    let positions = await positionsApi.all();
     setPositionList(positions);
   };
 

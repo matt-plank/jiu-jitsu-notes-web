@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  createSubmission,
-  deleteSubmission,
-  updateSubmission,
-} from "../api/api";
+import { submissions as submissionsApi } from "../api/api";
 
 const useSubmissions = (submissionApiResults, fromPositionId) => {
   const [submissions, setSubmissions] = useState(submissionApiResults ?? []);
@@ -28,16 +24,16 @@ const useSubmissions = (submissionApiResults, fromPositionId) => {
     if (!submission.id && submission.name === "") return;
 
     if (!submission.id) {
-      await createSubmission(submission);
+      await submissionsApi.create(submission);
       return;
     }
 
     if (submission.name === "") {
-      await deleteSubmission(submission.id);
+      await submissionsApi.delete(submission.id);
       return;
     }
 
-    await updateSubmission(submission.id, submission);
+    await submissionsApi.update(submission.id, submission);
   };
 
   const newEmptySubmission = () => {

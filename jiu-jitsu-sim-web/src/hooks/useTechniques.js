@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { createTechnique, deleteTechnique, updateTechnique } from "../api/api";
+import { techniques as techniquesApi } from "../api/api";
 
 const useTechniques = (techniqueApiResults, fromPositionId) => {
   const [techniques, setTechniques] = useState(techniqueApiResults ?? []);
@@ -24,16 +24,16 @@ const useTechniques = (techniqueApiResults, fromPositionId) => {
     if (!technique.id && technique.name === "") return;
 
     if (!technique.id) {
-      await createTechnique(technique);
+      await techniquesApi.create(technique);
       return;
     }
 
     if (technique.name === "") {
-      await deleteTechnique(technique.id);
+      await techniquesApi.delete(technique.id);
       return;
     }
 
-    await updateTechnique(technique.id, technique);
+    await techniquesApi.update(technique.id, technique);
   };
 
   const newEmptyTechnique = () => {

@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { allGrips } from "../api/api";
+import { grips as gripsApi } from "../api/api";
 
 const useAllGrips = () => {
   const [grips, setGrips] = useState([]);
 
   useEffect(() => {
     const fetchAllGrips = async () => {
-      let positions = await allGrips();
+      let positions = await gripsApi.all();
       setGrips(positions);
     };
 
