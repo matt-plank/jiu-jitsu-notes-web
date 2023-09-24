@@ -4,11 +4,15 @@ const useGuesses = (guessString, setGuessString, techniques) => {
   const [guessed, setGuessed] = useState([]);
 
   useEffect(() => {
+    if (techniques === undefined) return;
+
     setGuessString("");
     setGuessed([]);
   }, [techniques]);
 
   useEffect(() => {
+    if (techniques === undefined) return;
+
     const technique = techniques.filter(
       (technique) => technique.name === guessString
     )[0];

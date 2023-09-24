@@ -17,12 +17,12 @@ const LearnPositions = () => {
   const [guessedTechniques, clearGuessedTechniques] = useGuesses(
     guessString,
     setGuessString,
-    selectedPosition?.techniques ?? []
+    selectedPosition?.techniques
   );
   const [guessedSubmissions, clearGuessedSubmissions] = useGuesses(
     guessString,
     setGuessString,
-    selectedPosition?.submissions ?? []
+    selectedPosition?.submissions
   );
 
   const PLAYLISTS = [
