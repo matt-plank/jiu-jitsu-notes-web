@@ -7,6 +7,7 @@ import TechniqueGuessList from "../components/techniqueGuessList";
 import TextInput from "../components/textInput";
 import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
+import usePositionPlaylist from "../hooks/usePositionPlaylist";
 
 const LearnPositions = () => {
   const [selectedPosition, setSelectedPosition] = useState();
@@ -23,6 +24,9 @@ const LearnPositions = () => {
     setGuessString,
     selectedPosition?.submissions ?? []
   );
+
+  const guardPlaylist = [];
+  const playlist = usePositionPlaylist(guardPlaylist, setSelectedPosition);
 
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(
@@ -58,6 +62,9 @@ const LearnPositions = () => {
               </ActionButton>
               <ActionButton onClick={selectRandomPosition} hotkeys="]">
                 Select Random
+              </ActionButton>
+              <ActionButton onClick={playlist.nextPosition} hotkeys="enter">
+                Next on Playlist
               </ActionButton>
             </div>
           </div>
