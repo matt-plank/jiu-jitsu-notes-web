@@ -10,14 +10,17 @@ const TechniqueGuessList = ({
         {guessedTechniques.length} / {allTechniques.length}
       </p>
       {guessedTechniques.map((technique) => (
-        <div
-          className="flex justify-between px-2 py-1 cursor-pointer hover:bg-gray-200"
-          onClick={() => {
-            const position = findPositionById(technique.to_position.id);
-            setSelectedPosition(position);
-          }}
-        >
+        <div className="flex justify-between">
           <p>{technique.name}</p>
+          <p
+            className="text-gray-400 cursor-pointer hover:text-gray-500"
+            onClick={() => {
+              const position = findPositionById(technique.to_position.id);
+              setSelectedPosition(position);
+            }}
+          >
+            {technique.to_position.display_name}
+          </p>
         </div>
       ))}
     </div>
