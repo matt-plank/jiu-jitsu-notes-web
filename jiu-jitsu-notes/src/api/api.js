@@ -110,3 +110,12 @@ export const grips = {
     return json;
   },
 };
+
+export const playlist = {
+  all: async () => {
+    let response = await fetch(routes.playlist);
+    let json = await response.json();
+
+    return json;
+  },
+};

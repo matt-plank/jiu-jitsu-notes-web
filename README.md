@@ -30,7 +30,8 @@ A template file for local development would be:
     "position": "http://localhost:8000/api/position/",
     "grip": "http://localhost:8000/api/grips/",
     "technique": "http://localhost:8000/api/technique/",
-    "submission": "http://localhost:8000/api/submission/"
+    "submission": "http://localhost:8000/api/submission/",
+    "playlist": "http://localhost:8000/api/playlists/"
 }
 ```
 

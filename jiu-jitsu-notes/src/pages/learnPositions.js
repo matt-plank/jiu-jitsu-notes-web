@@ -5,6 +5,7 @@ import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
 import TechniqueGuessList from "../components/techniqueGuessList";
 import TextInput from "../components/textInput";
+import useAllPlaylists from "../hooks/useAllPlaylists";
 import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 import usePositionPlaylist from "../hooks/usePositionPlaylist";
@@ -12,6 +13,7 @@ import usePositionPlaylist from "../hooks/usePositionPlaylist";
 const LearnPositions = () => {
   const [selectedPosition, setSelectedPosition] = useState();
   const positions = useAllPositions();
+  const playlists = useAllPlaylists();
 
   const [guessString, setGuessString] = useState("");
   const [guessedTechniques, clearGuessedTechniques] = useGuesses(
@@ -24,23 +26,6 @@ const LearnPositions = () => {
     setGuessString,
     selectedPosition?.submissions
   );
-
-  const PLAYLISTS = [
-    {
-      name: "Guard Positions",
-      description: "All positions where you're on your back",
-      positions: positions.positionList.filter(
-        (position) => position.aspect === "Playing"
-      ),
-    },
-    {
-      name: "Pin Positions",
-      description: "Top positions where you're pinning your opponent",
-      positions: positions.positionList.filter(
-        (position) => position.aspect === "Top"
-      ),
-    },
-  ];
 
   const playlist = usePositionPlaylist(setSelectedPosition);
 
@@ -124,11 +109,18 @@ const LearnPositions = () => {
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <h1 className="text-xl">Position Playlists</h1>
 
-            {PLAYLISTS.map((playlistItem) => (
+            {playlists.map((playlistItem) => (
               <div
                 className="bg-gray-200 hover:bg-gray-300 py-2 px-4 cursor-pointer rounded-md"
                 onClick={() => {
-                  playlist.setPositions(playlistItem.positions);
+                  playlist.setPositions(
+                    positions.positionList.filter((position) => {
+                      const playlistIds = position.playlists.map(
+                        (playlist) => playlist.id
+                      );
+                      return playlistIds.includes(playlistItem.id);
+                    })
+                  );
                 }}
               >
                 {playlistItem.name}
