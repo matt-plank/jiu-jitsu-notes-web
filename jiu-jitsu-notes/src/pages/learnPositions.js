@@ -25,8 +25,22 @@ const LearnPositions = () => {
     selectedPosition?.submissions ?? []
   );
 
-  const guardPlaylist = [];
-  const playlist = usePositionPlaylist(guardPlaylist, setSelectedPosition);
+  const PLAYLISTS = [
+    {
+      name: "Guard",
+      positions: positions.positionList.filter(
+        (position) => position.aspect === "Playing"
+      ),
+    },
+    {
+      name: "Pin",
+      positions: positions.positionList.filter(
+        (position) => position.aspect === "Top"
+      ),
+    },
+  ];
+
+  const playlist = usePositionPlaylist(setSelectedPosition);
 
   const selectRandomPosition = () => {
     const randomIndex = Math.floor(
@@ -44,7 +58,7 @@ const LearnPositions = () => {
     <>
       <NavBar selected="/positions" />
 
-      <div className="flex justify-center">
+      <div className="flex justify-center gap-5">
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <SearchableDropdown
@@ -63,8 +77,20 @@ const LearnPositions = () => {
               <ActionButton onClick={selectRandomPosition} hotkeys="]">
                 Select Random
               </ActionButton>
-              <ActionButton onClick={playlist.nextPosition} hotkeys="enter">
+              <ActionButton
+                onClick={playlist.moveToNextPosition}
+                hotkeys="enter"
+              >
                 Next on Playlist
+              </ActionButton>
+              <ActionButton
+                onClick={() => {
+                  playlist.clear();
+                  setSelectedPosition(null);
+                }}
+                hotkeys="escape"
+              >
+                Clear Playlist
               </ActionButton>
             </div>
           </div>
@@ -90,6 +116,27 @@ const LearnPositions = () => {
               allSubmissions={selectedPosition?.submissions ?? []}
               guessedSubmissions={guessedSubmissions}
             />
+          </div>
+        </div>
+        <div className="flex flex-col mt-10 gap-5 w-[40%]">
+          <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
+            <h1 className="text-xl">Position Playlists</h1>
+
+            {PLAYLISTS.map((playlistItem) => (
+              <div
+                className="bg-gray-200 hover:bg-gray-300 py-2 px-4 cursor-pointer rounded-md"
+                onClick={() => {
+                  playlist.setPositions(playlistItem.positions);
+                }}
+              >
+                {playlistItem.name}
+                <p className="text-gray-400">
+                  {playlistItem.positions
+                    .map((position) => position.display_name)
+                    .join(" \u2022 ")}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>

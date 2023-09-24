@@ -1,23 +1,41 @@
 import { useState } from "react";
 
-const usePositionPlaylist = (positions, setSelectedPosition) => {
+const usePositionPlaylist = (setSelectedPosition) => {
+  const [positionsList, setPositionsList] = useState([]);
   const [currentPositionIndex, setCurrentPositionIndex] = useState(0);
-  const hasPositions = positions.length > 0;
+  const hasPositions = positionsList.length > 0;
 
-  const nextPosition = () => {
-    if (currentPositionIndex + 1 >= positions.length) {
+  const currentPosition = () => {
+    return positionsList[currentPositionIndex];
+  };
+
+  const moveToNextPosition = () => {
+    if (currentPositionIndex + 1 >= positionsList.length) {
       setCurrentPositionIndex(0);
-      setSelectedPosition(positions[0]);
+      setSelectedPosition(positionsList[0]);
       return;
     }
 
     setCurrentPositionIndex(currentPositionIndex + 1);
-    setSelectedPosition(positions[currentPositionIndex + 1]);
+    setSelectedPosition(positionsList[currentPositionIndex + 1]);
+  };
+
+  const clear = () => {
+    setPositionsList([]);
+    setCurrentPositionIndex(0);
+  };
+
+  const setPositions = (positions) => {
+    setPositionsList(positions);
+    setSelectedPosition(positions[0]);
   };
 
   return {
-    nextPosition,
+    setPositions,
+    currentPosition,
+    moveToNextPosition,
     hasPositions,
+    clear,
   };
 };
 
