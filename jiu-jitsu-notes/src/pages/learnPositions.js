@@ -45,7 +45,7 @@ const LearnPositions = () => {
     <>
       <NavBar selected="/positions" />
 
-      <div className="flex justify-center gap-5">
+      <div className="flex justify-center gap-10">
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
           <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
             <SearchableDropdown
@@ -84,7 +84,7 @@ const LearnPositions = () => {
 
           <div className="flex flex-col gap-5 bg-gray-100 rounded-lg p-5">
             <TextInput
-              placeholder="Enter Guess"
+              placeholder="Enter Technique / Submission Guess"
               value={guessString}
               onChange={(e) => {
                 setGuessString(e.target.value);
@@ -105,13 +105,14 @@ const LearnPositions = () => {
             />
           </div>
         </div>
+
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
-          <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
+          <div className="flex flex-col gap-5">
             <h1 className="text-xl">Position Playlists</h1>
 
             {playlists.map((playlistItem) => (
               <div
-                className="bg-gray-200 hover:bg-gray-300 py-2 px-4 cursor-pointer rounded-md"
+                className="bg-gray-100 hover:bg-gray-200 py-3 px-5 cursor-pointer rounded-md"
                 onClick={() => {
                   playlist.setPositions(
                     positions.positionList.filter((position) => {
