@@ -11,12 +11,12 @@ const NavBar = ({ selected }) => {
         <Logo dark className="cursor-pointer" />
       </Link>
       <p className={selected === "/edit" ? SELECTED_COLOUR : DEFAULT_COLOUR}>
-        <Link to="/edit">Edit Positions</Link>
+        <Link to="/edit">Positions</Link>
       </p>
       <p
         className={selected === "/positions" ? "text-yellow-500" : "text-white"}
       >
-        <Link to="/positions">Learn Positions</Link>
+        <Link to="/positions">Learn</Link>
       </p>
     </div>
   );
