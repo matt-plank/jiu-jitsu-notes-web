@@ -27,13 +27,15 @@ const LearnPositions = () => {
 
   const PLAYLISTS = [
     {
-      name: "Guard",
+      name: "Guard Positions",
+      description: "All positions where you're on your back",
       positions: positions.positionList.filter(
         (position) => position.aspect === "Playing"
       ),
     },
     {
-      name: "Pin",
+      name: "Pin Positions",
+      description: "Top positions where you're pinning your opponent",
       positions: positions.positionList.filter(
         (position) => position.aspect === "Top"
       ),
@@ -130,6 +132,10 @@ const LearnPositions = () => {
                 }}
               >
                 {playlistItem.name}
+                <span className="text-gray-600 italic">
+                  {" "}
+                  - {playlistItem.description}
+                </span>
                 <p className="text-gray-400">
                   {playlistItem.positions
                     .map((position) => position.display_name)
