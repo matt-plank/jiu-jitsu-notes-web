@@ -38,9 +38,20 @@ const NavBar = ({ selected }) => {
       <div className="flex-1" />
 
       {!tokenApi.exists() ? (
-        <p className={selected === "/login" ? SELECTED_COLOUR : DEFAULT_COLOUR}>
-          <Link to="/login">Log In</Link>
-        </p>
+        <>
+          <p
+            className={selected === "/login" ? SELECTED_COLOUR : DEFAULT_COLOUR}
+          >
+            <Link to="/login">Log In</Link>
+          </p>
+          <p
+            className={
+              selected === "/register" ? SELECTED_COLOUR : DEFAULT_COLOUR
+            }
+          >
+            <Link to="/register">Register</Link>
+          </p>
+        </>
       ) : (
         <p
           className="cursor-pointer"

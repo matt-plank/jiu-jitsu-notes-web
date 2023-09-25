@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import LearnPositions from "./pages/learnPositions";
 import Login from "./pages/login";
 import Playlists from "./pages/playlists";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/playlists" element={<Playlists />} />
           <Route path="/edit" element={<EditPositions />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </Router>
     </>

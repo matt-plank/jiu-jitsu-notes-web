@@ -192,3 +192,17 @@ export const playlist = {
     return json;
   },
 };
+
+export const account = {
+  create: async (username, password) => {
+    let response = await fetch(routes.account, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ username: username, password: password }),
+    });
+
+    if (response.status !== 200) return false;
+
+    return true;
+  },
+};
