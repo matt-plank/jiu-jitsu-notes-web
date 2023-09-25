@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { token as tokenApi } from "./api/api";
+import useAccount from "./hooks/useAccount";
 import EditPositions from "./pages/editPositions";
 import Home from "./pages/home";
 import LearnPositions from "./pages/learnPositions";
@@ -7,6 +9,8 @@ import Playlists from "./pages/playlists";
 import Register from "./pages/register";
 
 function App() {
+  const accountDetails = useAccount(tokenApi.fromStorage());
+
   return (
     <>
       <Router>

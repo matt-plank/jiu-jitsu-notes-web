@@ -205,4 +205,17 @@ export const account = {
 
     return true;
   },
+  details: async () => {
+    let response = await fetch(routes.account, {
+      headers: {
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+    });
+
+    if (response.status !== 200) return {};
+
+    let json = await response.json();
+
+    return json;
+  },
 };
