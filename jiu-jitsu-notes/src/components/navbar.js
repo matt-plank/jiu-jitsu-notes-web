@@ -14,6 +14,11 @@ const NavBar = ({ selected }) => {
         <Link to="/edit">Positions</Link>
       </p>
       <p
+        className={selected === "/playlists" ? SELECTED_COLOUR : DEFAULT_COLOUR}
+      >
+        <Link to="/playlists">Playlists</Link>
+      </p>
+      <p
         className={selected === "/positions" ? "text-yellow-500" : "text-white"}
       >
         <Link to="/positions">Learn</Link>

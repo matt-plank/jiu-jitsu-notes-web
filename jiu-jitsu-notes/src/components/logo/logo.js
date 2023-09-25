@@ -5,7 +5,7 @@ const Logo = ({ dark, className }) => {
   return (
     <div className={`flex justify-center h-6 items-center ${className}`}>
       <img
-        className="h-full pixelated"
+        className="h-full"
         src={dark ? DarkLogo : LightLogo}
         alt="Jiu Jitsu Notes Logo"
       />
