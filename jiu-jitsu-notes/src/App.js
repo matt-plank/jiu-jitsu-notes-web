@@ -3,6 +3,7 @@ import { token as tokenApi } from "./api/api";
 import useAccount from "./hooks/useAccount";
 import EditPositions from "./pages/editPositions";
 import Grips from "./pages/grips";
+import Guide from "./pages/guide";
 import Home from "./pages/home";
 import LearnPositions from "./pages/learnPositions";
 import Login from "./pages/login";
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home account={account} />} />
+          <Route path="/guide" element={<Guide account={account} />} />
           <Route path="/grips" element={<Grips account={account} />} />
           <Route
             path="/positions"

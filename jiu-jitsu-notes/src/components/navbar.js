@@ -6,58 +6,67 @@ const SELECTED_COLOUR = "text-yellow-500";
 const DEFAULT_COLOUR = "text-white";
 
 const NavBar = ({ selected, username }) => {
+  const LOGGED_IN_LINKS = [
+    {
+      path: "/guide",
+      name: "Guide",
+    },
+    {
+      path: "/grips",
+      name: "Grips",
+    },
+    {
+      path: "/edit",
+      name: "Positions",
+    },
+    {
+      path: "/playlists",
+      name: "Playlists",
+    },
+    {
+      path: "/positions",
+      name: "Learn",
+    },
+  ];
+
+  const LOGGED_OUT_LINKS = [
+    {
+      path: "/login",
+      name: "Log In",
+    },
+    {
+      path: "/register",
+      name: "Register",
+    },
+  ];
+
+  const LinkList = ({ links }) => {
+    return (
+      <>
+        {links.map((link) => (
+          <p
+            className={
+              selected === link.path ? SELECTED_COLOUR : DEFAULT_COLOUR
+            }
+          >
+            <Link to={link.path}>{link.name}</Link>
+          </p>
+        ))}
+      </>
+    );
+  };
+
   return (
     <div className="bg-gray-800 px-5 py-5 text-white flex flex-row justify-center gap-10">
       <Link to="/">
         <Logo dark className="cursor-pointer" />
       </Link>
-      {tokenApi.exists() && (
-        <>
-          <p
-            className={selected === "/grips" ? SELECTED_COLOUR : DEFAULT_COLOUR}
-          >
-            <Link to="/grips">Grips</Link>
-          </p>
-          <p
-            className={selected === "/edit" ? SELECTED_COLOUR : DEFAULT_COLOUR}
-          >
-            <Link to="/edit">Positions</Link>
-          </p>
-          <p
-            className={
-              selected === "/playlists" ? SELECTED_COLOUR : DEFAULT_COLOUR
-            }
-          >
-            <Link to="/playlists">Playlists</Link>
-          </p>
-          <p
-            className={
-              selected === "/positions" ? "text-yellow-500" : "text-white"
-            }
-          >
-            <Link to="/positions">Learn</Link>
-          </p>
-        </>
-      )}
+
+      {tokenApi.exists() && <LinkList links={LOGGED_IN_LINKS} />}
 
       <div className="flex-1" />
 
-      {!tokenApi.exists() ? (
-        <>
-          <p
-            className={selected === "/login" ? SELECTED_COLOUR : DEFAULT_COLOUR}
-          >
-            <Link to="/login">Log In</Link>
-          </p>
-          <p
-            className={
-              selected === "/register" ? SELECTED_COLOUR : DEFAULT_COLOUR
-            }
-          >
-            <Link to="/register">Register</Link>
-          </p>
-        </>
-      ) : (
+      {tokenApi.exists() && (
         <>
           <p>{username}</p>
           <p
@@ -71,6 +80,8 @@ const NavBar = ({ selected, username }) => {
           </p>
         </>
       )}
+
+      {!tokenApi.exists() && <LinkList links={LOGGED_OUT_LINKS} />}
     </div>
   );
 };
