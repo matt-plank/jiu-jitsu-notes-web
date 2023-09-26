@@ -9,16 +9,19 @@ import Playlists from "./pages/playlists";
 import Register from "./pages/register";
 
 function App() {
-  const accountDetails = useAccount(tokenApi.fromStorage());
+  const account = useAccount(tokenApi.fromStorage());
 
   return (
     <>
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/positions" element={<LearnPositions />} />
-          <Route path="/playlists" element={<Playlists />} />
-          <Route path="/edit" element={<EditPositions />} />
+          <Route path="/" element={<Home account={account} />} />
+          <Route
+            path="/positions"
+            element={<LearnPositions account={account} />}
+          />
+          <Route path="/playlists" element={<Playlists account={account} />} />
+          <Route path="/edit" element={<EditPositions account={account} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>

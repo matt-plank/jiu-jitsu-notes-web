@@ -11,7 +11,7 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 import usePositionPlaylist from "../hooks/usePositionPlaylist";
 
-const LearnPositions = () => {
+const LearnPositions = ({ account }) => {
   const [selectedPosition, setSelectedPosition] = useState();
   const positions = useAllPositions();
   const playlists = useAllPlaylists();
@@ -44,7 +44,7 @@ const LearnPositions = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <NavBar selected="/positions" />
+      <NavBar selected="/positions" username={account.username} />
 
       <div className="flex justify-center gap-10">
         <div className="flex flex-col mt-10 gap-5 w-[40%]">

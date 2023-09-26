@@ -11,7 +11,7 @@ import usePosition from "../hooks/usePosition";
 import useSubmissions from "../hooks/useSubmissions";
 import useTechniques from "../hooks/useTechniques";
 
-const EditPositions = () => {
+const EditPositions = ({ account }) => {
   const grips = useAllGrips();
   const positions = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
@@ -71,7 +71,7 @@ const EditPositions = () => {
 
   return (
     <>
-      <NavBar selected="/edit" />
+      <NavBar selected="/edit" username={account.username} />
 
       <div className="flex p-5 gap-5">
         <EditDetailsColumn

@@ -5,7 +5,7 @@ import Logo from "./logo/logo";
 const SELECTED_COLOUR = "text-yellow-500";
 const DEFAULT_COLOUR = "text-white";
 
-const NavBar = ({ selected }) => {
+const NavBar = ({ selected, username }) => {
   return (
     <div className="bg-gray-800 px-5 py-5 text-white flex flex-row justify-center gap-10">
       <Link to="/">
@@ -53,15 +53,18 @@ const NavBar = ({ selected }) => {
           </p>
         </>
       ) : (
-        <p
-          className="cursor-pointer"
-          onClick={() => {
-            tokenApi.delete();
-            window.location.href = "/login";
-          }}
-        >
-          Log Out
-        </p>
+        <>
+          <p>{username}</p>
+          <p
+            className="cursor-pointer"
+            onClick={() => {
+              tokenApi.delete();
+              window.location.href = "/login";
+            }}
+          >
+            Log Out
+          </p>
+        </>
       )}
     </div>
   );
