@@ -70,7 +70,7 @@ const EditPositions = ({ account }) => {
   }, [positions.positionList]);
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <NavBar selected="/edit" username={account.username} />
 
       <div className="flex p-5 gap-5">
@@ -93,8 +93,10 @@ const EditPositions = ({ account }) => {
         <EditSubmissionsColumn submissions={submissions} />
       </div>
 
+      <div className="flex-1" />
+
       <Footer />
-    </>
+    </div>
   );
 };
 

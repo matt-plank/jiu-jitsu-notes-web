@@ -3,7 +3,7 @@ import NavBar from "../components/navbar";
 
 const Home = ({ account }) => {
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <NavBar selected="/" username={account.username} />
 
       <div className="flex justify-center px-10">
@@ -46,8 +46,10 @@ const Home = ({ account }) => {
         </div>
       </div>
 
+      <div className="flex-1" />
+
       <Footer />
-    </>
+    </div>
   );
 };
 
