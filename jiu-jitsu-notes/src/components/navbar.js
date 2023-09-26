@@ -14,6 +14,11 @@ const NavBar = ({ selected, username }) => {
       {tokenApi.exists() && (
         <>
           <p
+            className={selected === "/grips" ? SELECTED_COLOUR : DEFAULT_COLOUR}
+          >
+            <Link to="/grips">Grips</Link>
+          </p>
+          <p
             className={selected === "/edit" ? SELECTED_COLOUR : DEFAULT_COLOUR}
           >
             <Link to="/edit">Positions</Link>
