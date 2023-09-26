@@ -3,6 +3,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import EditDetailsColumn from "../components/editDetailsColumn";
 import EditSubmissionsColumn from "../components/editSubmissionsColumn";
 import EditTechniquesColumn from "../components/editTechniquesColumn";
+import Footer from "../components/footer";
 import NavBar from "../components/navbar";
 import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
@@ -91,6 +92,8 @@ const EditPositions = () => {
 
         <EditSubmissionsColumn submissions={submissions} />
       </div>
+
+      <Footer />
     </>
   );
 };

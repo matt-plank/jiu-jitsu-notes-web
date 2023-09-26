@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ActionButton from "../components/actionButton";
+import Footer from "../components/footer";
 import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
@@ -42,7 +43,7 @@ const LearnPositions = () => {
   };
 
   return (
-    <>
+    <div className="flex flex-col min-h-screen">
       <NavBar selected="/positions" />
 
       <div className="flex justify-center gap-10">
@@ -139,7 +140,11 @@ const LearnPositions = () => {
           </div>
         </div>
       </div>
-    </>
+
+      <div className="flex-1" />
+
+      <Footer />
+    </div>
   );
 };
 
