@@ -31,7 +31,9 @@ A template file for local development would be:
     "grip": "http://localhost:8000/api/grips/",
     "technique": "http://localhost:8000/api/technique/",
     "submission": "http://localhost:8000/api/submission/",
-    "playlist": "http://localhost:8000/api/playlists/"
+    "playlist": "http://localhost:8000/api/playlists/",
+    "token": "http://localhost:8000/auth/token",
+    "account": "http://localhost:8000/auth/account"
 }
 ```
 
