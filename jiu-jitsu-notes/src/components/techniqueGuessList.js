@@ -7,10 +7,10 @@ const TechniqueGuessList = ({
   return (
     <div className="flex flex-col gap-2">
       <p className="text-gray-400">
-        {guessedTechniques.length} / {allTechniques.length}
+        {guessedTechniques.length} / {allTechniques.length} Techniques Guessed
       </p>
       {guessedTechniques.map((technique) => (
-        <div className="flex justify-between">
+        <div className="flex justify-between bg-white p-3 rounded-md shadow-sm">
           <p>{technique.name}</p>
           <p
             className="text-gray-400 cursor-pointer hover:text-gray-500"
@@ -19,7 +19,7 @@ const TechniqueGuessList = ({
               setSelectedPosition(position);
             }}
           >
-            {technique.to_position.display_name}
+            (Go to) {technique.to_position.display_name}
           </p>
         </div>
       ))}

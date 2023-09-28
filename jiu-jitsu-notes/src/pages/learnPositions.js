@@ -5,7 +5,6 @@ import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
 import TechniqueGuessList from "../components/techniqueGuessList";
-import TextInput from "../components/textInput";
 import useAllPlaylists from "../hooks/useAllPlaylists";
 import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
@@ -43,68 +42,61 @@ const LearnPositions = ({ account }) => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar selected="/positions" username={account.username} />
 
       <div className="flex justify-center gap-10">
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
-          <div className="bg-gray-100 rounded-lg p-5 flex flex-col gap-5">
-            <SearchableDropdown
-              selectedItem={selectedPosition}
-              setSelectedItem={setSelectedPosition}
-              itemOptions={positions.positionList}
-              getItemDisplayName={(option) => option.display_name}
-              placeholder="Search for Position"
-              className="w-full bg-white"
-            />
-
-            <div className="flex flex-row gap-2">
-              <ActionButton onClick={clearAllGuesses} hotkeys="[">
-                Clear Guesses
-              </ActionButton>
-              <ActionButton onClick={selectRandomPosition} hotkeys="]">
-                Select Random
-              </ActionButton>
-              <ActionButton
-                onClick={playlist.moveToNextPosition}
-                hotkeys="enter"
-              >
-                Next on Playlist
-              </ActionButton>
-              <ActionButton
-                onClick={() => {
-                  playlist.clear();
-                  setSelectedPosition(null);
-                }}
-                hotkeys="escape"
-              >
-                Clear Playlist
-              </ActionButton>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-5 bg-gray-100 rounded-lg p-5">
-            <TextInput
-              placeholder="Enter Technique / Submission Guess"
-              value={guessString}
-              onChange={(e) => {
-                setGuessString(e.target.value);
+          <SearchableDropdown
+            selectedItem={selectedPosition}
+            setSelectedItem={setSelectedPosition}
+            itemOptions={positions.positionList}
+            getItemDisplayName={(option) => option.display_name}
+            placeholder="Search for Position"
+            className="w-full bg-white"
+          />
+          <div className="flex flex-row gap-2">
+            <ActionButton onClick={clearAllGuesses} hotkeys="[">
+              Clear Guesses
+            </ActionButton>
+            <ActionButton onClick={selectRandomPosition} hotkeys="]">
+              Select Random
+            </ActionButton>
+            <ActionButton onClick={playlist.moveToNextPosition} hotkeys="enter">
+              Next on Playlist
+            </ActionButton>
+            <ActionButton
+              onClick={() => {
+                playlist.clear();
+                setSelectedPosition(null);
               }}
-              className="bg-white"
-            />
-
-            <TechniqueGuessList
-              allTechniques={selectedPosition?.techniques ?? []}
-              guessedTechniques={guessedTechniques}
-              setSelectedPosition={setSelectedPosition}
-              findPositionById={positions.findById}
-            />
-
-            <SubmissionGuessList
-              allSubmissions={selectedPosition?.submissions ?? []}
-              guessedSubmissions={guessedSubmissions}
-            />
+              hotkeys="escape"
+            >
+              Clear Playlist
+            </ActionButton>
           </div>
+
+          <hr className="border border-gray-200" />
+
+          <input
+            type="text"
+            placeholder="Enter Technique / Submission Guess"
+            className="bg-white px-3 py-2 rounded-md shadow-sm my-3"
+            value={guessString}
+            onChange={(e) => {
+              setGuessString(e.target.value);
+            }}
+          />
+          <TechniqueGuessList
+            allTechniques={selectedPosition?.techniques ?? []}
+            guessedTechniques={guessedTechniques}
+            setSelectedPosition={setSelectedPosition}
+            findPositionById={positions.findById}
+          />
+          <SubmissionGuessList
+            allSubmissions={selectedPosition?.submissions ?? []}
+            guessedSubmissions={guessedSubmissions}
+          />
         </div>
 
         <div className="flex flex-col mt-10 gap-5 w-[40%]">
@@ -113,7 +105,7 @@ const LearnPositions = ({ account }) => {
 
             {playlists.map((playlistItem) => (
               <div
-                className="bg-gray-100 hover:bg-gray-200 py-3 px-5 cursor-pointer rounded-md"
+                className="bg-white hover:bg-gray-50 py-3 px-5 cursor-pointer rounded-md shadow-sm"
                 onClick={() => {
                   playlist.setPositions(
                     positions.positionList.filter((position) => {
