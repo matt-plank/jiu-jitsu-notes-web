@@ -81,11 +81,15 @@ export const techniques = {
 
 export const positions = {
   all: async () => {
-    let response = await fetch(routes.position, {
+    const queryURL = new URL(routes.position);
+    queryURL.searchParams.append("order_by", "name");
+
+    let response = await fetch(queryURL, {
       headers: {
         Authorization: `Token ${token.fromStorage()}`,
       },
     });
+
     let json = await response.json();
 
     return json;
