@@ -3,8 +3,8 @@ const PositionDetailsEditableTable = ({ aspect, setAspect, name, setName }) => {
     <table className="border-collapse w-full">
       <tbody>
         <tr>
-          <td className="border border-gray-800 p-2">Aspect</td>
-          <td className="border border-gray-800 p-2">
+          <td className="border border-gray-200 p-2">Aspect</td>
+          <td className="border border-gray-200 p-2">
             <input
               type="text"
               className="bg-transparent w-full !outline-none"
@@ -17,8 +17,8 @@ const PositionDetailsEditableTable = ({ aspect, setAspect, name, setName }) => {
           </td>
         </tr>
         <tr>
-          <td className="border border-gray-800 p-2">Name</td>
-          <td className="border border-gray-800 p-2">
+          <td className="border border-gray-200 p-2">Name</td>
+          <td className="border border-gray-200 p-2">
             <input
               type="text"
               className="bg-transparent w-full !outline-none"

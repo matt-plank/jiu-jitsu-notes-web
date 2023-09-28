@@ -14,16 +14,14 @@ const EditDetailsColumn = ({
 }) => {
   return (
     <div className="w-1/3 flex flex-col gap-5">
-      <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
-        <SearchableDropdown
-          selectedItem={selectedPosition}
-          setSelectedItem={setSelectedPosition}
-          itemOptions={positions.positionList}
-          getItemDisplayName={(option) => option.display_name}
-          placeholder="Search for Position"
-          className="w-full bg-white"
-        />
-      </div>
+      <SearchableDropdown
+        selectedItem={selectedPosition}
+        setSelectedItem={setSelectedPosition}
+        itemOptions={positions.positionList}
+        getItemDisplayName={(option) => option.display_name}
+        placeholder="Search for Position"
+        className="w-full bg-white"
+      />
 
       <div className="w-full flex gap-5">
         <ActionButton
@@ -39,7 +37,7 @@ const EditDetailsColumn = ({
         </ActionButton>
       </div>
 
-      <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+      <div className="p-5 bg-white rounded-lg flex flex-col gap-5 shadow-sm">
         <h2 className="text-xl">Details</h2>
 
         <PositionDetailsEditableTable
@@ -50,7 +48,7 @@ const EditDetailsColumn = ({
         />
       </div>
 
-      <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+      <div className="p-5 bg-white rounded-lg flex flex-col gap-5 shadow-sm">
         <h2 className="text-xl">Your Grips</h2>
 
         <MultiGripSelector
@@ -70,7 +68,7 @@ const EditDetailsColumn = ({
         </ActionButton>
       </div>
 
-      <div className="p-5 bg-gray-100 rounded-lg flex flex-col gap-5">
+      <div className="p-5 bg-white rounded-lg flex flex-col gap-5 shadow-sm">
         <h2 className="text-xl">Their Grips</h2>
 
         <MultiGripSelector

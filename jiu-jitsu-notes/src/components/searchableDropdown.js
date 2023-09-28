@@ -31,8 +31,8 @@ const SearchableDropdown = ({
   };
 
   return (
-    <div className={`${className} relative inline-block w-96`}>
-      <div className="border-2 border-gray-400 rounded-sm p-1 px-2 flex flex-row items-center gap-2">
+    <div className={`${className} relative inline-block rounded-lg shadow-sm`}>
+      <div className="py-2 px-3 flex flex-row items-center gap-2">
         <AiOutlineSearch className="text-gray-400" />
 
         <input

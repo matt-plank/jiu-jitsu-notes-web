@@ -1,7 +1,7 @@
 const GripSelector = ({ grip, setGrip, allGrips }) => {
   return (
     <select
-      className="border-2 border-gray-400 rounded-sm p-2 bg-white"
+      className="border border-gray-200 rounded-md shadow-sm px-2 py-3 bg-white"
       value={grip.id}
       onChange={(e) => {
         setGrip({
