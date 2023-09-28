@@ -2,7 +2,7 @@
 
 The React front-end for my Jiu Jitsu notes app - designed to simplify the process of conceptualising and memorising complex techniques and transitions in the sport of Jiu Jitsu.
 
-![image](https://github.com/matt-plank/jiu-jitsu-notes-web/assets/48247883/1212799f-54a3-45af-837f-5593c795a007)
+![image](https://github.com/matt-plank/jiu-jitsu-notes-web/assets/48247883/d08c7185-3a67-412f-b977-343348fa30a1)
 
 ## Setup
 
