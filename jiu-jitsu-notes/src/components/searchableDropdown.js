@@ -56,7 +56,7 @@ const SearchableDropdown = ({
         )}
       </div>
       {isOpen ? (
-        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white z-10 max-h-52 overflow-y-auto">
+        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white z-10 max-h-96 overflow-y-auto">
           {itemOptions.filter(filterQueryInOption).map((item, i) => (
             <p
               onClick={() => {
