@@ -56,14 +56,14 @@ const SearchableDropdown = ({
         )}
       </div>
       {isOpen ? (
-        <div className="border-2 border-gray-400 rounded-sm mt-2 absolute w-full bg-white z-10">
+        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white z-10 max-h-52 overflow-y-auto">
           {itemOptions.filter(filterQueryInOption).map((item, i) => (
             <p
               onClick={() => {
                 setSelectedItem(item);
                 setQuery(getItemDisplayName(item));
               }}
-              className="cursor-pointer hover:bg-gray-200 px-2 py-1"
+              className="cursor-pointer hover:bg-gray-100 px-2 py-1"
               key={i}
             >
               {getItemDisplayName(item)}
