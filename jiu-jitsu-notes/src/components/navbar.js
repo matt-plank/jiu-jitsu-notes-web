@@ -1,4 +1,5 @@
 import { ImBooks } from "react-icons/im";
+import { LuLogOut } from "react-icons/lu";
 import { MdPlaylistPlay, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { token as tokenApi } from "../api/api";
@@ -77,12 +78,13 @@ const NavBar = ({ selected, username }) => {
         <>
           <p>{username}</p>
           <p
-            className="cursor-pointer"
+            className="cursor-pointer flex items-center gap-1"
             onClick={() => {
               tokenApi.delete();
               window.location.href = "/login";
             }}
           >
+            <LuLogOut className="pt-1" />
             Log Out
           </p>
         </>
