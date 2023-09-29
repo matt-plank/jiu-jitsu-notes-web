@@ -1,3 +1,5 @@
+import { ImBooks } from "react-icons/im";
+import { MdPlaylistPlay, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { token as tokenApi } from "../api/api";
 import Logo from "./logo/logo";
@@ -10,6 +12,7 @@ const NavBar = ({ selected, username }) => {
     {
       path: "/guide",
       name: "Guide",
+      icon: ImBooks,
     },
     {
       path: "/grips",
@@ -22,10 +25,12 @@ const NavBar = ({ selected, username }) => {
     {
       path: "/playlists",
       name: "Playlists",
+      icon: MdPlaylistPlay,
     },
     {
       path: "/positions",
       name: "Learn",
+      icon: MdSchool,
     },
   ];
 
@@ -49,7 +54,9 @@ const NavBar = ({ selected, username }) => {
               selected === link.path ? SELECTED_COLOUR : DEFAULT_COLOUR
             }
           >
-            <Link to={link.path}>{link.name}</Link>
+            <Link to={link.path} className="flex items-center gap-1">
+              {link.icon ? <link.icon className="pt-1" /> : ""} {link.name}
+            </Link>
           </p>
         ))}
       </>
