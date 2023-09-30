@@ -1,3 +1,5 @@
+import { BsFillPeopleFill } from "react-icons/bs";
+import { FaHandshake } from "react-icons/fa";
 import { ImBooks } from "react-icons/im";
 import { LuLogOut } from "react-icons/lu";
 import { MdPlaylistPlay, MdSchool } from "react-icons/md";
@@ -18,10 +20,12 @@ const NavBar = ({ selected, username }) => {
     {
       path: "/grips",
       name: "Grips",
+      icon: FaHandshake,
     },
     {
       path: "/edit",
       name: "Positions",
+      icon: BsFillPeopleFill,
     },
     {
       path: "/playlists",
