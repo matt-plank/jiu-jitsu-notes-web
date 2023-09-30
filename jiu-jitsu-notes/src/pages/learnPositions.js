@@ -123,11 +123,6 @@ const LearnPositions = ({ account }) => {
                   {" "}
                   - {playlistItem.description}
                 </span>
-                <p className="text-gray-400">
-                  {playlistItem.positions
-                    .map((position) => position.display_name)
-                    .join(" \u2022 ")}
-                </p>
               </div>
             ))}
           </div>
