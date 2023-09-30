@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { AiOutlinePlaySquare } from "react-icons/ai";
 import ActionButton from "../components/actionButton";
 import Footer from "../components/footer";
 import NavBar from "../components/navbar";
@@ -116,6 +117,7 @@ const LearnPositions = ({ account }) => {
                   );
                 }}
               >
+                <AiOutlinePlaySquare className="inline-block mb-1 mr-3" />
                 {playlistItem.name}
                 <span className="text-gray-600 italic">
                   {" "}
