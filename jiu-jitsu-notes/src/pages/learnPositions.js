@@ -45,8 +45,8 @@ const LearnPositions = ({ account }) => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar selected="/positions" username={account.username} />
 
-      <div className="flex justify-center gap-10">
-        <div className="flex flex-col mt-10 gap-5 w-[40%]">
+      <div className="flex justify-center gap-10 p-10">
+        <div className="flex flex-col gap-5 w-1/2">
           <SearchableDropdown
             selectedItem={selectedPosition}
             setSelectedItem={setSelectedPosition}
@@ -81,12 +81,13 @@ const LearnPositions = ({ account }) => {
           <input
             type="text"
             placeholder="Enter Technique / Submission Guess"
-            className="bg-white px-3 py-2 rounded-md shadow-sm my-3"
+            className="bg-white p-3 rounded-md shadow-sm my-3 !outline-none"
             value={guessString}
             onChange={(e) => {
               setGuessString(e.target.value);
             }}
           />
+
           <TechniqueGuessList
             allTechniques={selectedPosition?.techniques ?? []}
             guessedTechniques={guessedTechniques}
@@ -99,10 +100,8 @@ const LearnPositions = ({ account }) => {
           />
         </div>
 
-        <div className="flex flex-col mt-10 gap-5 w-[40%]">
+        <div className="flex flex-col gap-5 w-1/3">
           <div className="flex flex-col gap-5">
-            <h1 className="text-xl">Position Playlists</h1>
-
             {playlists.map((playlistItem) => (
               <div
                 className="bg-white hover:bg-gray-50 py-3 px-5 cursor-pointer rounded-md shadow-sm"
