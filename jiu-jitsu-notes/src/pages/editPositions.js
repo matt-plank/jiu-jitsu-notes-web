@@ -89,6 +89,7 @@ const EditPositions = ({ account }) => {
             techniques={techniques}
             position={position}
             positions={positions}
+            setSelectedPosition={setSelectedPosition}
           />
 
           <EditSubmissionsColumn submissions={submissions} />
