@@ -73,7 +73,7 @@ const EditPositions = ({ account }) => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar selected="/edit" username={account.username} />
 
-      <div className="flex p-5 gap-5">
+      <div className="flex p-5 gap-5 justify-center">
         <EditDetailsColumn
           selectedPosition={selectedPosition}
           setSelectedPosition={setSelectedPosition}
@@ -84,13 +84,15 @@ const EditPositions = ({ account }) => {
           grips={grips}
         />
 
-        <EditTechniquesColumn
-          techniques={techniques}
-          position={position}
-          positions={positions}
-        />
+        <div className="w-1/2 flex flex-col gap-5">
+          <EditTechniquesColumn
+            techniques={techniques}
+            position={position}
+            positions={positions}
+          />
 
-        <EditSubmissionsColumn submissions={submissions} />
+          <EditSubmissionsColumn submissions={submissions} />
+        </div>
       </div>
 
       <div className="flex-1" />

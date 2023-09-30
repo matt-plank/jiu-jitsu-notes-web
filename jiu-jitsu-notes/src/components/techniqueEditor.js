@@ -10,7 +10,7 @@ const TechniqueEditor = ({
       <input
         type="text"
         placeholder="Enter Technique Name"
-        className="p-2 border border-gray-200 rounded-md shadow-sm bg-white !outline-none"
+        className="p-2 border border-gray-200 rounded-md shadow-sm bg-white !outline-none w-full"
         value={name}
         onChange={(e) => {
           setName(e.target.value);
