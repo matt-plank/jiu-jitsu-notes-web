@@ -3,11 +3,9 @@ import ActionButton from "../components/actionButton";
 import EditableGripCard from "../components/editableGripCard";
 import Footer from "../components/footer";
 import NavBar from "../components/navbar";
-import useGripsApi from "../hooks/useGripsApi";
 
-const Grips = ({ account }) => {
+const Grips = ({ account, grips }) => {
   const [gripQuery, setGripQuery] = useState("");
-  const grips = useGripsApi();
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
