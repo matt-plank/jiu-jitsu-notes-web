@@ -178,9 +178,50 @@ export const grips = {
         Authorization: `Token ${token.fromStorage()}`,
       },
     });
+
+    if (response.status !== 200) return [];
+
     let json = await response.json();
 
     return json;
+  },
+  update: async (id, data) => {
+    let response = await fetch(routes.grip, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify({ ...data, id: id }),
+    });
+
+    let json = await response.json();
+
+    return json;
+  },
+  create: async (data) => {
+    let response = await fetch(routes.grip, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify(data),
+    });
+
+    let json = await response.json();
+
+    return json;
+  },
+  remove: async (id) => {
+    await fetch(routes.grip, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify({ id: id }),
+    });
   },
 };
 

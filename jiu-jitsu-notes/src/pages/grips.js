@@ -1,25 +1,65 @@
 import { useState } from "react";
+import ActionButton from "../components/actionButton";
+import EditableGripCard from "../components/editableGripCard";
 import Footer from "../components/footer";
 import NavBar from "../components/navbar";
+import useGripsApi from "../hooks/useGripsApi";
 
 const Grips = ({ account }) => {
   const [gripQuery, setGripQuery] = useState("");
+  const grips = useGripsApi();
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar selected="/grips" username={account.username} />
 
       <div className="flex justify-center pt-10">
-        <div className="w-[40%] flex flex-col gap-5">
-          <input
-            type="text"
-            className="w-full bg-white !outline-none py-2 px-2 border-2 border-gray-400 rounded-sm"
-            placeholder="Search Grips"
-            value={gripQuery}
-            onChange={(e) => {
-              setGripQuery(e.target.value);
-            }}
-          />
+        <div className="flex flex-col gap-5 w-1/2">
+          <div className="flex gap-2">
+            <input
+              type="text"
+              className="flex-1 bg-white !outline-none p-2 rounded-md shadow-sm"
+              placeholder="Search Grips"
+              value={gripQuery}
+              onChange={(e) => {
+                setGripQuery(e.target.value);
+              }}
+            />
+            <ActionButton
+              onClick={() => {
+                if (gripQuery === "") return;
+                grips.pushNew(gripQuery);
+              }}
+            >
+              Create Grip
+            </ActionButton>
+
+            <ActionButton onClick={grips.save} hotkeys="ctrl+s">
+              Save Changes
+            </ActionButton>
+          </div>
+
+          <hr className="border border-gray-200" />
+
+          <div className="flex flex-col gap-2">
+            {grips.grips
+              .filter(
+                (grip) =>
+                  grip.name.toLowerCase().indexOf(gripQuery.toLowerCase()) !==
+                  -1
+              )
+              .map((grip, i) => (
+                <EditableGripCard
+                  gripName={grip.name}
+                  onGripNameChange={(e) => {
+                    grips.setNameByIndex(i, e.target.value);
+                  }}
+                  onDelete={() => {
+                    grips.deleteById(grip.id);
+                  }}
+                />
+              ))}
+          </div>
         </div>
       </div>
 
