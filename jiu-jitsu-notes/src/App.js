@@ -1,6 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { token as tokenApi } from "./api/api";
 import useAccount from "./hooks/useAccount";
+import useGripsApi from "./hooks/useGripsApi";
+import usePlaylistsApi from "./hooks/usePlaylistsApi";
 import EditPositions from "./pages/editPositions";
 import Grips from "./pages/grips";
 import Guide from "./pages/guide";
@@ -12,6 +14,8 @@ import Register from "./pages/register";
 
 function App() {
   const account = useAccount(tokenApi.fromStorage());
+  const grips = useGripsApi();
+  const playlists = usePlaylistsApi();
 
   return (
     <>
@@ -19,13 +23,19 @@ function App() {
         <Routes>
           <Route path="/" element={<Home account={account} />} />
           <Route path="/guide" element={<Guide account={account} />} />
-          <Route path="/grips" element={<Grips account={account} />} />
+          <Route
+            path="/grips"
+            element={<Grips account={account} grips={grips} />}
+          />
           <Route
             path="/positions"
-            element={<LearnPositions account={account} />}
+            element={<LearnPositions account={account} playlists={playlists} />}
           />
           <Route path="/playlists" element={<Playlists account={account} />} />
-          <Route path="/edit" element={<EditPositions account={account} />} />
+          <Route
+            path="/edit"
+            element={<EditPositions account={account} grips={grips} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
