@@ -6,15 +6,13 @@ import NavBar from "../components/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
 import TechniqueGuessList from "../components/techniqueGuessList";
-import useAllPlaylists from "../hooks/useAllPlaylists";
 import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 import usePositionPlaylist from "../hooks/usePositionPlaylist";
 
-const LearnPositions = ({ account }) => {
+const LearnPositions = ({ account, playlists }) => {
   const [selectedPosition, setSelectedPosition] = useState();
   const positions = useAllPositions();
-  const playlists = useAllPlaylists();
 
   const [guessString, setGuessString] = useState("");
   const [guessedTechniques, clearGuessedTechniques] = useGuesses(
@@ -103,7 +101,7 @@ const LearnPositions = ({ account }) => {
 
         <div className="flex flex-col gap-5 w-1/3">
           <div className="flex flex-col gap-5">
-            {playlists.map((playlistItem) => (
+            {playlists.all.map((playlistItem) => (
               <div
                 className="bg-white hover:bg-gray-50 py-3 px-5 cursor-pointer rounded-md shadow-sm"
                 onClick={() => {

@@ -2,6 +2,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { token as tokenApi } from "./api/api";
 import useAccount from "./hooks/useAccount";
 import useGripsApi from "./hooks/useGripsApi";
+import usePlaylistsApi from "./hooks/usePlaylistsApi";
 import EditPositions from "./pages/editPositions";
 import Grips from "./pages/grips";
 import Guide from "./pages/guide";
@@ -14,6 +15,7 @@ import Register from "./pages/register";
 function App() {
   const account = useAccount(tokenApi.fromStorage());
   const grips = useGripsApi();
+  const playlists = usePlaylistsApi();
 
   return (
     <>
@@ -27,7 +29,7 @@ function App() {
           />
           <Route
             path="/positions"
-            element={<LearnPositions account={account} />}
+            element={<LearnPositions account={account} playlists={playlists} />}
           />
           <Route path="/playlists" element={<Playlists account={account} />} />
           <Route path="/edit" element={<EditPositions account={account} />} />
