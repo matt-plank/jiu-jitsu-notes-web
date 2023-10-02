@@ -5,14 +5,12 @@ import EditSubmissionsColumn from "../components/editSubmissionsColumn";
 import EditTechniquesColumn from "../components/editTechniquesColumn";
 import Footer from "../components/footer";
 import NavBar from "../components/navbar";
-import useAllGrips from "../hooks/useAllGrips";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
 import useSubmissions from "../hooks/useSubmissions";
 import useTechniques from "../hooks/useTechniques";
 
-const EditPositions = ({ account }) => {
-  const grips = useAllGrips();
+const EditPositions = ({ account, grips }) => {
   const positions = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
 
@@ -81,7 +79,7 @@ const EditPositions = ({ account }) => {
           savePositionDetails={savePositionDetails}
           deletePosition={deletePosition}
           position={position}
-          grips={grips}
+          grips={grips.grips}
         />
 
         <div className="w-1/2 flex flex-col gap-5">

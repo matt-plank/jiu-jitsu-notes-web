@@ -32,7 +32,10 @@ function App() {
             element={<LearnPositions account={account} playlists={playlists} />}
           />
           <Route path="/playlists" element={<Playlists account={account} />} />
-          <Route path="/edit" element={<EditPositions account={account} />} />
+          <Route
+            path="/edit"
+            element={<EditPositions account={account} grips={grips} />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
         </Routes>
