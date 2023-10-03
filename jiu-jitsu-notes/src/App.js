@@ -3,6 +3,7 @@ import { token as tokenApi } from "./api/api";
 import useAccount from "./hooks/useAccount";
 import useGripsApi from "./hooks/useGripsApi";
 import usePlaylistsApi from "./hooks/usePlaylistsApi";
+import usePositionsApi from "./hooks/usePositionsApi";
 import EditPositions from "./pages/editPositions";
 import Grips from "./pages/grips";
 import Guide from "./pages/guide";
@@ -16,6 +17,7 @@ function App() {
   const account = useAccount(tokenApi.fromStorage());
   const grips = useGripsApi();
   const playlists = usePlaylistsApi();
+  const positions = usePositionsApi();
 
   return (
     <>
@@ -31,7 +33,16 @@ function App() {
             path="/positions"
             element={<LearnPositions account={account} playlists={playlists} />}
           />
-          <Route path="/playlists" element={<Playlists account={account} />} />
+          <Route
+            path="/playlists"
+            element={
+              <Playlists
+                account={account}
+                playlists={playlists}
+                positions={positions}
+              />
+            }
+          />
           <Route
             path="/edit"
             element={<EditPositions account={account} grips={grips} />}

@@ -14,8 +14,18 @@ const usePlaylistsApi = () => {
     refreshFromApi();
   }, []);
 
+  const pushNew = (name) => {
+    setPlaylists((currentPlaylists) => {
+      return [
+        ...currentPlaylists,
+        { name: name, description: "", changed: true },
+      ];
+    });
+  };
+
   return {
     all: playlists,
+    pushNew,
   };
 };
 
