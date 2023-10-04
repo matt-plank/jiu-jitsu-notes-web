@@ -107,8 +107,8 @@ const Playlists = ({ account, playlists, positions }) => {
                   .toLowerCase()
                   .includes(playlistQuery.toLowerCase())
               )
-              .map((playlist, i) => (
-                <PlaylistCard playlist={playlist} key={i} />
+              .map((playlist) => (
+                <PlaylistCard playlist={playlist} />
               ))}
           </div>
         </div>
@@ -131,9 +131,7 @@ const Playlists = ({ account, playlists, positions }) => {
                   .toLowerCase()
                   .includes(positionQuery.toLowerCase())
               )
-              .map((position, i) => (
-                <PositionCard position={position} key={i} />
-              ))}
+              .map((position) => PositionCard(position))}
           </div>
         </div>
       </div>
