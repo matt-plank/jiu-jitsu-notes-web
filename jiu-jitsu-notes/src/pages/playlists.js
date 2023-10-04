@@ -15,6 +15,55 @@ const Playlists = ({ account, playlists, positions }) => {
     setSelectedPlaylist();
   });
 
+  const PlaylistCard = ({ playlist }) => (
+    <SelectablePlaylistCard
+      name={playlist.name}
+      setName={(name) => {
+        playlists.setNameById(playlist.id, name);
+      }}
+      description={playlist.description}
+      setDescription={(description) => {
+        playlists.setDescriptionById(playlist.id, description);
+      }}
+      isSelected={playlist === selectedPlaylist}
+      onSelect={() => {
+        setSelectedPlaylist(playlist);
+      }}
+      onDelete={() => {
+        playlists.deleteById(playlist.id);
+        setSelectedPlaylist();
+      }}
+    />
+  );
+
+  const PositionCard = ({ position }) => {
+    return (
+      <SelectablePositionCard
+        position={position}
+        isSelected={
+          selectedPlaylist &&
+          selectedPlaylist.positions.map((p) => p.id).includes(position.id)
+        }
+        onSelect={() => {
+          if (!selectedPlaylist) return;
+
+          playlists.setPositionsById(selectedPlaylist.id, [
+            ...selectedPlaylist.positions,
+            position,
+          ]);
+        }}
+        onDeselect={() => {
+          if (!selectedPlaylist) return;
+
+          playlists.setPositionsById(
+            selectedPlaylist.id,
+            selectedPlaylist.positions.filter((p) => p.id !== position.id)
+          );
+        }}
+      />
+    );
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar selected="/playlists" username={account.username} />
@@ -59,24 +108,7 @@ const Playlists = ({ account, playlists, positions }) => {
                   .includes(playlistQuery.toLowerCase())
               )
               .map((playlist) => (
-                <SelectablePlaylistCard
-                  name={playlist.name}
-                  setName={(name) => {
-                    playlists.setNameById(playlist.id, name);
-                  }}
-                  description={playlist.description}
-                  setDescription={(description) => {
-                    playlists.setDescriptionById(playlist.id, description);
-                  }}
-                  isSelected={playlist === selectedPlaylist}
-                  onSelect={() => {
-                    setSelectedPlaylist(playlist);
-                  }}
-                  onDelete={() => {
-                    playlists.deleteById(playlist.id);
-                    setSelectedPlaylist();
-                  }}
-                />
+                <PlaylistCard playlist={playlist} />
               ))}
           </div>
         </div>
@@ -99,35 +131,7 @@ const Playlists = ({ account, playlists, positions }) => {
                   .toLowerCase()
                   .includes(positionQuery.toLowerCase())
               )
-              .map((position) => (
-                <SelectablePositionCard
-                  position={position}
-                  isSelected={
-                    selectedPlaylist &&
-                    selectedPlaylist.positions
-                      .map((p) => p.id)
-                      .includes(position.id)
-                  }
-                  onSelect={() => {
-                    if (!selectedPlaylist) return;
-
-                    playlists.setPositionsById(selectedPlaylist.id, [
-                      ...selectedPlaylist.positions,
-                      position,
-                    ]);
-                  }}
-                  onDeselect={() => {
-                    if (!selectedPlaylist) return;
-
-                    playlists.setPositionsById(
-                      selectedPlaylist.id,
-                      selectedPlaylist.positions.filter(
-                        (p) => p.id !== position.id
-                      )
-                    );
-                  }}
-                />
-              ))}
+              .map((position) => PositionCard(position))}
           </div>
         </div>
       </div>
