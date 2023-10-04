@@ -23,9 +23,29 @@ const usePlaylistsApi = () => {
     });
   };
 
+  const setAttributeById = (id, attribute, value) => {
+    setPlaylists((currentPlaylists) => {
+      const playlist = currentPlaylists.find((p) => p.id === id);
+      playlist[attribute] = value;
+      playlist.changed = true;
+      return [...currentPlaylists];
+    });
+  };
+
+  const setNameById = (id, name) => {
+    setAttributeById(id, "name", name);
+  };
+
+  const setDescriptionById = (id, description) => {
+    setAttributeById(id, "description", description);
+  };
+
   return {
     all: playlists,
     pushNew,
+    setAttributeById,
+    setNameById,
+    setDescriptionById,
   };
 };
 

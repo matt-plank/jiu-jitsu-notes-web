@@ -53,7 +53,13 @@ const Playlists = ({ account, playlists, positions }) => {
               .map((playlist) => (
                 <SelectablePlaylistCard
                   name={playlist.name}
+                  setName={(name) => {
+                    playlists.setNameById(playlist.id, name);
+                  }}
                   description={playlist.description}
+                  setDescription={(description) => {
+                    playlists.setDescriptionById(playlist.id, description);
+                  }}
                   isSelected={playlist === selectedPlaylist}
                   onClick={() => {
                     setSelectedPlaylist(playlist);

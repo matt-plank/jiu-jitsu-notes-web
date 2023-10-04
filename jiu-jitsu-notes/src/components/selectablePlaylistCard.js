@@ -2,7 +2,9 @@ import { AiOutlinePlaySquare } from "react-icons/ai";
 
 const SelectablePlaylistCard = ({
   name,
+  setName,
   description,
+  setDescription,
   isSelected,
   onClick,
   onDelete,
@@ -21,16 +23,23 @@ const SelectablePlaylistCard = ({
       onClick={onClick}
     >
       <AiOutlinePlaySquare className="inline-block mb-1 mr-3" />
+
       <input
         type="text"
-        className="p-2 flex-1 rounded-md shadow-sm border border-200 !outline-none bg-transparent"
+        className="p-2 flex-2 rounded-md shadow-sm border border-200 !outline-none bg-transparent"
         value={name}
+        onChange={(e) => {
+          setName(e.target.value);
+        }}
       />
 
       <input
         type="text"
         className="p-2 flex-1 rounded-md shadow-sm border border-200 !outline-none bg-transparent"
         value={description}
+        onChange={(e) => {
+          setDescription(e.target.value);
+        }}
       />
 
       <button
