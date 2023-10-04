@@ -96,6 +96,24 @@ const Playlists = ({ account, playlists, positions }) => {
                       .map((p) => p.id)
                       .includes(position.id)
                   }
+                  onSelect={() => {
+                    if (!selectedPlaylist) return;
+
+                    playlists.setPositionsById(selectedPlaylist.id, [
+                      ...selectedPlaylist.positions,
+                      position,
+                    ]);
+                  }}
+                  onDeselect={() => {
+                    if (!selectedPlaylist) return;
+
+                    playlists.setPositionsById(
+                      selectedPlaylist.id,
+                      selectedPlaylist.positions.filter(
+                        (p) => p.id !== position.id
+                      )
+                    );
+                  }}
                 />
               ))}
           </div>

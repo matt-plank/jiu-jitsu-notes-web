@@ -18,7 +18,7 @@ const usePlaylistsApi = () => {
     setPlaylists((currentPlaylists) => {
       return [
         ...currentPlaylists,
-        { name: name, description: "", changed: true },
+        { name: name, description: "", positions: [], changed: true },
       ];
     });
   };
@@ -40,12 +40,17 @@ const usePlaylistsApi = () => {
     setAttributeById(id, "description", description);
   };
 
+  const setPositionsById = (id, positions) => {
+    setAttributeById(id, "positions", positions);
+  };
+
   return {
     all: playlists,
     pushNew,
     setAttributeById,
     setNameById,
     setDescriptionById,
+    setPositionsById,
   };
 };
 
