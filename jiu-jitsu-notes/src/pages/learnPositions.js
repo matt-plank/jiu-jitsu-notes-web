@@ -15,16 +15,10 @@ const LearnPositions = ({ account, playlists }) => {
   const positions = useAllPositions();
 
   const [guessString, setGuessString] = useState("");
-  const [guessedTechniques, clearGuessedTechniques] = useGuesses(
-    guessString,
-    setGuessString,
-    selectedPosition?.techniques
-  );
-  const [guessedSubmissions, clearGuessedSubmissions] = useGuesses(
-    guessString,
-    setGuessString,
-    selectedPosition?.submissions
-  );
+  const [guessedTechniques, clearGuessedTechniques, revealTechniques] =
+    useGuesses(guessString, setGuessString, selectedPosition?.techniques);
+  const [guessedSubmissions, clearGuessedSubmissions, revealSubmissions] =
+    useGuesses(guessString, setGuessString, selectedPosition?.submissions);
 
   const playlist = usePositionPlaylist(setSelectedPosition);
 
@@ -38,6 +32,11 @@ const LearnPositions = ({ account, playlists }) => {
   const clearAllGuesses = () => {
     clearGuessedTechniques();
     clearGuessedSubmissions();
+  };
+
+  const revealAll = () => {
+    revealTechniques();
+    revealSubmissions();
   };
 
   return (
@@ -72,6 +71,9 @@ const LearnPositions = ({ account, playlists }) => {
               hotkeys="escape"
             >
               Clear Playlist
+            </ActionButton>
+            <ActionButton onClick={revealAll} hotkeys="=">
+              Reveal All
             </ActionButton>
           </div>
 

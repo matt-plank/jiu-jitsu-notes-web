@@ -27,7 +27,11 @@ const useGuesses = (guessString, setGuessString, techniques) => {
     setGuessed([]);
   };
 
-  return [guessed, clearGuessed];
+  const revealAll = () => {
+    setGuessed(techniques);
+  };
+
+  return [guessed, clearGuessed, revealAll];
 };
 
 export default useGuesses;
