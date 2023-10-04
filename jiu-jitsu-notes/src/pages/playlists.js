@@ -38,7 +38,15 @@ const Playlists = ({ account, playlists, positions }) => {
               New Playlist
             </ActionButton>
 
-            <ActionButton>Save Changes</ActionButton>
+            <ActionButton
+              onClick={async () => {
+                playlists.saveChanges();
+                setSelectedPlaylist();
+              }}
+              hotkeys="ctrl+s"
+            >
+              Save Changes
+            </ActionButton>
           </div>
 
           <hr className="border border-gray-200" />

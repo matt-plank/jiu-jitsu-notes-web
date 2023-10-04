@@ -44,6 +44,20 @@ const usePlaylistsApi = () => {
     setAttributeById(id, "positions", positions);
   };
 
+  const saveChanges = async () => {
+    const changedPlaylists = playlists.filter((p) => p.changed);
+
+    for (const playlist of changedPlaylists) {
+      if (playlist.id) {
+        await playlistApi.update(playlist.id, playlist);
+      } else {
+        await playlistApi.create(playlist);
+      }
+    }
+
+    refreshFromApi();
+  };
+
   return {
     all: playlists,
     pushNew,
@@ -51,6 +65,7 @@ const usePlaylistsApi = () => {
     setNameById,
     setDescriptionById,
     setPositionsById,
+    saveChanges,
   };
 };
 
