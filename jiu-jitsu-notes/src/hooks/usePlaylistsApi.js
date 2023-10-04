@@ -14,6 +14,15 @@ const usePlaylistsApi = () => {
     refreshFromApi();
   }, []);
 
+  const deleteById = (id) => {
+    setPlaylists((currentPlaylists) => {
+      const playlist = currentPlaylists.find((p) => p.id === id);
+      const newPlaylists = currentPlaylists.filter((p) => p !== playlist);
+      setDeleted((currentDeleted) => [...currentDeleted, playlist]);
+      return newPlaylists;
+    });
+  };
+
   const pushNew = (name) => {
     setPlaylists((currentPlaylists) => {
       return [
@@ -55,6 +64,11 @@ const usePlaylistsApi = () => {
       }
     }
 
+    for (const playlist of deleted) {
+      await playlistApi.delete(playlist.id);
+    }
+
+    setDeleted([]);
     refreshFromApi();
   };
 
@@ -65,6 +79,7 @@ const usePlaylistsApi = () => {
     setNameById,
     setDescriptionById,
     setPositionsById,
+    deleteById,
     saveChanges,
   };
 };

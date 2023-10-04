@@ -6,7 +6,7 @@ const SelectablePlaylistCard = ({
   description,
   setDescription,
   isSelected,
-  onClick,
+  onSelect,
   onDelete,
 }) => {
   const classes = isSelected
@@ -20,7 +20,6 @@ const SelectablePlaylistCard = ({
   return (
     <div
       className={`${classes} rounded-md shadow-sm p-5 cursor-pointer duration-100 flex gap-2 items-center`}
-      onClick={onClick}
     >
       <AiOutlinePlaySquare className="inline-block mb-1 mr-3" />
 
@@ -41,6 +40,13 @@ const SelectablePlaylistCard = ({
           setDescription(e.target.value);
         }}
       />
+
+      <button
+        onClick={onSelect}
+        className={`${buttonClasses} px-3 py-2 rounded-md duration-100`}
+      >
+        Select
+      </button>
 
       <button
         onClick={onDelete}

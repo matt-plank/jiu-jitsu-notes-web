@@ -69,8 +69,12 @@ const Playlists = ({ account, playlists, positions }) => {
                     playlists.setDescriptionById(playlist.id, description);
                   }}
                   isSelected={playlist === selectedPlaylist}
-                  onClick={() => {
+                  onSelect={() => {
                     setSelectedPlaylist(playlist);
+                  }}
+                  onDelete={() => {
+                    playlists.deleteById(playlist.id);
+                    setSelectedPlaylist();
                   }}
                 />
               ))}

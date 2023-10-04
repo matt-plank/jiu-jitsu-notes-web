@@ -262,6 +262,16 @@ export const playlist = {
 
     return json;
   },
+  delete: async (id) => {
+    await fetch(routes.playlist, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify({ id: id }),
+    });
+  },
 };
 
 export const account = {
