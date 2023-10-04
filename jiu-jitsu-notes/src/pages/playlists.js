@@ -51,7 +51,7 @@ const Playlists = ({ account, playlists, positions }) => {
 
           <hr className="border border-gray-200" />
 
-          <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+          <div className="flex flex-col gap-2">
             {playlists.all
               .filter((playlist) =>
                 playlist.name
@@ -92,7 +92,7 @@ const Playlists = ({ account, playlists, positions }) => {
 
           <hr className="border border-gray-200" />
 
-          <div className="flex flex-col gap-2 max-h-96 overflow-y-auto">
+          <div className="flex flex-col gap-2">
             {positions.all
               .filter((position) =>
                 position.display_name
