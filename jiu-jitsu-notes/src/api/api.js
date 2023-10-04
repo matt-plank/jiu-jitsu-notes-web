@@ -236,6 +236,42 @@ export const playlist = {
 
     return json;
   },
+  create: async (data) => {
+    let response = await fetch(routes.playlist, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify(data),
+    });
+    let json = await response.json();
+
+    return json;
+  },
+  update: async (id, data) => {
+    let response = await fetch(routes.playlist, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify({ ...data, id: id }),
+    });
+    let json = await response.json();
+
+    return json;
+  },
+  delete: async (id) => {
+    await fetch(routes.playlist, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${token.fromStorage()}`,
+      },
+      body: JSON.stringify({ id: id }),
+    });
+  },
 };
 
 export const account = {
