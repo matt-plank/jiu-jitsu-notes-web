@@ -12,12 +12,14 @@ const useGuesses = (guessString, setGuessString, techniques) => {
 
   useEffect(() => {
     if (techniques === undefined) return;
+    if (guessString === "") return;
 
     const technique = techniques.filter(
       (technique) => technique.name === guessString
     )[0];
 
     if (!technique) return;
+    if (guessed.includes(technique)) return;
 
     setGuessed((prev) => [...prev, technique]);
     setGuessString("");
