@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { positions as positionsApi } from "../api/api";
+import positionsApi from "../api/positions";
 import useStateAsDict from "./useStateAsDict";
 
 const usePosition = (position) => {

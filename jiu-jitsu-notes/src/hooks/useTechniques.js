@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { techniques as techniquesApi } from "../api/api";
+import techniquesApi from "../api/techniques";
 
 const useTechniques = (techniqueApiResults, fromPositionId) => {
   const [techniques, setTechniques] = useState(techniqueApiResults ?? []);

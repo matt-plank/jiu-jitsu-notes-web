@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { account as accountApi } from "../api/api";
+import accountApi from "../api/accounts";
 import ActionButton from "../components/actionButton";
 
 const Register = () => {

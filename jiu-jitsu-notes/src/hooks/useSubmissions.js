@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { submissions as submissionsApi } from "../api/api";
+import submissionsApi from "../api/submissions";
 
 const useSubmissions = (submissionApiResults, fromPositionId) => {
   const [submissions, setSubmissions] = useState(submissionApiResults ?? []);

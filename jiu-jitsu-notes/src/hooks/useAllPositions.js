@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { positions as positionsApi } from "../api/api";
+import positionsApi from "../api/positions";
 
 const useAllPositions = () => {
   const [positionList, setPositionList] = useState([]);

@@ -1,5 +1,5 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { token as tokenApi } from "./api/api";
+import tokenStorage from "./api/tokenStorage";
 import useAccount from "./hooks/useAccount";
 import useGripsApi from "./hooks/useGripsApi";
 import usePlaylistsApi from "./hooks/usePlaylistsApi";
@@ -14,7 +14,7 @@ import Playlists from "./pages/playlists";
 import Register from "./pages/register";
 
 function App() {
-  const account = useAccount(tokenApi.fromStorage());
+  const account = useAccount(tokenStorage.get());
   const grips = useGripsApi();
   const playlists = usePlaylistsApi();
   const positions = usePositionsApi();

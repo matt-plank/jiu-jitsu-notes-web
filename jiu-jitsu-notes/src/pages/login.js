@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { token as tokenApi } from "../api/api";
+import tokenApi from "../api/token";
 import ActionButton from "../components/actionButton";
 
 const Login = () => {

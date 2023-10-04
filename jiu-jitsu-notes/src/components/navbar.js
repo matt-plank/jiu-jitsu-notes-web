@@ -4,7 +4,7 @@ import { ImBooks } from "react-icons/im";
 import { LuLogOut } from "react-icons/lu";
 import { MdPlaylistPlay, MdSchool } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { token as tokenApi } from "../api/api";
+import tokenStorage from "../api/tokenStorage";
 import Logo from "./logo/logo";
 
 const SELECTED_COLOUR = "text-yellow-500";
@@ -74,17 +74,17 @@ const NavBar = ({ selected, username }) => {
         <Logo dark className="cursor-pointer" />
       </Link>
 
-      {tokenApi.exists() && <LinkList links={LOGGED_IN_LINKS} />}
+      {tokenStorage.exists() && <LinkList links={LOGGED_IN_LINKS} />}
 
       <div className="flex-1" />
 
-      {tokenApi.exists() && (
+      {tokenStorage.exists() && (
         <>
           <p>{username}</p>
           <p
             className="cursor-pointer flex items-center gap-1"
             onClick={() => {
-              tokenApi.delete();
+              tokenStorage.delete();
               window.location.href = "/login";
             }}
           >
@@ -94,7 +94,7 @@ const NavBar = ({ selected, username }) => {
         </>
       )}
 
-      {!tokenApi.exists() && <LinkList links={LOGGED_OUT_LINKS} />}
+      {!tokenStorage.exists() && <LinkList links={LOGGED_OUT_LINKS} />}
     </div>
   );
 };

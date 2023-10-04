@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { account as accountApi } from "../api/api";
+import accountApi from "../api/accounts";
 
 const useAccount = (token) => {
   const [details, setDetails] = useState({});

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { grips as gripsApi } from "../api/api";
+import gripsApi from "../api/grips";
 
 const useGripsApi = () => {
   const [grips, setGrips] = useState([]);

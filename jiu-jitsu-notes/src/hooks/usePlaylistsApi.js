@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { playlist as playlistApi } from "../api/api";
+import playlistApi from "../api/playlists";
 
 const usePlaylistsApi = () => {
   const [playlists, setPlaylists] = useState([]);
