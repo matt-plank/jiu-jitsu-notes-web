@@ -27,7 +27,7 @@ const NavPanel = () => {
             <FaHandshake className="mt-1" />
             Grips
           </Link>
-          <Link to="/edit" className="flex items-center gap-3">
+          <Link to="/positions" className="flex items-center gap-3">
             <BsFillPeopleFill className="mt-1" />
             Positions
           </Link>
@@ -35,7 +35,7 @@ const NavPanel = () => {
             <MdPlaylistPlay className="mt-1" />
             Playlists
           </Link>
-          <Link to="/positions" className="flex items-center gap-3">
+          <Link to="/learn" className="flex items-center gap-3">
             <MdSchool className="mt-1" />
             Learn
           </Link>

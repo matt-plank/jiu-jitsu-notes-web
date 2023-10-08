@@ -10,7 +10,7 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 import usePositionPlaylist from "../hooks/usePositionPlaylist";
 
-const LearnPositions = ({ account, playlists }) => {
+const Learn = ({ account, playlists }) => {
   const [selectedPosition, setSelectedPosition] = useState();
   const positions = useAllPositions();
 
@@ -136,4 +136,4 @@ const LearnPositions = ({ account, playlists }) => {
   );
 };
 
-export default LearnPositions;
+export default Learn;

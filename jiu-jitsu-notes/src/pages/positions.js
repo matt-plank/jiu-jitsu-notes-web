@@ -10,7 +10,7 @@ import usePosition from "../hooks/usePosition";
 import useSubmissions from "../hooks/useSubmissions";
 import useTechniques from "../hooks/useTechniques";
 
-const EditPositions = ({ account, grips }) => {
+const Positions = ({ account, grips }) => {
   const positions = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
 
@@ -101,4 +101,4 @@ const EditPositions = ({ account, grips }) => {
   );
 };
 
-export default EditPositions;
+export default Positions;
