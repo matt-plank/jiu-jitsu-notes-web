@@ -11,12 +11,12 @@ const Grips = ({ account, grips }) => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
 
-      <div className="flex justify-center pt-10">
-        <div className="flex flex-col gap-5 w-1/2">
+      <div className="flex justify-center">
+        <div className="flex flex-col gap-5 w-full max-w-3xl p-5">
           <div className="flex gap-2">
             <input
               type="text"
-              className="flex-1 bg-white !outline-none p-2 rounded-md shadow-sm"
+              className="w-full flex-1 bg-white !outline-none p-3 rounded-md shadow-sm"
               placeholder="Search Grips"
               value={gripQuery}
               onChange={(e) => {
@@ -29,11 +29,11 @@ const Grips = ({ account, grips }) => {
                 grips.pushNew(gripQuery);
               }}
             >
-              Create Grip
+              Create
             </ActionButton>
 
             <ActionButton onClick={grips.save} hotkeys="ctrl+s">
-              Save Changes
+              Save
             </ActionButton>
           </div>
 
