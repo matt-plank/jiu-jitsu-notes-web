@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
-import useClickToggle from "../hooks/useClickToggle";
+import useClickToggle from "../hooks/click/useClickToggle";
 
 const SearchableDropdown = ({
   selectedItem,
