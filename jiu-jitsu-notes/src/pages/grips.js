@@ -13,28 +13,36 @@ const Grips = ({ account, grips }) => {
 
       <div className="flex justify-center">
         <div className="flex flex-col gap-5 w-full max-w-3xl p-5">
-          <div className="flex gap-2">
+          <div className="flex gap-2 flex-wrap">
             <input
               type="text"
-              className="w-full flex-1 bg-white !outline-none p-3 rounded-md shadow-sm"
+              className="flex-1 bg-white !outline-none p-3 rounded-md shadow-sm"
               placeholder="Search Grips"
               value={gripQuery}
               onChange={(e) => {
                 setGripQuery(e.target.value);
               }}
             />
-            <ActionButton
-              onClick={() => {
-                if (gripQuery === "") return;
-                grips.pushNew(gripQuery);
-              }}
-            >
-              Create
-            </ActionButton>
 
-            <ActionButton onClick={grips.save} hotkeys="ctrl+s">
-              Save
-            </ActionButton>
+            <div className="flex-1 flex gap-2">
+              <ActionButton
+                onClick={() => {
+                  if (gripQuery === "") return;
+                  grips.pushNew(gripQuery);
+                }}
+                className="flex-1"
+              >
+                Create
+              </ActionButton>
+
+              <ActionButton
+                onClick={grips.save}
+                hotkeys="ctrl+s"
+                className="flex-1"
+              >
+                Save
+              </ActionButton>
+            </div>
           </div>
 
           <hr className="border border-gray-200" />
