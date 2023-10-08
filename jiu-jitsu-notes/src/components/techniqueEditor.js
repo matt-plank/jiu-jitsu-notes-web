@@ -9,11 +9,11 @@ const TechniqueEditor = ({
   setSelectedPosition,
 }) => {
   return (
-    <div className="flex flex-row gap-2">
+    <div className="flex gap-2 overflow-x-auto">
       <input
         type="text"
         placeholder="Enter Technique Name"
-        className="p-2 border border-gray-200 rounded-md shadow-sm bg-white !outline-none flex-1"
+        className="min-w-40 p-2 border border-gray-200 rounded-md shadow-sm bg-white !outline-none w-full"
         value={name}
         onChange={(e) => {
           setName(e.target.value);
@@ -21,7 +21,7 @@ const TechniqueEditor = ({
       />
 
       <select
-        className="border border-gray-200 rounded-md shadow-sm p-2 bg-white w-1/2"
+        className="min-w-40 border border-gray-200 rounded-md shadow-sm p-2 bg-white w-full"
         value={toPosition?.toString() ?? ""}
         onChange={(e) => {
           setToPosition({
@@ -41,6 +41,7 @@ const TechniqueEditor = ({
 
           setSelectedPosition(positions.filter((p) => p.id === toPosition)[0]);
         }}
+        className="min-w-20"
       >
         Go To
       </ActionButton>

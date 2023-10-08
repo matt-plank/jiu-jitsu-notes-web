@@ -13,7 +13,7 @@ const EditDetailsColumn = ({
   grips,
 }) => {
   return (
-    <div className="w-1/3 flex flex-col gap-5">
+    <div className="w-full max-w-xl flex flex-col gap-5">
       <SearchableDropdown
         selectedItem={selectedPosition}
         setSelectedItem={setSelectedPosition}
@@ -29,11 +29,11 @@ const EditDetailsColumn = ({
           hotkeys="ctrl+s"
           className="flex-1"
         >
-          Save Position Details
+          Save
         </ActionButton>
 
         <ActionButton onClick={deletePosition} className="flex-1">
-          Delete Position
+          Delete
         </ActionButton>
       </div>
 

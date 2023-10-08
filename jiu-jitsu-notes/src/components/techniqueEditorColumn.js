@@ -1,14 +1,14 @@
 import ActionButton from "./actionButton";
 import TechniqueEditor from "./techniqueEditor";
 
-const EditTechniquesColumn = ({
+const TechniqueEditorColumn = ({
   techniques,
   position,
   positions,
   setSelectedPosition,
 }) => {
   return (
-    <div className="p-5 bg-white shadow-sm rounded-lg flex flex-col gap-5">
+    <div className="p-5 bg-white shadow-sm rounded-lg flex flex-col gap-5 w-full">
       <h2 className="text-xl">Techniques</h2>
 
       {techniques.techniques.map((technique, i) => (
@@ -30,4 +30,4 @@ const EditTechniquesColumn = ({
   );
 };
 
-export default EditTechniquesColumn;
+export default TechniqueEditorColumn;

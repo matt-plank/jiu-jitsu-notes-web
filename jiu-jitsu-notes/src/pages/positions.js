@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import EditDetailsColumn from "../components/editDetailsColumn";
 import EditSubmissionsColumn from "../components/editSubmissionsColumn";
-import EditTechniquesColumn from "../components/editTechniquesColumn";
 import Footer from "../components/footer";
 import NavBar from "../components/nav/navbar";
+import TechniqueEditorColumn from "../components/techniqueEditorColumn";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
 import useSubmissions from "../hooks/useSubmissions";
@@ -71,7 +71,7 @@ const Positions = ({ account, grips }) => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
 
-      <div className="flex p-5 gap-5 justify-center">
+      <div className="flex p-5 gap-5 justify-center flex-wrap">
         <EditDetailsColumn
           selectedPosition={selectedPosition}
           setSelectedPosition={setSelectedPosition}
@@ -82,8 +82,8 @@ const Positions = ({ account, grips }) => {
           grips={grips.grips}
         />
 
-        <div className="w-1/2 flex flex-col gap-5">
-          <EditTechniquesColumn
+        <div className="w-full max-w-4xl flex flex-col gap-5">
+          <TechniqueEditorColumn
             techniques={techniques}
             position={position}
             positions={positions}
