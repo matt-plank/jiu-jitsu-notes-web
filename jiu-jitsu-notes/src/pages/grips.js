@@ -2,14 +2,14 @@ import { useState } from "react";
 import ActionButton from "../components/actionButton";
 import EditableGripCard from "../components/editableGripCard";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 
 const Grips = ({ account, grips }) => {
   const [gripQuery, setGripQuery] = useState("");
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/grips" username={account.username} />
+      <NavBar username={account.username} />
 
       <div className="flex justify-center pt-10">
         <div className="flex flex-col gap-5 w-1/2">

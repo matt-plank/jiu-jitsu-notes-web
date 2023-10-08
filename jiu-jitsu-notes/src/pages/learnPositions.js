@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import ActionButton from "../components/actionButton";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
 import TechniqueGuessList from "../components/techniqueGuessList";
@@ -41,7 +41,7 @@ const LearnPositions = ({ account, playlists }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/positions" username={account.username} />
+      <NavBar username={account.username} />
 
       <div className="flex justify-center gap-5 p-5">
         <div className="flex flex-col gap-5 w-1/2">
