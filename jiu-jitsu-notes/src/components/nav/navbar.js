@@ -46,7 +46,7 @@ const NavBar = ({ username }) => {
           <div className="flex gap-5">
             {username}
 
-            {!smallScreen && (
+            {!smallScreen && tokenStorage.exists() && (
               <p
                 className="cursor-pointer flex items-center gap-1"
                 onClick={() => {
@@ -57,6 +57,19 @@ const NavBar = ({ username }) => {
                 <LuLogOut className="pt-1" />
                 Log Out
               </p>
+            )}
+
+            {!smallScreen && !tokenStorage.exists() && (
+              <>
+                <Link to="/login" className="flex items-center gap-3">
+                  <LuLogOut className="mt-1" />
+                  Log In
+                </Link>
+                <Link to="/register" className="flex items-center gap-3">
+                  <LuLogOut className="mt-1" />
+                  Register
+                </Link>
+              </>
             )}
           </div>
         </div>
