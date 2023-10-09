@@ -24,7 +24,7 @@ jobs:
     - name: Build
       env:
         CI: false
-      run: npm run build-pages
+      run: npm run build
       working-directory: jiu-jitsu-notes
     
     - name: Deploy
