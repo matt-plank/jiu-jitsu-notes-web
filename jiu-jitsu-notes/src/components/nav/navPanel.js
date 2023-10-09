@@ -46,7 +46,7 @@ const NavPanel = () => {
             className="cursor-pointer flex items-center gap-1"
             onClick={() => {
               tokenStorage.delete();
-              window.location.href = "/login";
+              window.location.href = "/#/login";
             }}
           >
             <LuLogOut className="pt-1" />

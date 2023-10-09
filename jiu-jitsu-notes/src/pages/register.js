@@ -21,7 +21,7 @@ const Register = () => {
       return;
     }
 
-    window.location.href = "/login";
+    window.location.href = "/#/login";
   };
 
   return (
