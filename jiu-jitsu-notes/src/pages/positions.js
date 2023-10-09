@@ -4,6 +4,7 @@ import EditDetailsColumn from "../components/editDetailsColumn";
 import EditSubmissionsColumn from "../components/editSubmissionsColumn";
 import Footer from "../components/footer";
 import NavBar from "../components/nav/navbar";
+import SaveBanner from "../components/saveBanner";
 import TechniqueEditorColumn from "../components/techniqueEditorColumn";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
@@ -70,6 +71,8 @@ const Positions = ({ account, grips }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
+
+      {position.saved && <SaveBanner />}
 
       <div className="flex p-5 gap-5 justify-center flex-wrap">
         <EditDetailsColumn

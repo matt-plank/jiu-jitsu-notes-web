@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import positionsApi from "../api/positions";
 import useStateAsDict from "./useStateAsDict";
 
@@ -10,6 +10,8 @@ const usePosition = (position) => {
     your_grips: useStateAsDict([]),
     their_grips: useStateAsDict([]),
   };
+
+  const [saved, setSaved] = useState(false);
 
   useEffect(() => {
     positionState.id.setValue(position?.id ?? null);
@@ -51,10 +53,12 @@ const usePosition = (position) => {
   const save = async () => {
     if (!positionState.id.value) {
       await create();
+      setSaved(true);
       return;
     }
 
     await update();
+    setSaved(true);
   };
 
   const remove = async () => {
@@ -67,6 +71,7 @@ const usePosition = (position) => {
     position: positionState,
     save,
     remove,
+    saved,
   };
 };
 

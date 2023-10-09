@@ -3,6 +3,7 @@ import ActionButton from "../components/actionButton";
 import EditableGripCard from "../components/editableGripCard";
 import Footer from "../components/footer";
 import NavBar from "../components/nav/navbar";
+import SaveBanner from "../components/saveBanner";
 
 const Grips = ({ account, grips }) => {
   const [gripQuery, setGripQuery] = useState("");
@@ -10,6 +11,8 @@ const Grips = ({ account, grips }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
+
+      {grips.saved && <SaveBanner />}
 
       <div className="flex justify-center">
         <div className="flex flex-col gap-5 w-full max-w-3xl p-5">

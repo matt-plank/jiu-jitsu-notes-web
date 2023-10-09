@@ -3,6 +3,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import ActionButton from "../components/actionButton";
 import Footer from "../components/footer";
 import NavBar from "../components/nav/navbar";
+import SaveBanner from "../components/saveBanner";
 import SelectablePlaylistCard from "../components/selectablePlaylistCard";
 import SelectablePositionCard from "../components/selectablePositionCard";
 
@@ -18,6 +19,8 @@ const Playlists = ({ account, playlists, positions }) => {
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
+
+      {playlists.saved && <SaveBanner />}
 
       <div className="flex flex-wrap gap-5 p-5 justify-center">
         <div className="w-full lg:w-1/2 flex flex-col gap-5">

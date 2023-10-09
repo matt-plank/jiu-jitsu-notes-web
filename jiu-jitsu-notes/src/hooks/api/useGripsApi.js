@@ -4,6 +4,7 @@ import gripsApi from "../../api/grips";
 const useGripsApi = () => {
   const [grips, setGrips] = useState([]);
   const [deletedGrips, setDeletedGrips] = useState([]);
+  const [saved, setSaved] = useState(false);
 
   const refreshWithApi = async () => {
     const newGrips = await gripsApi.all();
@@ -43,19 +44,25 @@ const useGripsApi = () => {
   };
 
   const save = async () => {
+    setSaved(false);
+
     for (const grip of grips) {
       if (!grip.changed) continue;
 
       if (grip.id) {
         await gripsApi.update(grip.id, grip);
+        setSaved(true);
         continue;
       }
 
       await gripsApi.create(grip);
+
+      setSaved(true);
     }
 
     for (const grip of deletedGrips) {
       await gripsApi.remove(grip.id);
+      setSaved(true);
     }
 
     setDeletedGrips([]);
@@ -69,6 +76,7 @@ const useGripsApi = () => {
     pushNew,
     save,
     deleteById,
+    saved,
   };
 };
 

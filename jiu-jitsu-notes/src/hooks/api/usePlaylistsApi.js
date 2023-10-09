@@ -4,6 +4,7 @@ import playlistApi from "../../api/playlists";
 const usePlaylistsApi = () => {
   const [playlists, setPlaylists] = useState([]);
   const [deleted, setDeleted] = useState([]);
+  const [saved, setSaved] = useState(false);
 
   const refreshFromApi = async () => {
     const newPlaylists = await playlistApi.all();
@@ -54,6 +55,7 @@ const usePlaylistsApi = () => {
   };
 
   const saveChanges = async () => {
+    setSaved(false);
     const changedPlaylists = playlists.filter((p) => p.changed);
 
     for (const playlist of changedPlaylists) {
@@ -62,10 +64,13 @@ const usePlaylistsApi = () => {
       } else {
         await playlistApi.create(playlist);
       }
+
+      setSaved(true);
     }
 
     for (const playlist of deleted) {
       await playlistApi.delete(playlist.id);
+      setSaved(true);
     }
 
     setDeleted([]);
@@ -81,6 +86,7 @@ const usePlaylistsApi = () => {
     setPositionsById,
     deleteById,
     saveChanges,
+    saved,
   };
 };
 
