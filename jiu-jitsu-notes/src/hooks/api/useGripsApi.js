@@ -44,11 +44,11 @@ const useGripsApi = () => {
 
   const save = async () => {
     for (const grip of grips) {
-      if (!grip.changed) return;
+      if (!grip.changed) continue;
 
       if (grip.id) {
         await gripsApi.update(grip.id, grip);
-        return;
+        continue;
       }
 
       await gripsApi.create(grip);
