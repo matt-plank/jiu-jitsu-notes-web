@@ -44,7 +44,7 @@ const Learn = ({ account, playlists }) => {
       <NavBar username={account.username} />
 
       <div className="flex justify-center gap-5 p-5 flex-wrap">
-        <div className="flex flex-col gap-5 w-full max-w-4xl">
+        <div className="flex flex-col gap-5 w-full md:w-1/2">
           <SearchableDropdown
             selectedItem={selectedPosition}
             setSelectedItem={setSelectedPosition}
@@ -115,7 +115,7 @@ const Learn = ({ account, playlists }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-5 w-full max-w-xl">
+        <div className="flex flex-col gap-5 w-full md:w-1/3">
           <div className="flex flex-col gap-2">
             {playlists.all.map((playlistItem) => (
               <div
