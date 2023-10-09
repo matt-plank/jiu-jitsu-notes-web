@@ -18,7 +18,7 @@ jobs:
       working-directory: jiu-jitsu-notes
 
     - name: Configure routes
-      run: mv routes.default.json routes.json
+      run: mv routes.production.json routes.json
       working-directory: jiu-jitsu-notes/src/api
     
     - name: Build

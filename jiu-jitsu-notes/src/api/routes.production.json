@@ -1,0 +1,10 @@
+{
+    "randomTechnique": "https://api.jiujitsunotes.com/api/technique/random",
+    "position": "https://api.jiujitsunotes.com/api/position/",
+    "grip": "https://api.jiujitsunotes.com/api/grips/",
+    "technique": "https://api.jiujitsunotes.com/api/technique/",
+    "submission": "https://api.jiujitsunotes.com/api/submission/",
+    "playlist": "https://api.jiujitsunotes.com/api/playlists/",
+    "token": "https://api.jiujitsunotes.com/auth/token",
+    "account": "https://api.jiujitsunotes.com/auth/account"
+}
