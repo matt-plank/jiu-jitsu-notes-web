@@ -1,0 +1,27 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: npm install
+      working-directory: jiu-jitsu-notes
+    
+    - name: Build
+      run: npm run build
+      working-directory: jiu-jitsu-notes
+    
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@v4
+      with:
+        folder: jiu-jitsu-notes/build
