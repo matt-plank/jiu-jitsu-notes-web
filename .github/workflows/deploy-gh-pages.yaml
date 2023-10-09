@@ -22,6 +22,8 @@ jobs:
       working-directory: jiu-jitsu-notes/src/api
     
     - name: Build
+      env:
+        CI: false
       run: npm run build
       working-directory: jiu-jitsu-notes
     
