@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
-import useClickToggle from "../hooks/useClickToggle";
+import useClickToggle from "../hooks/click/useClickToggle";
 
 const SearchableDropdown = ({
   selectedItem,
@@ -56,7 +56,7 @@ const SearchableDropdown = ({
         )}
       </div>
       {isOpen ? (
-        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white z-10 max-h-96 overflow-y-auto">
+        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white max-h-96 overflow-y-auto">
           {itemOptions.filter(filterQueryInOption).map((item, i) => (
             <p
               onClick={() => {

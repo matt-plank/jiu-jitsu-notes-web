@@ -1,5 +1,3 @@
-import { AiOutlinePlaySquare } from "react-icons/ai";
-
 const SelectablePlaylistCard = ({
   name,
   setName,
@@ -19,9 +17,14 @@ const SelectablePlaylistCard = ({
 
   return (
     <div
-      className={`${classes} rounded-md shadow-sm p-5 cursor-pointer duration-100 flex gap-2 items-center`}
+      className={`${classes} rounded-md shadow-sm p-5 cursor-pointer duration-100 flex gap-2 items-center overflow-x-auto`}
     >
-      <AiOutlinePlaySquare className="inline-block mb-1 mr-3" />
+      <button
+        onClick={onSelect}
+        className={`${buttonClasses} px-3 py-2 rounded-md duration-100`}
+      >
+        Select
+      </button>
 
       <input
         type="text"
@@ -40,13 +43,6 @@ const SelectablePlaylistCard = ({
           setDescription(e.target.value);
         }}
       />
-
-      <button
-        onClick={onSelect}
-        className={`${buttonClasses} px-3 py-2 rounded-md duration-100`}
-      >
-        Select
-      </button>
 
       <button
         onClick={onDelete}

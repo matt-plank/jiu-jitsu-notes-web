@@ -1,20 +1,20 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import tokenStorage from "./api/tokenStorage";
-import useAccount from "./hooks/useAccount";
-import useGripsApi from "./hooks/useGripsApi";
-import usePlaylistsApi from "./hooks/usePlaylistsApi";
-import usePositionsApi from "./hooks/usePositionsApi";
-import EditPositions from "./pages/editPositions";
+import useAccountApi from "./hooks/api/useAccountApi";
+import useGripsApi from "./hooks/api/useGripsApi";
+import usePlaylistsApi from "./hooks/api/usePlaylistsApi";
+import usePositionsApi from "./hooks/api/usePositionsApi";
 import Grips from "./pages/grips";
 import Guide from "./pages/guide";
 import Home from "./pages/home";
-import LearnPositions from "./pages/learnPositions";
+import Learn from "./pages/learn";
 import Login from "./pages/login";
 import Playlists from "./pages/playlists";
+import Positions from "./pages/positions";
 import Register from "./pages/register";
 
 function App() {
-  const account = useAccount(tokenStorage.get());
+  const account = useAccountApi(tokenStorage.get());
   const grips = useGripsApi();
   const playlists = usePlaylistsApi();
   const positions = usePositionsApi();
@@ -30,8 +30,8 @@ function App() {
             element={<Grips account={account} grips={grips} />}
           />
           <Route
-            path="/positions"
-            element={<LearnPositions account={account} playlists={playlists} />}
+            path="/learn"
+            element={<Learn account={account} playlists={playlists} />}
           />
           <Route
             path="/playlists"
@@ -44,8 +44,8 @@ function App() {
             }
           />
           <Route
-            path="/edit"
-            element={<EditPositions account={account} grips={grips} />}
+            path="/positions"
+            element={<Positions account={account} grips={grips} />}
           />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

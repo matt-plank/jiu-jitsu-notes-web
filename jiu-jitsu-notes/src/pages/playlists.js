@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import ActionButton from "../components/actionButton";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 import SelectablePlaylistCard from "../components/selectablePlaylistCard";
 import SelectablePositionCard from "../components/selectablePositionCard";
 
@@ -17,10 +17,10 @@ const Playlists = ({ account, playlists, positions }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/playlists" username={account.username} />
+      <NavBar username={account.username} />
 
-      <div className="flex gap-5 p-5 justify-center">
-        <div className="w-1/2 flex flex-col gap-5">
+      <div className="flex flex-wrap gap-5 p-5 justify-center">
+        <div className="w-full max-w-4xl flex flex-col gap-5">
           <div className="flex gap-2">
             <input
               type="text"
@@ -35,7 +35,7 @@ const Playlists = ({ account, playlists, positions }) => {
                 playlists.pushNew(playlistQuery);
               }}
             >
-              New Playlist
+              New
             </ActionButton>
 
             <ActionButton
@@ -45,7 +45,7 @@ const Playlists = ({ account, playlists, positions }) => {
               }}
               hotkeys="ctrl+s"
             >
-              Save Changes
+              Save
             </ActionButton>
           </div>
 
@@ -81,7 +81,7 @@ const Playlists = ({ account, playlists, positions }) => {
           </div>
         </div>
 
-        <div className="w-1/3 flex flex-col gap-5">
+        <div className="w-full max-w-xl flex flex-col gap-5">
           <input
             type="text"
             placeholder="Filter positions"

@@ -1,10 +1,10 @@
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 
 const Home = ({ account }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <NavBar selected="/" username={account.username} />
+      <NavBar username={account.username} />
 
       <div className="flex justify-center px-10">
         <div className="flex flex-col mt-10 gap-5 w-full max-w-2xl pb-10">

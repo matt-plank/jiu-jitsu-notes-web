@@ -2,15 +2,15 @@ import { useEffect, useState } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import EditDetailsColumn from "../components/editDetailsColumn";
 import EditSubmissionsColumn from "../components/editSubmissionsColumn";
-import EditTechniquesColumn from "../components/editTechniquesColumn";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
+import TechniqueEditorColumn from "../components/techniqueEditorColumn";
 import useAllPositions from "../hooks/useAllPositions";
 import usePosition from "../hooks/usePosition";
 import useSubmissions from "../hooks/useSubmissions";
 import useTechniques from "../hooks/useTechniques";
 
-const EditPositions = ({ account, grips }) => {
+const Positions = ({ account, grips }) => {
   const positions = useAllPositions();
   const [selectedPosition, setSelectedPosition] = useState();
 
@@ -69,9 +69,9 @@ const EditPositions = ({ account, grips }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/edit" username={account.username} />
+      <NavBar username={account.username} />
 
-      <div className="flex p-5 gap-5 justify-center">
+      <div className="flex p-5 gap-5 justify-center flex-wrap">
         <EditDetailsColumn
           selectedPosition={selectedPosition}
           setSelectedPosition={setSelectedPosition}
@@ -82,8 +82,8 @@ const EditPositions = ({ account, grips }) => {
           grips={grips.grips}
         />
 
-        <div className="w-1/2 flex flex-col gap-5">
-          <EditTechniquesColumn
+        <div className="w-full max-w-4xl flex flex-col gap-5">
+          <TechniqueEditorColumn
             techniques={techniques}
             position={position}
             positions={positions}
@@ -101,4 +101,4 @@ const EditPositions = ({ account, grips }) => {
   );
 };
 
-export default EditPositions;
+export default Positions;

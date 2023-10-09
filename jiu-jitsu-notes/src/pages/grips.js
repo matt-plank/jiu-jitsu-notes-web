@@ -2,39 +2,47 @@ import { useState } from "react";
 import ActionButton from "../components/actionButton";
 import EditableGripCard from "../components/editableGripCard";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 
 const Grips = ({ account, grips }) => {
   const [gripQuery, setGripQuery] = useState("");
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/grips" username={account.username} />
+      <NavBar username={account.username} />
 
-      <div className="flex justify-center pt-10">
-        <div className="flex flex-col gap-5 w-1/2">
-          <div className="flex gap-2">
+      <div className="flex justify-center">
+        <div className="flex flex-col gap-5 w-full max-w-3xl p-5">
+          <div className="flex gap-2 flex-wrap">
             <input
               type="text"
-              className="flex-1 bg-white !outline-none p-2 rounded-md shadow-sm"
+              className="flex-1 bg-white !outline-none p-3 rounded-md shadow-sm"
               placeholder="Search Grips"
               value={gripQuery}
               onChange={(e) => {
                 setGripQuery(e.target.value);
               }}
             />
-            <ActionButton
-              onClick={() => {
-                if (gripQuery === "") return;
-                grips.pushNew(gripQuery);
-              }}
-            >
-              Create Grip
-            </ActionButton>
 
-            <ActionButton onClick={grips.save} hotkeys="ctrl+s">
-              Save Changes
-            </ActionButton>
+            <div className="flex-1 flex gap-2">
+              <ActionButton
+                onClick={() => {
+                  if (gripQuery === "") return;
+                  grips.pushNew(gripQuery);
+                }}
+                className="flex-1"
+              >
+                Create
+              </ActionButton>
+
+              <ActionButton
+                onClick={grips.save}
+                hotkeys="ctrl+s"
+                className="flex-1"
+              >
+                Save
+              </ActionButton>
+            </div>
           </div>
 
           <hr className="border border-gray-200" />

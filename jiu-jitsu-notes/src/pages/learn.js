@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AiOutlinePlaySquare } from "react-icons/ai";
 import ActionButton from "../components/actionButton";
 import Footer from "../components/footer";
-import NavBar from "../components/navbar";
+import NavBar from "../components/nav/navbar";
 import SearchableDropdown from "../components/searchableDropdown";
 import SubmissionGuessList from "../components/submissionGuessList";
 import TechniqueGuessList from "../components/techniqueGuessList";
@@ -10,7 +10,7 @@ import useAllPositions from "../hooks/useAllPositions";
 import useGuesses from "../hooks/useGuesses";
 import usePositionPlaylist from "../hooks/usePositionPlaylist";
 
-const LearnPositions = ({ account, playlists }) => {
+const Learn = ({ account, playlists }) => {
   const [selectedPosition, setSelectedPosition] = useState();
   const positions = useAllPositions();
 
@@ -41,10 +41,10 @@ const LearnPositions = ({ account, playlists }) => {
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-100">
-      <NavBar selected="/positions" username={account.username} />
+      <NavBar username={account.username} />
 
-      <div className="flex justify-center gap-5 p-5">
-        <div className="flex flex-col gap-5 w-1/2">
+      <div className="flex justify-center gap-5 p-5 flex-wrap">
+        <div className="flex flex-col gap-5 w-full max-w-4xl">
           <SearchableDropdown
             selectedItem={selectedPosition}
             setSelectedItem={setSelectedPosition}
@@ -53,14 +53,27 @@ const LearnPositions = ({ account, playlists }) => {
             placeholder="Search for Position"
             className="w-full bg-white"
           />
-          <div className="flex flex-row gap-2">
-            <ActionButton onClick={clearAllGuesses} hotkeys="[">
+
+          <div className="flex flex-row gap-2 overflow-x-auto">
+            <ActionButton
+              onClick={clearAllGuesses}
+              hotkeys="["
+              className="min-w-max"
+            >
               Clear Guesses
             </ActionButton>
-            <ActionButton onClick={selectRandomPosition} hotkeys="]">
+            <ActionButton
+              onClick={selectRandomPosition}
+              hotkeys="]"
+              className="min-w-max"
+            >
               Select Random
             </ActionButton>
-            <ActionButton onClick={playlist.moveToNextPosition} hotkeys="enter">
+            <ActionButton
+              onClick={playlist.moveToNextPosition}
+              hotkeys="enter"
+              className="min-w-max"
+            >
               Next on Playlist
             </ActionButton>
             <ActionButton
@@ -69,10 +82,11 @@ const LearnPositions = ({ account, playlists }) => {
                 setSelectedPosition(null);
               }}
               hotkeys="escape"
+              className="min-w-max"
             >
               Clear Playlist
             </ActionButton>
-            <ActionButton onClick={revealAll} hotkeys="=">
+            <ActionButton onClick={revealAll} hotkeys="=" className="min-w-max">
               Reveal All
             </ActionButton>
           </div>
@@ -101,7 +115,7 @@ const LearnPositions = ({ account, playlists }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-5 w-1/3">
+        <div className="flex flex-col gap-5 w-full max-w-xl">
           <div className="flex flex-col gap-2">
             {playlists.all.map((playlistItem) => (
               <div
@@ -136,4 +150,4 @@ const LearnPositions = ({ account, playlists }) => {
   );
 };
 
-export default LearnPositions;
+export default Learn;

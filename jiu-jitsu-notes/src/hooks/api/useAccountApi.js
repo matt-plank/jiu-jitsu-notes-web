@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import accountApi from "../api/accounts";
+import accountApi from "../../api/accounts";
 
-const useAccount = (token) => {
+const useAccountApi = (token) => {
   const [details, setDetails] = useState({});
 
   useEffect(() => {
@@ -16,4 +16,4 @@ const useAccount = (token) => {
   return details;
 };
 
-export default useAccount;
+export default useAccountApi;
