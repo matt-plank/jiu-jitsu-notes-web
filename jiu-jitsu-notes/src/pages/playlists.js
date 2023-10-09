@@ -20,7 +20,7 @@ const Playlists = ({ account, playlists, positions }) => {
       <NavBar username={account.username} />
 
       <div className="flex flex-wrap gap-5 p-5 justify-center">
-        <div className="w-full max-w-4xl flex flex-col gap-5">
+        <div className="w-full lg:w-1/2 flex flex-col gap-5">
           <div className="flex gap-2">
             <input
               type="text"
@@ -81,7 +81,9 @@ const Playlists = ({ account, playlists, positions }) => {
           </div>
         </div>
 
-        <div className="w-full max-w-xl flex flex-col gap-5">
+        <hr className="border border-gray-200 my-5 w-full block lg:hidden" />
+
+        <div className="w-full lg:w-1/3 flex flex-col gap-5">
           <input
             type="text"
             placeholder="Filter positions"
