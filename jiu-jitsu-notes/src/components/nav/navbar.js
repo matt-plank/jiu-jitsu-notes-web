@@ -1,10 +1,26 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
+import { LuLogOut } from "react-icons/lu";
 import { CSSTransition } from "react-transition-group";
+import tokenStorage from "../../api/tokenStorage";
 import NavPanel from "./navPanel";
 
 const NavBar = ({ username }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [smallScreen, setSmallScreen] = useState(false);
+
+  const checkScreenSize = () => {
+    setSmallScreen(window.innerWidth < 1024);
+  };
+
+  useEffect(() => {
+    checkScreenSize();
+    window.addEventListener("resize", checkScreenSize);
+
+    return () => {
+      window.removeEventListener("resize", checkScreenSize);
+    };
+  }, []);
 
   const toggle = () => {
     setIsOpen((current) => !current);
@@ -19,7 +35,22 @@ const NavBar = ({ username }) => {
             onClick={toggle}
           />
 
-          {username}
+          <div className="flex gap-5">
+            {username}
+
+            {!smallScreen && (
+              <p
+                className="cursor-pointer flex items-center gap-1"
+                onClick={() => {
+                  tokenStorage.delete();
+                  window.location.href = "/login";
+                }}
+              >
+                <LuLogOut className="pt-1" />
+                Log Out
+              </p>
+            )}
+          </div>
         </div>
 
         <CSSTransition
