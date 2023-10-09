@@ -13,7 +13,7 @@ const EditDetailsColumn = ({
   grips,
 }) => {
   return (
-    <div className="w-full max-w-xl flex flex-col gap-5">
+    <div className="w-full md:w-1/3 flex flex-col gap-5">
       <SearchableDropdown
         selectedItem={selectedPosition}
         setSelectedItem={setSelectedPosition}

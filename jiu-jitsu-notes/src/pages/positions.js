@@ -82,7 +82,7 @@ const Positions = ({ account, grips }) => {
           grips={grips.grips}
         />
 
-        <div className="w-full max-w-4xl flex flex-col gap-5">
+        <div className="w-full md:w-1/2 flex flex-col gap-5">
           <TechniqueEditorColumn
             techniques={techniques}
             position={position}
