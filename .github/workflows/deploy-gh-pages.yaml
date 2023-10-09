@@ -16,6 +16,10 @@ jobs:
     - name: Install dependencies
       run: npm install
       working-directory: jiu-jitsu-notes
+
+    - name: Configure routes
+      run: mv routes.default.json routes.json
+      working-directory: jiu-jitsu-notes/src/api
     
     - name: Build
       run: npm run build
