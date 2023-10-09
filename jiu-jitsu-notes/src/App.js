@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import { Route, HashRouter as Router, Routes } from "react-router-dom";
 import tokenStorage from "./api/tokenStorage";
 import useAccountApi from "./hooks/api/useAccountApi";
 import useGripsApi from "./hooks/api/useGripsApi";
