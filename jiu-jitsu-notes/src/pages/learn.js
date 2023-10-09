@@ -43,8 +43,8 @@ const Learn = ({ account, playlists }) => {
     <div className="flex flex-col min-h-screen bg-gray-100">
       <NavBar username={account.username} />
 
-      <div className="flex justify-center gap-5 p-5">
-        <div className="flex flex-col gap-5 w-1/2">
+      <div className="flex justify-center gap-5 p-5 flex-wrap">
+        <div className="flex flex-col gap-5 w-full max-w-4xl">
           <SearchableDropdown
             selectedItem={selectedPosition}
             setSelectedItem={setSelectedPosition}
@@ -53,14 +53,27 @@ const Learn = ({ account, playlists }) => {
             placeholder="Search for Position"
             className="w-full bg-white"
           />
-          <div className="flex flex-row gap-2">
-            <ActionButton onClick={clearAllGuesses} hotkeys="[">
+
+          <div className="flex flex-row gap-2 overflow-x-auto">
+            <ActionButton
+              onClick={clearAllGuesses}
+              hotkeys="["
+              className="min-w-max"
+            >
               Clear Guesses
             </ActionButton>
-            <ActionButton onClick={selectRandomPosition} hotkeys="]">
+            <ActionButton
+              onClick={selectRandomPosition}
+              hotkeys="]"
+              className="min-w-max"
+            >
               Select Random
             </ActionButton>
-            <ActionButton onClick={playlist.moveToNextPosition} hotkeys="enter">
+            <ActionButton
+              onClick={playlist.moveToNextPosition}
+              hotkeys="enter"
+              className="min-w-max"
+            >
               Next on Playlist
             </ActionButton>
             <ActionButton
@@ -69,10 +82,11 @@ const Learn = ({ account, playlists }) => {
                 setSelectedPosition(null);
               }}
               hotkeys="escape"
+              className="min-w-max"
             >
               Clear Playlist
             </ActionButton>
-            <ActionButton onClick={revealAll} hotkeys="=">
+            <ActionButton onClick={revealAll} hotkeys="=" className="min-w-max">
               Reveal All
             </ActionButton>
           </div>
@@ -101,7 +115,7 @@ const Learn = ({ account, playlists }) => {
           />
         </div>
 
-        <div className="flex flex-col gap-5 w-1/3">
+        <div className="flex flex-col gap-5 w-full max-w-xl">
           <div className="flex flex-col gap-2">
             {playlists.all.map((playlistItem) => (
               <div
