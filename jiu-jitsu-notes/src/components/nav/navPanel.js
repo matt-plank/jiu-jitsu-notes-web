@@ -9,7 +9,7 @@ import tokenStorage from "../../api/tokenStorage";
 
 const NavPanel = () => {
   return (
-    <div className="w-full max-w-lg bg-gray-700 p-5 text-white flex flex-col gap-3 absolute z-10">
+    <div className="w-full max-w-lg bg-gray-800 p-5 text-white flex flex-col gap-3 absolute z-10">
       {tokenStorage.exists() && (
         <>
           <Link to="/" className="flex items-center gap-3">

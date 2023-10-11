@@ -31,7 +31,7 @@ const NavBar = ({ username }) => {
   return (
     <>
       <div className="relative">
-        <div className="w-full bg-gray-800 p-5 text-white flex gap-5 items-center justify-between select-none z-20 relative">
+        <div className="bg-white w-full p-5 text-gray-800 flex gap-5 items-center justify-between select-none z-20 relative">
           <div className="flex gap-8">
             <AiOutlineMenu
               className="text-2xl cursor-pointer active:scale-75 duration-75"
@@ -39,7 +39,7 @@ const NavBar = ({ username }) => {
             />
 
             <Link to="/">
-              <Logo dark />
+              <Logo />
             </Link>
           </div>
 
