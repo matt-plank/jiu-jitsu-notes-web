@@ -8,6 +8,10 @@ const token = {
       password: password,
     });
 
+    if (response.status !== 200) {
+      return "";
+    }
+
     let json = await response.json();
 
     return json.token;

@@ -10,7 +10,7 @@ const Login = () => {
   const logIn = async () => {
     const token = await tokenApi.create(username, password);
 
-    if (token === "") {
+    if (!token) {
       setErrorMessage("Incorrect username or password");
       return;
     }
@@ -21,11 +21,16 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen">
-        <div className="flex flex-col justify-center items-center gap-5 p-5 rounded-md w-80">
-          <h1 className="text-5xl font-thin m-5">Log In</h1>
+      <div className="flex flex-col items-center h-screen">
+        <div className="h-28" />
+
+        <div className="flex flex-col gap-5">
+          <h1 className="text-5xl font-black text-gray-800 m-5 text-center">
+            Log In
+          </h1>
+
           <input
-            className="p-2 rounded-sm border w-full"
+            className="p-2 rounded-sm border w-64"
             type="text"
             placeholder="Username"
             value={username}
