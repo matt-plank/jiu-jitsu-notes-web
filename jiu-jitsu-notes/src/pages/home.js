@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import tokenStorage from "../api/tokenStorage";
 import Footer from "../components/footer";
 import NavBar from "../components/nav/navbar";
 
@@ -31,18 +32,31 @@ const Home = ({ account }) => {
           </h2>
 
           <div className="flex gap-2 mx-5">
-            <Link
-              className="px-5 py-2 bg-gray-800 text-white rounded-md"
-              to="/register"
-            >
-              Register
-            </Link>
-            <Link
-              className="px-5 py-2 bg-gray-800 text-white rounded-md"
-              to="/login"
-            >
-              Login
-            </Link>
+            {tokenStorage.exists() ? (
+              <>
+                <Link
+                  className="px-5 py-2 bg-gray-800 text-white rounded-md"
+                  to="/guide"
+                >
+                  View Guide
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  className="px-5 py-2 bg-gray-800 text-white rounded-md"
+                  to="/login"
+                >
+                  Login
+                </Link>
+                <Link
+                  className="px-5 py-2 bg-gray-800 text-white rounded-md"
+                  to="/register"
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
