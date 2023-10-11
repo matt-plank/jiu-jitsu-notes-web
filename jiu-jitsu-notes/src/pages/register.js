@@ -16,8 +16,8 @@ const Register = () => {
 
     const created = await accountApi.create(username, password);
 
-    if (!created) {
-      setErrorMessage("Username already exists");
+    if (!created.success) {
+      setErrorMessage(`Account could not be created - ${created.message}`);
       return;
     }
 
