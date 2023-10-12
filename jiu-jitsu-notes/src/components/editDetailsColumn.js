@@ -1,6 +1,5 @@
 import ActionButton from "./actionButton";
 import MultiGripSelector from "./multiGripSelector";
-import PositionDetailsEditableTable from "./positionDetailsEditableTable";
 import SearchableDropdown from "./searchableDropdown";
 
 const EditDetailsColumn = ({
@@ -40,12 +39,32 @@ const EditDetailsColumn = ({
       <div className="p-5 bg-white rounded-lg flex flex-col gap-5 shadow-sm">
         <h2 className="text-xl">Details</h2>
 
-        <PositionDetailsEditableTable
-          aspect={position.position.aspect.value}
-          setAspect={position.position.aspect.setValue}
-          name={position.position.name.value}
-          setName={position.position.name.setValue}
-        />
+        <div className="flex gap-2 w-full">
+          <select
+            name="aspect"
+            id="aspect"
+            className="bg-white p-2 border border-gray-200 rounded-md shadow-sm"
+            value={position.position.aspect.value}
+            onChange={(e) => {
+              position.position.aspect.setValue(e.target.value);
+            }}
+          >
+            <option value="Playing">Playing</option>
+            <option value="Passing">Passing</option>
+            <option value="Top">Top</option>
+            <option value="Bottom">Bottom</option>
+          </select>
+
+          <input
+            type="text"
+            className="bg-white p-2 border border-gray-200 rounded-md shadown sm w-full"
+            placeholder="Position Name"
+            value={position.position.name.value}
+            onChange={(e) => {
+              position.position.name.setValue(e.target.value);
+            }}
+          />
+        </div>
       </div>
 
       <div className="p-5 bg-white rounded-lg flex flex-col gap-5 shadow-sm">
