@@ -32,7 +32,7 @@ const SearchableDropdown = ({
 
   return (
     <div className={`${className} relative inline-block rounded-lg shadow-sm`}>
-      <div className="py-2 px-3 flex flex-row items-center gap-2">
+      <div className="p-3 flex flex-row items-center gap-2">
         <AiOutlineSearch className="text-gray-400" />
 
         <input
@@ -56,14 +56,14 @@ const SearchableDropdown = ({
         )}
       </div>
       {isOpen ? (
-        <div className="border border-gray-300 rounded-lg shadow-sm mt-1 absolute w-full bg-white max-h-96 overflow-y-auto">
+        <div className="border border-gray-300 rounded-lg shadow-sm mt-2 absolute w-full bg-white max-h-96 overflow-y-auto">
           {itemOptions.filter(filterQueryInOption).map((item, i) => (
             <p
               onClick={() => {
                 setSelectedItem(item);
                 setQuery(getItemDisplayName(item));
               }}
-              className="cursor-pointer hover:bg-gray-100 px-2 py-1"
+              className="cursor-pointer hover:bg-gray-100 p-2"
               key={i}
             >
               {getItemDisplayName(item)}
