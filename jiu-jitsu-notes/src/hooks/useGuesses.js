@@ -15,7 +15,7 @@ const useGuesses = (guessString, setGuessString, techniques) => {
     if (guessString === "") return;
 
     const technique = techniques.filter(
-      (technique) => technique.name === guessString
+      (technique) => technique.name.toLowerCase() === guessString.toLowerCase()
     )[0];
 
     if (!technique) return;
