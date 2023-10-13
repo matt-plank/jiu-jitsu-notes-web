@@ -40,13 +40,13 @@ const Positions = ({ account, grips }) => {
   const savePositionDetails = async () => {
     await position.save();
 
-    techniques.techniques.forEach(async (_, i) => {
+    for (let i = 0; i < techniques.techniques.length; i++) {
       await techniques.saveByIndex(i);
-    });
+    }
 
-    submissions.submissions.forEach(async (_, i) => {
+    for (let i = 0; i < submissions.submissions.length; i++) {
       await submissions.saveByIndex(i);
-    });
+    }
 
     await positions.refreshPositions();
   };
